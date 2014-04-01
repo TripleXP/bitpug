@@ -1,0 +1,184 @@
+/* line 17, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 58, ../img/layout/pugs/pug-tongue/*.png */
+.pug-tongue-sprite, .pug-tongue-p1, .pug-tongue-p2, .pug-tongue-p3 {
+  background: url('/img/../img/layout/pugs/pug-tongue-s83c2d4e84e.png') no-repeat;
+}
+
+/* line 60, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+.pug-tongue-p1 {
+  background-position: 0 -128px;
+}
+
+/* line 60, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+.pug-tongue-p2 {
+  background-position: 0 -64px;
+}
+
+/* line 60, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+.pug-tongue-p3 {
+  background-position: 0 0;
+}
+
+/* line 2, ../scss/_layout.scss */
+body {
+  background: url(../img/layout/bg-body.svg) no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+/* line 2, ../scss/layout/_playground.scss */
+.playground {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 950px;
+  height: 500px;
+  margin-left: -475px;
+  margin-top: -250px;
+  background: white;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+}
+/* line 14, ../scss/layout/_playground.scss */
+.playground #game {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 2, ../scss/layout/_stat-display.scss */
+.stat-display {
+  position: absolute;
+  width: 100px;
+  left: -100px;
+  top: 15px;
+  background: rgba(255, 255, 255, 0.8);
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  -webkit-border-radius: 10px 0 0 10px;
+  -moz-border-radius: 10px 0 0 10px;
+  -ms-border-radius: 10px 0 0 10px;
+  -o-border-radius: 10px 0 0 10px;
+  border-radius: 10px 0 0 10px;
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
+}
+/* line 13, ../scss/layout/_stat-display.scss */
+.stat-display.visible {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  opacity: 1;
+}
+/* line 18, ../scss/layout/_stat-display.scss */
+.stat-display .deko-pug {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  background: url(../img/layout/pugs/pug-tongue/p1.png);
+  left: 50%;
+  top: -53px;
+  margin-left: -60px;
+}
+/* line 29, ../scss/layout/_stat-display.scss */
+.stat-display .module {
+  position: relative;
+  text-align: center;
+  line-height: 90px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #808080;
+  font-family: "Arial", sans-serif;
+}
+/* line 39, ../scss/layout/_stat-display.scss */
+.stat-display .module:not(:last-child) {
+  border-bottom: 1px solid #DDDDDD;
+}
+/* line 44, ../scss/layout/_stat-display.scss */
+.stat-display .module:after {
+  content: "Default";
+  display: block;
+  position: absolute;
+  top: 10px;
+  left: 5px;
+  font-weight: lighter;
+  font-size: 9px;
+  line-height: 0;
+}
+/* line 57, ../scss/layout/_stat-display.scss */
+.stat-display .points:after {
+  content: "Points";
+}
+/* line 62, ../scss/layout/_stat-display.scss */
+.stat-display .level:after {
+  content: "Level";
+}

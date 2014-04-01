@@ -1,0 +1,14 @@
+body
+{
+	background: url(../img/layout/bg-body.svg) no-repeat;
+	@include background-size(cover);
+}
+
+#page
+{
+
+}
+
+// Import layout components
+@import "layout/playground";
+@import "layout/stat-display";

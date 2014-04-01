@@ -1,0 +1,19 @@
+.playground
+{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 950px;
+	height: 500px;
+	margin-left: -475px;
+	margin-top: -250px;
+	background: white;
+	@include border-radius(10px);
+
+	#game
+	{
+		position: relative;
+		width: 100%;
+		height: 100%;
+	}
+}
