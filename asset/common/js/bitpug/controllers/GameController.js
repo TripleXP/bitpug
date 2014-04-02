@@ -1,10 +1,15 @@
 goog.provide('bitpug.controllers.GameController');
 
 goog.require('goog.ui.Component');
+goog.require('goog.dom');
+goog.require('goog.events');
+goog.require('goog.events.EventTarget');
 
 // Get game componentes
 goog.require('bitpug.ui.StatDisplay');
 goog.require('bitpug.controllers.RegistryController');
+goog.require('bitpug.controllers.KeyController');
+goog.require('bitpug.controllers.PugController');
 
 /**
  * @constructor
@@ -13,6 +18,8 @@ goog.require('bitpug.controllers.RegistryController');
  */
 bitpug.controllers.GameController = function(settings)
 {
+	goog.base(this);
+
 	/**
 	 * @type {Object}
 	 * @private
@@ -24,6 +31,7 @@ bitpug.controllers.GameController = function(settings)
 	 */
 	bitpug.gameComponents = {};
 };
+goog.inherits(bitpug.controllers.GameController, goog.events.EventTarget);
 
 bitpug.controllers.GameController.prototype.start = function()
 {
@@ -38,5 +46,17 @@ bitpug.controllers.GameController.prototype.start = function()
 		goog.dom.createDom('div', 'module points'), // Point section
 		goog.dom.createDom('div', 'module level')   // Level section
 	]);
-	bitpug.gameComponents.StatDisplay.decorate(statDisplay);
+	//bitpug.gameComponents.StatDisplay.decorate(statDisplay);
+
+	// Init Key controller
+	bitpug.gameComponents.KeyController = new bitpug.controllers.KeyController.getInstance();
+	bitpug.gameComponents.KeyController.init();
+
+	// Init player pug
+	bitpug.gameComponents.PugController = new bitpug.controllers.PugController.getInstance();
+	bitpug.gameComponents.PugController.init();
+
+
+	// Unlock Key Controller
+	bitpug.gameComponents.KeyController.lock(false);
 };
