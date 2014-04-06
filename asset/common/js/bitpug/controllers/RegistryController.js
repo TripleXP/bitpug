@@ -22,6 +22,9 @@ goog.addSingletonGetter(bitpug.controllers.RegistryController);
  */
 bitpug.controllers.RegistryController.prototype.addElement = function(el, className)
 {
+	if(!className)
+		className = '';
+
 	goog.dom.classes.add(el, className);
 	this.register.elements.push(el);
 };
@@ -33,7 +36,7 @@ bitpug.controllers.RegistryController.prototype.addElement = function(el, classN
 bitpug.controllers.RegistryController.prototype.getElement = function(className)
 {
 	// Search in the register
-	var results = []
+	var results = [];
 	for(var i = 0; i < this.register.elements.length; i++)
 	{
 		if(goog.dom.classes.has(this.register.elements[i], className))

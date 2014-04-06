@@ -15,7 +15,7 @@ goog.inherits(bitpug.events.MainControl, goog.events.Event);
 
 bitpug.events.MainControl.EventType = {
     WALKLEFT: 'walkleft',
-    STOPWALKLEFT: 'stopwalkleft',
     WALKRIGHT: 'walkright',
-    STOPWALKRIGHT: 'stopwalkright'
+    STOPWALK: 'stopwalk',
+    JUMP: 'jump'
 }

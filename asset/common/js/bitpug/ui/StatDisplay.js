@@ -12,6 +12,12 @@ bitpug.ui.StatDisplay = function()
 	goog.base(this);
 
 	/**
+	 * @type {Element}
+	 * @private
+	 */
+	this.statDisplay_ = null;
+
+	/**
 	 * @type {Object}
 	 * @private
 	 */
@@ -43,18 +49,23 @@ bitpug.ui.StatDisplay = function()
 };
 goog.inherits(bitpug.ui.StatDisplay, goog.ui.Component);
 
-bitpug.ui.StatDisplay.prototype.decorateInternal = function(el)
+bitpug.ui.StatDisplay.prototype.init = function()
 {
-	goog.base(this, 'decorateInternal', el);
+	// Stat display element tree
+	this.statDisplay_ = goog.dom.createDom('div', '', [
+		goog.dom.createDom('div', 'deko-pug'),
+		goog.dom.createDom('div', 'module points'), // Point section
+		goog.dom.createDom('div', 'module level')   // Level section
+	]);
 
 	// Get point el
-	this.pointEl_ = goog.dom.getElementByClass('points', el);
+	this.pointEl_ = goog.dom.getElementByClass('points', this.statDisplay_);
 
 	// Get level el
-	this.levelEl_ = goog.dom.getElementByClass('level', el);
+	this.levelEl_ = goog.dom.getElementByClass('level', this.statDisplay_);
 
 	// Add element to registry
-	this.registry_.addElement(el, 'stat-display');
+	this.registry_.addElement(this.statDisplay_, 'stat-display');
 
 	// Render display
 	this.renderDisplay_();
@@ -70,9 +81,9 @@ bitpug.ui.StatDisplay.prototype.renderDisplay_ = function()
 {
 	// Append display element
 	var gameField = bitpug.gameComponents.Registry.getElement('game-section')[0];
-	gameField.appendChild(this.getElement());
+	gameField.appendChild(this.statDisplay_);
 	goog.Timer.callOnce(function(){
-		goog.dom.classes.enable(this.getElement(), 'visible', true);
+		goog.dom.classes.enable(this.statDisplay_, 'visible', true);
 	}, 0, this);
 
 	// Set points to 0

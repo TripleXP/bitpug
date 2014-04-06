@@ -17,9 +17,9 @@
 	.deko-pug
 	{
 		position: absolute;
-		width: image-width("../img/layout/pugs/pug-tongue/p1.png");
-		height: image-height("../img/layout/pugs/pug-tongue/p1.png");
-		background: url(../img/layout/pugs/pug-tongue/p1.png);
+		width: image-width("../img/layout/pugs/pug-default.png");
+		height: image-height("../img/layout/pugs/pug-default.png");
+		background: url(../img/layout/pugs/pug-default.png);
 		left: 50%;
 		top: -53px;
 		margin-left: -60px;
@@ -30,10 +30,10 @@
 		position: relative;
 		text-align: center;
 		line-height: 90px;
-		font-size: 30px;
+		font-size: 50px;
 		font-weight: bold;
 		color: #808080;
-		font-family: "Arial", sans-serif;
+		font-family: "Pixel", sans-serif;
 
 		&:not(:last-child)
 		{

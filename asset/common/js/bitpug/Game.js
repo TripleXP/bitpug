@@ -6,6 +6,7 @@ goog.require('bitpug.controllers.GameController');
  * @constructor
  */
 bitpug.Game = function(){};
+
 bitpug.Game.prototype.startInit = function()
 {
 	var settings = {
@@ -22,3 +23,4 @@ bitpug.Initialize = function()
 	var game = new bitpug.Game();
 	game.startInit();
 };
+goog.exportSymbol('bitpug.Initialize', bitpug.Initialize);

@@ -1,6 +1,6 @@
 body
 {
-	//background: url(../img/layout/bg-body.svg) no-repeat;
+	background: url(../img/layout/bg-body.svg) no-repeat;
 	@include background-size(cover);
 }
 
@@ -10,5 +10,9 @@ body
 }
 
 // Import layout components
+@import "layout/off-game";
 @import "layout/playground";
 @import "layout/stat-display";
+@import "layout/environment";
+@import "layout/pug-player";
+@import "layout/rain";

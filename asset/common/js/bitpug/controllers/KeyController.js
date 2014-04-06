@@ -44,10 +44,10 @@ bitpug.controllers.KeyController.prototype.init = function()
 bitpug.controllers.KeyController.prototype.addKeyListeners_ = function()
 {
     goog.events.listen(window, goog.events.EventType.KEYDOWN,
-        this.handleKeyDown_, false, this);
+        this.handleKeyDownUp_, false, this);
 
     goog.events.listen(window, goog.events.EventType.KEYUP,
-        this.handleKeyDown_, false, this);
+        this.handleKeyDownUp_, false, this);
 };
 
 /**
@@ -62,15 +62,14 @@ bitpug.controllers.KeyController.prototype.lock = function(isLocked)
  * @private
  * @param  {goog.events.BrowserEvent} e
  */
-bitpug.controllers.KeyController.prototype.handleKeyDown_ = function(e)
+bitpug.controllers.KeyController.prototype.handleKeyDownUp_ = function(e)
 {
     if(this.isLocked_)
         return;
 
     switch(e.keyCode)
     {
-        // Arrow left
-        case 37:
+        case 37: // Arrow left
             if(e.type == 'keydown')
             {
                 if(!this.leftKeyActive_)
@@ -86,13 +85,12 @@ bitpug.controllers.KeyController.prototype.handleKeyDown_ = function(e)
                 {
                     this.leftKeyActive_ = false;
                     this.handleWalk_(
-                        bitpug.events.MainControl.EventType.STOPWALKLEFT);
+                        bitpug.events.MainControl.EventType.STOPWALK);
                 }
             }
         break;
 
-        // Arrow right
-        case 39:
+        case 39: // Arrow right
             if(e.type == 'keydown')
             {
                 if(!this.rightKeyActive_)
@@ -108,13 +106,23 @@ bitpug.controllers.KeyController.prototype.handleKeyDown_ = function(e)
                 {
                     this.rightKeyActive_ = false;
                     this.handleWalk_(
-                        bitpug.events.MainControl.EventType.STOPWALKRIGHT);
+                        bitpug.events.MainControl.EventType.STOPWALK);
                 }
+            }
+        break;
+
+        case 32: // Space
+            if(e.type == 'keyup')
+            {
+               this.dispatchEvent(bitpug.events.MainControl.EventType.JUMP);
             }
         break;
     }
 };
 
+/**
+ * @param  {string} event
+ */
 bitpug.controllers.KeyController.prototype.handleWalk_ = function(event)
 {
     this.dispatchEvent(event);

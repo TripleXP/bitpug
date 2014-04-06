@@ -1,5 +1,6 @@
 goog.provide('bitpug.controllers.PugController');
 
+goog.require('bitpug.ui.PugPlayer');
 goog.require('bitpug.events.MainControl');
 goog.require('bitpug.controllers.RegistryController');
 
@@ -8,7 +9,17 @@ goog.require('bitpug.controllers.RegistryController');
  */
 bitpug.controllers.PugController = function()
 {
+    /**
+     * @type {Element}
+     * @private
+     */
+    this.pugEl_ = null;
 
+    /**
+     * @type {bitpug.ui.PugPlayer}
+     * @private
+     */
+    this.pugPlayer_ = new bitpug.ui.PugPlayer();
 };
 goog.addSingletonGetter(bitpug.controllers.PugController);
 
@@ -16,6 +27,9 @@ bitpug.controllers.PugController.prototype.init = function()
 {
     this.spawnPug_();
     this.listenMainControl_();
+
+    // Decorate (init) pug player
+    this.pugPlayer_.decorate(this.pugEl_);
 };
 
 /**
@@ -23,7 +37,13 @@ bitpug.controllers.PugController.prototype.init = function()
  */
 bitpug.controllers.PugController.prototype.spawnPug_ = function()
 {
-
+    // Create pug element
+    this.pugEl_ = goog.dom.createDom('div', 'pug-player', [
+            goog.dom.createDom('div', 'mouth')
+        ]);
+    var gameSection = bitpug.gameComponents.Registry.getElement('game-section')[0];
+    bitpug.gameComponents.Registry.addElement(this.pugEl_);
+    gameSection.appendChild(this.pugEl_);
 };
 
 /**
@@ -31,6 +51,7 @@ bitpug.controllers.PugController.prototype.spawnPug_ = function()
  */
 bitpug.controllers.PugController.prototype.listenMainControl_ = function()
 {
+    // Walk listeners
     goog.events.listen(
         bitpug.gameComponents.KeyController,
         bitpug.events.MainControl.EventType.WALKLEFT,
@@ -41,13 +62,6 @@ bitpug.controllers.PugController.prototype.listenMainControl_ = function()
 
     goog.events.listen(
         bitpug.gameComponents.KeyController,
-        bitpug.events.MainControl.EventType.STOPWALKLEFT,
-        function(){
-            this.handleWalkStop_();
-        }, false, this);
-
-    goog.events.listen(
-        bitpug.gameComponents.KeyController,
         bitpug.events.MainControl.EventType.WALKRIGHT,
         function(){
             this.handleWalkStart_('right');
@@ -55,10 +69,16 @@ bitpug.controllers.PugController.prototype.listenMainControl_ = function()
 
     goog.events.listen(
         bitpug.gameComponents.KeyController,
-        bitpug.events.MainControl.EventType.STOPWALKRIGHT,
+        bitpug.events.MainControl.EventType.STOPWALK,
         function(){
             this.handleWalkStop_();
         }, false, this);
+
+    // Jump listener
+    goog.events.listen(
+        bitpug.gameComponents.KeyController,
+        bitpug.events.MainControl.EventType.JUMP,
+        this.handleJump_, false, this);
 };
 
 /**
@@ -67,7 +87,7 @@ bitpug.controllers.PugController.prototype.listenMainControl_ = function()
  */
 bitpug.controllers.PugController.prototype.handleWalkStart_ = function(drn)
 {
-    console.log(drn);
+    this.pugPlayer_.moveX(drn);
 };
 
 /**
@@ -75,5 +95,13 @@ bitpug.controllers.PugController.prototype.handleWalkStart_ = function(drn)
  */
 bitpug.controllers.PugController.prototype.handleWalkStop_ = function()
 {
-    console.log('stop');
-}
+    this.pugPlayer_.stop();
+};
+
+/**
+ * @private
+ */
+bitpug.controllers.PugController.prototype.handleJump_ = function()
+{
+    this.pugPlayer_.jump();
+};

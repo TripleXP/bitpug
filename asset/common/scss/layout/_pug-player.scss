@@ -1,0 +1,52 @@
+.pug-player
+{
+	width: image-width("../img/layout/pugs/pug-player/pug-left-sprite.png");
+	height: 58px;
+	background: url(../img/layout/pugs/pug-player/pug-left-sprite.png) no-repeat;
+	position: absolute;
+	bottom: 35px;
+	left: 100px;
+
+	.mouth
+	{
+		position: absolute;
+		left: 0;
+		width: 45px;
+		height: 35px;
+		background: rgba(0,0,0,0.5);
+	}
+
+	// States of the pug
+	&.right .mouth
+	{
+		left: auto;
+		right: 0;
+	}
+
+	&.right
+	{
+		background-image: url(../img/layout/pugs/pug-player/pug-right-sprite.png);
+	}
+
+	&.walking
+	{
+
+	}
+
+	&.jumping
+	{
+		@include transition(transform 0.5s);
+
+		@include transform(rotate(360deg));
+
+		&.right
+		{
+			@include transform(rotate(-360deg));
+		}
+	}
+
+	&.jumping-down
+	{
+
+	}
+}
