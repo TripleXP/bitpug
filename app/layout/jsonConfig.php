@@ -3,4 +3,4 @@
     $jsonConfig = new GetJsonConfig;
 ?>
 
-<?= $jsonConfig->getJsonConfig() ?>
+<?= preg_replace('!/\*.*?\*/!s', '', $jsonConfig->getJsonConfig()) ?>

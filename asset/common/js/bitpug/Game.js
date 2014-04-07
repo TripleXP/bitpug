@@ -1,5 +1,7 @@
 goog.provide('bitpug.Game');
 
+goog.require('goog.net.XhrIo');
+
 goog.require('bitpug.controllers.GameController');
 
 /**
@@ -19,26 +21,11 @@ bitpug.Game.prototype.startInit = function(config)
 
 bitpug.Game.prototype.loadConfig_ = function()
 {
-    var xmlhttp;
-    if(window.XMLHttpRequest)
-    {
-        xmlhttp = new XMLHttpRequest();
-    }
-    else
-    {
-        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
+   var xhr = new goog.net.XhrIo();
+   xhr.send('/app/layout/jsonConfig.php');
+   var response = xhr.getResponseText();
 
-    xmlhttp.onreadystatechange = function()
-    {
-        if(xmlhttp.readyState == 4 && xmlhttp.status == 200)
-        {
-            console.log(xmlhttp.responseText, xmlhttp);
-        }
-    }
-
-    xmlhttp.open("GET", "/app/layout/jsonConfig.php", true);
-    xmlhttp.send();
+   console.log(response);
 };
 
 // Seperated function to keep after it's compiled
