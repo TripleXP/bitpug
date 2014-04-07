@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+    <head>
+        <title>Bitpug</title>
+        <link href="asset/common/css/game.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="page">
+            <h1 class="heading">Bitpug</h1>
+            <div class="playground">
+                <div class="environment">
+                    <div class="ground"></div>
+                </div>
+                <div id="game"></div>
+            </div>
+        </div>
+        <script src="asset/closure-library/closure/goog/base.js"></script>
+        <script src="asset/common/js/deps.js"></script>
+        <script>goog.require('bitpug.Game');</script>
+        <script>bitpug.Initialize();</script>
+    </body>
+</html>

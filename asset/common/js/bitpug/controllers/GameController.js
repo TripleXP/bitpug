@@ -17,15 +17,9 @@ goog.require('bitpug.controllers.RainController');
  * @param {Object} settings
  * @extends {goog.ui.Component}
  */
-bitpug.controllers.GameController = function(settings)
+bitpug.controllers.GameController = function()
 {
 	goog.base(this);
-
-	/**
-	 * @type {Object}
-	 * @private
-	 */
-	this.settings_ = settings;
 
 	/**
 	 * @type {Object}

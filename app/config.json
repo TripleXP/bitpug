@@ -1,0 +1,29 @@
+{
+    /**
+     * PUG SETTINGS
+     *
+     * configure the speed, movement and animation of the
+     * pug, which is played by the user
+     */
+    "pug": {
+    	"moveSpeed": 2.5,
+        "jumpSpeed": 6,
+        "walkAnimationMs": 100,
+        "maxJumpHeight": 150,
+    },
+
+    /**
+     * RAIN SETTINGS
+     *
+     * configure the rain by it's speed and animation
+     * framerate
+     */
+    "rain": {
+        "initialFallSpeed": 5000,
+        "spawnInterval": 2000,
+        "defaultSize": 20,
+        "dropClasses": [
+            "candy", "bone"
+        ]
+    }
+}

@@ -31,7 +31,7 @@ bitpug.ui.PugPlayer = function()
 	 * @type {goog.Timer} also speed in ms
 	 * @private
 	 */
-	this.walkAnimTimer_ = new goog.Timer(100);
+	this.walkAnimTimer_ = new goog.Timer(bitpug.settings.pug.walkAnimationMs);
 
 	/**
 	 * @type {Array.<Number>}
@@ -52,34 +52,22 @@ bitpug.ui.PugPlayer = function()
 	this.moveDirection_ = '';
 
 	/**
-	 * @type {Object}
+	 * @type {Number} pixels per tick
 	 * @private
 	 */
-	this.posX_ = {};
-
-	/**
-	 * @type {Object}
-	 * @private
-	 */
-	this.posY_ = {};
+	this.speed_ = bitpug.settings.pug.moveSpeed;
 
 	/**
 	 * @type {Number} pixels per tick
 	 * @private
 	 */
-	this.speed_ = 2.5;
-
-	/**
-	 * @type {Number} pixels per tick
-	 * @private
-	 */
-	this.jumpSpeed_ = 6;
+	this.jumpSpeed_ = bitpug.settings.pug.jumpSpeed;
 
 	/**
 	 * @type {Number} pixels
 	 * @private
 	 */
-	this.maxJumpHeight_ = 150;
+	this.maxJumpHeight_ = bitpug.settings.pug.maxJumpHeight;
 
 	/**
 	 * @type {Object}
@@ -104,8 +92,19 @@ bitpug.ui.PugPlayer = function()
 	 * @private
 	 */
 	this.pugDrn_ = 'left';
+
+	/**
+	 * @type {Object}
+	 */
+	this.posX = {};
+
+	/**
+	 * @type {Object}
+	 */
+	this.posY = {};
 };
 goog.inherits(bitpug.ui.PugPlayer, goog.ui.Component);
+goog.addSingletonGetter(bitpug.ui.PugPlayer);
 
 /** @inheritDoc */
 bitpug.ui.PugPlayer.prototype.decorateInternal = function(el)
@@ -117,8 +116,8 @@ bitpug.ui.PugPlayer.prototype.decorateInternal = function(el)
 			'game-section')[0];
 
 	// Set initial position
-	this.posX_.left = el.offsetLeft;
-	this.posY_.bottom = gameSection.offsetHeight - (
+	this.posX.left = el.offsetLeft;
+	this.posY.bottom = gameSection.offsetHeight - (
 		el.offsetTop + el.offsetHeight);
 
 	// Set move range X
@@ -129,7 +128,7 @@ bitpug.ui.PugPlayer.prototype.decorateInternal = function(el)
 
 	// Set jump range Y
 	this.jumpRange_ = {
-		min: this.posY_.bottom,
+		min: this.posY.bottom,
 		max: gameSection.offsetHeight - el.offsetHeight
 	}
 
@@ -161,18 +160,18 @@ bitpug.ui.PugPlayer.prototype.handleMoveX_ = function()
 {
 	if(this.moveDirection_ == 'left')
 	{
-		this.posX_.left -= this.speed_;
+		this.posX.left -= this.speed_;
 	}
 	else if(this.moveDirection_ == 'right')
 	{
-		this.posX_.left += this.speed_;
+		this.posX.left += this.speed_;
 	}
 
-	this.posX_.left = goog.math.clamp(this.posX_.left,
+	this.posX.left = goog.math.clamp(this.posX.left,
 						this.moveRange_.min, this.moveRange_.max);
 
-	if(this.posX_.left <= this.moveRange_.min ||
-		this.posX_.left >= this.moveRange_.max)
+	if(this.posX.left <= this.moveRange_.min ||
+		this.posX.left >= this.moveRange_.max)
 	{
 		goog.dom.classes.enable(
 			this.getElement(), 'walking', false);
@@ -185,7 +184,7 @@ bitpug.ui.PugPlayer.prototype.handleMoveX_ = function()
 	}
 
 	goog.style.setStyle(this.getElement(), {
-		left: this.posX_.left + 'px'
+		left: this.posX.left + 'px'
 	});
 };
 
@@ -251,26 +250,26 @@ bitpug.ui.PugPlayer.prototype.handleWalkAnimTick_ = function()
  */
 bitpug.ui.PugPlayer.prototype.handleJumpAnimation_ = function()
 {
-	if(this.posY_.bottom <= this.maxJumpHeight_ &&
+	if(this.posY.bottom <= this.maxJumpHeight_ &&
 		!goog.dom.classes.has(this.getElement(), 'jumping-down'))
 	{
-		this.posY_.bottom += this.jumpSpeed_;
+		this.posY.bottom += this.jumpSpeed_;
 	}
 	else
 	{
-		this.posY_.bottom -= this.jumpSpeed_*1.5;
+		this.posY.bottom -= this.jumpSpeed_*1.5;
 		goog.dom.classes.enable(
 			this.getElement(), 'jumping-down', true);
 	}
 
-	this.posY_.bottom = goog.math.clamp(this.posY_.bottom,
+	this.posY.bottom = goog.math.clamp(this.posY.bottom,
 			this.jumpRange_.min, this.jumpRange_.max);
 
 	goog.style.setStyle(this.getElement(), {
-		bottom: this.posY_.bottom + 'px'
+		bottom: this.posY.bottom + 'px'
 	});
 
-	if(this.posY_.bottom <= this.jumpRange_.min)
+	if(this.posY.bottom <= this.jumpRange_.min)
 	{
 		this.handleJumpAnimationEnd_();
 	}
@@ -284,6 +283,6 @@ bitpug.ui.PugPlayer.prototype.handleJumpAnimationEnd_ = function()
 	this.jumpTimer_.stop();
 	goog.dom.classes.enable(this.getElement(), 'jumping', false);
 	goog.dom.classes.enable(this.getElement(), 'jumping-down', false);
-	this.posY_.bottom = this.jumpRange_.min;
+	this.posY.bottom = this.jumpRange_.min;
 	this.jumpActive_ = false;
 };

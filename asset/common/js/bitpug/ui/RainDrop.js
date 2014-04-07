@@ -3,6 +3,8 @@ goog.provide('bitpug.ui.RainDrop');
 goog.require('goog.ui.Component');
 goog.require('goog.style');
 
+goog.require('bitpug.ui.PugPlayer');
+
 /**
  * @constructor
  * @extends {goog.ui.Component}
@@ -34,6 +36,12 @@ bitpug.ui.RainDrop = function()
 	 * @private
 	 */
 	this.animation_ = null;
+
+	/**
+	 * @type {bitpug.ui.PugPlayer}
+	 * @private
+	 */
+	this.pugPlayer_ = new bitpug.ui.PugPlayer.getInstance();
 };
 goog.inherits(bitpug.ui.RainDrop, goog.ui.Component);
 
@@ -43,7 +51,8 @@ goog.inherits(bitpug.ui.RainDrop, goog.ui.Component);
 bitpug.ui.RainDrop.prototype.renderDrop = function(coordinates)
 {
 	// Render raindrop
-	var raindropEl = goog.dom.createDom('div', 'drop candy');
+	var raindropEl = goog.dom.createDom('div', 'drop ' +
+		bitpug.settings.rain.dropClasses[0]);
 
 	goog.style.setPosition(raindropEl, coordinates.x, -50);
 
@@ -54,7 +63,7 @@ bitpug.ui.RainDrop.prototype.renderDrop = function(coordinates)
 
 	// Set animation
 	this.animation_ = new goog.fx.Animation([coordinates.x,-50],
-		[0,coordinates.y], 5000);
+		[0,coordinates.y], bitpug.settings.rain.initialFallSpeed);
 
 	// Listen for animation
 	this.getHandler().listen(this.animation_,
@@ -81,6 +90,7 @@ bitpug.ui.RainDrop.prototype.dispatchDrop_ = function()
  */
 bitpug.ui.RainDrop.prototype.handleAnimation_ = function(e)
 {
+
 	var y = (Number) ((e.y).toFixed(0));
 	goog.style.setStyle(this.dropEl_, {top: y + 'px'});
 };

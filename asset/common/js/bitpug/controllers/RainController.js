@@ -27,7 +27,7 @@ bitpug.controllers.RainController = function()
 	 * @type {Number}
 	 * @private
 	 */
-	this.spawnInterval_ = 2000;
+	this.spawnInterval_ = bitpug.settings.rain.spawnInterval;
 
 	/**
 	 * @type {goog.Timer}
@@ -87,9 +87,10 @@ bitpug.controllers.RainController.prototype.setSpawnTimer_ = function()
 bitpug.controllers.RainController.prototype.spawnRainDrop_ = function()
 {
 	var cordX = (Number) ((Math.random()*this.maxRange_.xE).toFixed(0));
-	var cordY = (Number) (this.maxRange_.yE + 20);
+	var cordY = (Number) (this.maxRange_.yE + bitpug.settings.rain.defaultSize);
 
-	cordX = goog.math.clamp(cordX, this.maxRange_.xS, this.maxRange_.xE - 20);
+	cordX = goog.math.clamp(cordX, this.maxRange_.xS,
+		this.maxRange_.xE - bitpug.settings.rain.defaultSize);
 
 	var spawnCoordinates = new goog.math.Coordinate(cordX, cordY);
 
