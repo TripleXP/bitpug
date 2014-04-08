@@ -30,10 +30,13 @@
             "speedIncicator": 3,
 
             /* Speed for the boost for reloading (ms) */
-            "reloadingDelay": 500,
+            "reloadingDelay": 5000,
 
             /* Max repeats of one tick */
-            "maxCount": 50
+            "maxCount": 30,
+
+            /* Pixels add on tick */
+            "pixelY": 1
         }
     },
 

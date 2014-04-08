@@ -290,7 +290,6 @@ bitpug.ui.PugPlayer.prototype.boost = function()
 		!goog.dom.classes.has(this.getElement(), 'jumping'))
 	{
 		this.stop();
-		bitpug.gameComponents.KeyController.lock(true);
 		this.activateBoost_();
 	}
 };
@@ -300,6 +299,9 @@ bitpug.ui.PugPlayer.prototype.boost = function()
  */
 bitpug.ui.PugPlayer.prototype.activateBoost_ = function()
 {
+	// Lock
+	bitpug.gameComponents.KeyController.lock(true);
+
 	// start boost
 	this.boostTimer_.start();
 
@@ -321,11 +323,21 @@ bitpug.ui.PugPlayer.prototype.handleBoostMove_ = function()
 		this.posX.left += this.speed_*bitpug.settings.module.boost.speedIncicator;
 	}
 
+	if(this.boostTimerCounter_ < bitpug.settings.module.boost.maxCount/2)
+	{
+		this.posY.bottom += bitpug.settings.module.boost.pixelY;
+	}
+	else
+	{
+		this.posY.bottom -= bitpug.settings.module.boost.pixelY;
+	}
+
 	this.posX.left = goog.math.clamp(this.posX.left,
 						this.moveRange_.min, this.moveRange_.max);
 
 	goog.style.setStyle(this.getElement(), {
-		left: this.posX.left + 'px'
+		left: this.posX.left + 'px',
+		bottom: this.posY.bottom + 'px'
 	});
 
 	this.boostTimerCounter_++;
@@ -336,6 +348,12 @@ bitpug.ui.PugPlayer.prototype.handleBoostMove_ = function()
 	{
 		this.boostTimer_.stop();
 		this.boostTimerCounter_ = 0;
+
+		goog.style.setStyle(this.getElement(), {
+			bottom: this.jumpRange_.min + 'px'
+		});
+
+		bitpug.gameComponents.KeyController.lock(false);
 	}
 };
 
@@ -366,7 +384,6 @@ bitpug.ui.PugPlayer.prototype.handleBoostLoadEnd_ = function()
 	this.boostLoading_ = false;
 	this.boostLoaded_ = true;
 	goog.dom.classes.enable(this.boostEl_, 'loading', false);
-	bitpug.gameComponents.KeyController.lock(false);
 };
 
 /**
