@@ -102,6 +102,43 @@ bitpug.ui.PugPlayer = function()
 	 * @type {Object}
 	 */
 	this.posY = {};
+
+	/**
+	 * @type {Element}
+	 * @private
+	 */
+	this.boostEl_ = null;
+
+	/**
+	 * @type {boolean}
+	 * @private
+	 */
+	this.boostLoading_ = false;
+
+	/**
+	 * @type {boolean}
+	 * @private
+	 */
+	this.boostLoaded_ = false;
+
+	/**
+	 * @type {goog.fx.Animation}
+	 * @private
+	 */
+	this.boostLoader_ = new goog.fx.Animation([0,1], [0,105],
+		bitpug.settings.module.boost.reloadingDelay);
+
+	/**
+	 * @type {goog.Timer}
+	 * @private
+	 */
+	this.boostTimer_ = new goog.Timer(10);
+
+	/**
+	 * @type {Number}
+	 * @private
+	 */
+	this.boostTimerCounter_ = 0;
 };
 goog.inherits(bitpug.ui.PugPlayer, goog.ui.Component);
 goog.addSingletonGetter(bitpug.ui.PugPlayer);
@@ -135,6 +172,11 @@ bitpug.ui.PugPlayer.prototype.decorateInternal = function(el)
 	// Init walk animation frames
 	this.walkAnimPos_ = [0, -62, -124, -185];
 	this.walkAnimPosCur_ = 0;
+
+	// Init boost element
+	var boostModule = bitpug.gameComponents.Registry.getElement(
+		'boost-cmp')[0];
+	this.boostEl_ = goog.dom.getElementByClass('bar', boostModule);
 };
 
 /** @inheritDoc */
@@ -151,6 +193,17 @@ bitpug.ui.PugPlayer.prototype.enterDocument = function()
 	// Listen for walk animation
 	this.getHandler().listen(this.walkAnimTimer_,
 		goog.Timer.TICK, this.handleWalkAnimTick_);
+
+	// Listen for boostloader
+	this.getHandler().listen(this.boostLoader_,
+		goog.fx.Animation.EventType.ANIMATE,
+		this.handleBoostLoad_);
+	this.getHandler().listen(this.boostLoader_,
+		goog.fx.Animation.EventType.END,
+		this.handleBoostLoadEnd_);
+
+	this.getHandler().listen(this.boostTimer_,
+		goog.Timer.TICK, this.handleBoostMove_);
 };
 
 /**
@@ -224,6 +277,108 @@ bitpug.ui.PugPlayer.prototype.jump = function()
 		goog.dom.classes.enable(this.getElement(), 'jumping', true);
 		this.jumpActive_ = true;
 	}
+};
+
+bitpug.ui.PugPlayer.prototype.boost = function()
+{
+	if(!this.boostLoading_ && !this.boostLoaded_)
+	{
+		this.loadBoost_();
+		return;
+	}
+	else if(!this.boostLoading_ && this.boostLoaded_ &&
+		!goog.dom.classes.has(this.getElement(), 'jumping'))
+	{
+		this.stop();
+		bitpug.gameComponents.KeyController.lock(true);
+		this.activateBoost_();
+	}
+};
+
+/**
+ * @private
+ */
+bitpug.ui.PugPlayer.prototype.activateBoost_ = function()
+{
+	// start boost
+	this.boostTimer_.start();
+
+	// Reload boost automatically
+	this.loadBoost_();
+};
+
+/**
+ * @private
+ */
+bitpug.ui.PugPlayer.prototype.handleBoostMove_ = function()
+{
+	if(this.moveDirection_ == 'left')
+	{
+		this.posX.left -= this.speed_*bitpug.settings.module.boost.speedIncicator;
+	}
+	else if(this.moveDirection_ == 'right')
+	{
+		this.posX.left += this.speed_*bitpug.settings.module.boost.speedIncicator;
+	}
+
+	this.posX.left = goog.math.clamp(this.posX.left,
+						this.moveRange_.min, this.moveRange_.max);
+
+	goog.style.setStyle(this.getElement(), {
+		left: this.posX.left + 'px'
+	});
+
+	this.boostTimerCounter_++;
+
+	if(this.boostTimerCounter_ >= bitpug.settings.module.boost.maxCount ||
+		this.posX.left == this.moveRange_.max ||
+		this.posX.left == this.moveRange_.min)
+	{
+		this.boostTimer_.stop();
+		this.boostTimerCounter_ = 0;
+	}
+};
+
+/**
+ * @param  {goog.fx.Animation.EventType} e
+ * @private
+ */
+bitpug.ui.PugPlayer.prototype.handleBoostLoad_ = function(e)
+{
+	var width = (Number) (goog.math.clamp(e.y, 1, 100).toFixed(2));
+
+	if(width > 80)
+	{
+		goog.dom.classes.enable(this.boostEl_, 'loading', false);
+		goog.dom.classes.enable(this.boostEl_, 'loaded', true);
+	}
+
+	goog.style.setStyle(this.boostEl_, {
+		'width': width + '%'
+	});
+};
+
+/**
+ * @private
+ */
+bitpug.ui.PugPlayer.prototype.handleBoostLoadEnd_ = function()
+{
+	this.boostLoading_ = false;
+	this.boostLoaded_ = true;
+	goog.dom.classes.enable(this.boostEl_, 'loading', false);
+	bitpug.gameComponents.KeyController.lock(false);
+};
+
+/**
+ * @private
+ */
+bitpug.ui.PugPlayer.prototype.loadBoost_ = function()
+{
+	this.boostLoader_.play();
+	this.boostLoading_ = true;
+	this.boostLoaded_ = false;
+	goog.dom.classes.enable(this.boostEl_, 'loading', true);
+	goog.dom.classes.enable(this.boostEl_, 'empty', false);
 };
 
 /**

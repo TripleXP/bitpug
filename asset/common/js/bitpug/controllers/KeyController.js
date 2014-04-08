@@ -35,7 +35,6 @@ goog.addSingletonGetter(bitpug.controllers.KeyController);
 bitpug.controllers.KeyController.prototype.init = function()
 {
     this.addKeyListeners_();
-    var eTarget = new bitpug.events.MainControl();
 };
 
 /**
@@ -115,6 +114,13 @@ bitpug.controllers.KeyController.prototype.handleKeyDownUp_ = function(e)
             if(e.type == 'keyup')
             {
                this.dispatchEvent(bitpug.events.MainControl.EventType.JUMP);
+            }
+        break;
+
+        case 66: // b
+            if(e.type == 'keydown')
+            {
+               this.dispatchEvent(bitpug.events.MainControl.EventType.BOOST);
             }
         break;
     }

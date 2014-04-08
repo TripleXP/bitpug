@@ -6,10 +6,35 @@
      * pug, which is played by the user
      */
     "pug": {
+        /* The sped the pugs moves each 10ms (px) */
     	"moveSpeed": 2.5,
+
+        /* Jump speed the pug takes up multiplied by 2 when falls down (increase px) */
         "jumpSpeed": 6,
+
+        /* How often the animation changes the frame (ms) */
         "walkAnimationMs": 100,
+
+        /* The maximal jump height the player can reach (px) */
         "maxJumpHeight": 150,
+    },
+
+    /**
+     * MODULE SETTINGS
+     *
+     * configure module like the boost reloading speed
+     */
+    "module": {
+        "boost": {
+            /* Multiplied by default speed */
+            "speedIncicator": 3,
+
+            /* Speed for the boost for reloading (ms) */
+            "reloadingDelay": 500,
+
+            /* Max repeats of one tick */
+            "maxCount": 50
+        }
     },
 
     /**
@@ -19,9 +44,16 @@
      * framerate
      */
     "rain": {
+        /* Fall speed on loading (ms) */
         "initialFallSpeed": 5000,
+
+        /* Spawn interval of each drop (ms) */
         "spawnInterval": 2000,
+
+        /* MAXIMAL size of one drop for calculating ranges (px) */
         "defaultSize": 20,
+
+        /* Classes for default drop (chosen random) */
         "dropClasses": [
             "candy", "bone"
         ]

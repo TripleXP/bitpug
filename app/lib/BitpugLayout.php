@@ -4,7 +4,7 @@ class BitpugLayout {
 
     private function initConfig()
     {
-        $this->layoutPath = '/app/layout/layout.phtml';
+        $this->layoutPath = 'app/layout/layout.phtml';
     }
 
     private function renderLayout()

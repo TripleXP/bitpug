@@ -13,7 +13,6 @@
 		left: 0;
 		width: 45px;
 		height: 35px;
-		background: rgba(0,0,0,0.5);
 	}
 
 	// States of the pug
@@ -36,7 +35,6 @@
 	&.jumping
 	{
 		@include transition(transform 0.5s);
-
 		@include transform(rotate(360deg));
 
 		&.right

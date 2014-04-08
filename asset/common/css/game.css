@@ -73,7 +73,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
 /* line 2, ../scss/_layout.scss */
 body {
-  background: url(../img/layout/bg-body.svg) no-repeat;
+  background: black no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -121,17 +121,13 @@ h1.heading:before {
   margin-left: -400px;
   margin-top: -300px;
   background: white;
-  border: 1px solid #f2f2f2;
-  -webkit-box-shadow: 0px 1px 1px #2e2e2e;
-  -moz-box-shadow: 0px 1px 1px #2e2e2e;
-  box-shadow: 0px 1px 1px #2e2e2e;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
   border-radius: 10px;
 }
-/* line 16, ../scss/layout/_playground.scss */
+/* line 14, ../scss/layout/_playground.scss */
 .playground #game {
   position: relative;
   width: 100%;
@@ -197,13 +193,50 @@ h1.heading:before {
   font-size: 9px;
   line-height: 0;
 }
-/* line 57, ../scss/layout/_stat-display.scss */
+/* line 58, ../scss/layout/_stat-display.scss */
+.stat-display .boost {
+  height: 60px;
+}
+/* line 62, ../scss/layout/_stat-display.scss */
+.stat-display .boost .bar-wrapper {
+  position: absolute;
+  top: 20px;
+  height: 15px;
+  width: 80px;
+  padding: 10px;
+}
+/* line 71, ../scss/layout/_stat-display.scss */
+.stat-display .boost .bar-wrapper .bar {
+  height: inherit;
+  -webkit-transition: background-color 1s;
+  -moz-transition: background-color 1s;
+  -o-transition: background-color 1s;
+  transition: background-color 1s;
+}
+/* line 76, ../scss/layout/_stat-display.scss */
+.stat-display .boost .bar-wrapper .bar.loaded {
+  background-color: #82FE82;
+}
+/* line 81, ../scss/layout/_stat-display.scss */
+.stat-display .boost .bar-wrapper .bar.loading {
+  background-color: orange;
+}
+/* line 86, ../scss/layout/_stat-display.scss */
+.stat-display .boost .bar-wrapper .bar.empty {
+  width: 1%;
+  background-color: red;
+}
+/* line 94, ../scss/layout/_stat-display.scss */
 .stat-display .points:after {
   content: "Points";
 }
-/* line 62, ../scss/layout/_stat-display.scss */
+/* line 99, ../scss/layout/_stat-display.scss */
 .stat-display .level:after {
   content: "Level";
+}
+/* line 104, ../scss/layout/_stat-display.scss */
+.stat-display .boost:after {
+  content: "Boost";
 }
 
 /* line 2, ../scss/layout/_environment.scss */
@@ -248,18 +281,17 @@ h1.heading:before {
   left: 0;
   width: 45px;
   height: 35px;
-  background: rgba(0, 0, 0, 0.5);
 }
-/* line 21, ../scss/layout/_pug-player.scss */
+/* line 20, ../scss/layout/_pug-player.scss */
 .pug-player.right .mouth {
   left: auto;
   right: 0;
 }
-/* line 27, ../scss/layout/_pug-player.scss */
+/* line 26, ../scss/layout/_pug-player.scss */
 .pug-player.right {
   background-image: url(../img/layout/pugs/pug-player/pug-right-sprite.png);
 }
-/* line 37, ../scss/layout/_pug-player.scss */
+/* line 36, ../scss/layout/_pug-player.scss */
 .pug-player.jumping {
   -webkit-transition: -webkit-transform 0.5s;
   -moz-transition: -moz-transform 0.5s;
@@ -271,7 +303,7 @@ h1.heading:before {
   -o-transform: rotate(360deg);
   transform: rotate(360deg);
 }
-/* line 43, ../scss/layout/_pug-player.scss */
+/* line 41, ../scss/layout/_pug-player.scss */
 .pug-player.jumping.right {
   -webkit-transform: rotate(-360deg);
   -moz-transform: rotate(-360deg);
@@ -298,6 +330,10 @@ h1.heading:before {
   background: rgba(0, 0, 0, 0.5);
 }
 /* line 19, ../scss/layout/_rain.scss */
+.rain-wrapper .drop.eaten {
+  visibility: hidden;
+}
+/* line 24, ../scss/layout/_rain.scss */
 .rain-wrapper .drop.candy {
   background: url(../img/layout/rain/candy.png) no-repeat;
 }

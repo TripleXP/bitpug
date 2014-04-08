@@ -53,6 +53,43 @@
 		}
 	}
 
+	// Boost
+	.boost
+	{
+		height: 60px;
+
+		.bar-wrapper
+		{
+			position: absolute;
+			top: 20px;
+			height: 15px;
+			width: 80px;
+			padding: 10px;
+		}
+
+		.bar-wrapper .bar
+		{
+			height: inherit;
+			@include transition(background-color 1s);
+
+			&.loaded
+			{
+				background-color: #82FE82;
+			}
+
+			&.loading
+			{
+				background-color: orange;
+			}
+
+			&.empty
+			{
+				width: 1%;
+				background-color: red;
+			}
+		}
+	}
+
 	.points:after
 	{
 		content: "Points";
@@ -61,5 +98,10 @@
 	.level:after
 	{
 		content: "Level";
+	}
+
+	.boost:after
+	{
+		content: "Boost";
 	}
 }

@@ -2,6 +2,7 @@ goog.provide('bitpug.ui.RainDrop');
 
 goog.require('goog.ui.Component');
 goog.require('goog.style');
+goog.require('goog.dom.classes')
 
 goog.require('bitpug.ui.PugPlayer');
 
@@ -42,6 +43,11 @@ bitpug.ui.RainDrop = function()
 	 * @private
 	 */
 	this.pugPlayer_ = new bitpug.ui.PugPlayer.getInstance();
+
+	/**
+	 * @type {boolean}
+	 */
+	this.isEaten_ = false;
 };
 goog.inherits(bitpug.ui.RainDrop, goog.ui.Component);
 
@@ -90,9 +96,51 @@ bitpug.ui.RainDrop.prototype.dispatchDrop_ = function()
  */
 bitpug.ui.RainDrop.prototype.handleAnimation_ = function(e)
 {
+	if(this.isInTouchWithHead_())
+	{
+		this.markAsEaten_();
+	}
 
 	var y = (Number) ((e.y).toFixed(0));
 	goog.style.setStyle(this.dropEl_, {top: y + 'px'});
+};
+
+/**
+ * @private
+ * @return {Boolean} [description]
+ */
+bitpug.ui.RainDrop.prototype.isInTouchWithHead_ = function()
+{
+	var pugPlayer = bitpug.gameComponents.Registry.getElement(
+		'pug-player')[0];
+	var mouth = goog.dom.getElementByClass('mouth', pugPlayer);
+
+	var borderPug = {
+		top: pugPlayer.offsetTop,
+		bottom: pugPlayer.offsetTop + mouth.offsetHeight,
+		left: goog.dom.classes.has(pugPlayer, 'right') ? pugPlayer.offsetLeft + pugPlayer.offsetWidth - mouth.offsetWidth : pugPlayer.offsetLeft,
+		right: goog.dom.classes.has(pugPlayer, 'right') ? pugPlayer.offsetLeft + pugPlayer.offsetWidth : pugPlayer.offsetLeft + mouth.offsetWidth
+	}
+
+	var borderDrop = {
+		top: this.dropEl_.offsetTop + this.dropEl_.offsetHeight/2,
+		left: this.dropEl_.offsetLeft + this.dropEl_.offsetWidth/2
+	}
+
+	if(borderDrop.top > borderPug.top &&
+		borderDrop.top < borderPug.bottom &&
+		borderDrop.left > borderPug.left &&
+		borderDrop.left < borderPug.right)
+	{
+		return true;
+	}
+};
+
+bitpug.ui.RainDrop.prototype.markAsEaten_ = function()
+{
+	this.isEaten_ = true;
+	goog.dom.classes.enable(this.dropEl_, 'eaten', true);
+	this.destroyDrop_();
 };
 
 /**
@@ -108,6 +156,6 @@ bitpug.ui.RainDrop.prototype.destroyDrop_ = function()
 		goog.fx.Animation.EventType.END, this.destroyDrop_);
 
 	// Remove drop from dom
-	bitpug.gameComponents.Registry.getElement(
-		'rain-wrapper')[0].removeChild(this.dropEl_);
+	/*bitpug.gameComponents.Registry.getElement(
+		'rain-wrapper')[0].removeChild(this.dropEl_);*/
 };

@@ -17,5 +17,6 @@ bitpug.events.MainControl.EventType = {
     WALKLEFT: 'walkleft',
     WALKRIGHT: 'walkright',
     STOPWALK: 'stopwalk',
-    JUMP: 'jump'
+    JUMP: 'jump',
+    BOOST: 'boost'
 }

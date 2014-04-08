@@ -12,6 +12,6 @@ class GetJsonConfig {
     public function getJsonConfig()
     {
         $this->initPath();
-        return $this->jsonConfig;
+        return preg_replace('!/\*.*?\*/!s', '', $this->jsonConfig);
     }
 }

@@ -15,6 +15,11 @@
 	height: 20px;
 	background: rgba(0,0,0,0.5);
 
+	&.eaten
+	{
+		visibility: hidden;
+	}
+
 	&.candy
 	{
 		background: url(../img/layout/rain/candy.png) no-repeat;

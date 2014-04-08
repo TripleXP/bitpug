@@ -30,6 +30,9 @@ bitpug.controllers.PugController.prototype.init = function()
 
     // Decorate (init) pug player
     this.pugPlayer_.decorate(this.pugEl_);
+
+    // Load boost module
+    this.pugPlayer_.boost();
 };
 
 /**
@@ -79,6 +82,12 @@ bitpug.controllers.PugController.prototype.listenMainControl_ = function()
         bitpug.gameComponents.KeyController,
         bitpug.events.MainControl.EventType.JUMP,
         this.handleJump_, false, this);
+
+    // Boost listener
+    goog.events.listen(
+        bitpug.gameComponents.KeyController,
+        bitpug.events.MainControl.EventType.BOOST,
+        this.handleBoost_, false, this);
 };
 
 /**
@@ -104,4 +113,12 @@ bitpug.controllers.PugController.prototype.handleWalkStop_ = function()
 bitpug.controllers.PugController.prototype.handleJump_ = function()
 {
     this.pugPlayer_.jump();
+};
+
+/**
+ * @private
+ */
+bitpug.controllers.PugController.prototype.handleBoost_ = function()
+{
+    this.pugPlayer_.boost();
 };

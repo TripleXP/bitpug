@@ -51,18 +51,30 @@ goog.inherits(bitpug.ui.StatDisplay, goog.ui.Component);
 
 bitpug.ui.StatDisplay.prototype.init = function()
 {
-	// Stat display element tree
+	// Stat display element tree (Modules)
 	this.statDisplay_ = goog.dom.createDom('div', '', [
 		goog.dom.createDom('div', 'deko-pug'),
 		goog.dom.createDom('div', 'module points'), // Point section
-		goog.dom.createDom('div', 'module level')   // Level section
+		goog.dom.createDom('div', 'module level'),   // Level section
+		goog.dom.createDom('div', 'module boost', [
+			goog.dom.createDom('div', 'bar-wrapper', [
+				goog.dom.createDom('div', 'bar empty')])]
+		), // Boost section
 	]);
 
+	// Add boost module to components
+	var boostModule = goog.dom.getElementByClass('boost',
+		this.statDisplay_);
+	bitpug.gameComponents.Registry.addElement(boostModule,
+		'boost-cmp');
+
 	// Get point el
-	this.pointEl_ = goog.dom.getElementByClass('points', this.statDisplay_);
+	this.pointEl_ = goog.dom.getElementByClass('points',
+		this.statDisplay_);
 
 	// Get level el
-	this.levelEl_ = goog.dom.getElementByClass('level', this.statDisplay_);
+	this.levelEl_ = goog.dom.getElementByClass('level',
+		this.statDisplay_);
 
 	// Add element to registry
 	this.registry_.addElement(this.statDisplay_, 'stat-display');
@@ -80,7 +92,8 @@ bitpug.ui.StatDisplay.prototype.init = function()
 bitpug.ui.StatDisplay.prototype.renderDisplay_ = function()
 {
 	// Append display element
-	var gameField = bitpug.gameComponents.Registry.getElement('game-section')[0];
+	var gameField = bitpug.gameComponents.Registry.getElement(
+		'game-section')[0];
 	gameField.appendChild(this.statDisplay_);
 	goog.Timer.callOnce(function(){
 		goog.dom.classes.enable(this.statDisplay_, 'visible', true);
