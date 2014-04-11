@@ -52,5 +52,5 @@ bitpug.controllers.GameController.prototype.start = function()
 	bitpug.gameComponents.RainController.start();
 
 	// Unlock Key Controller after all components are loaded
-	bitpug.gameComponents.KeyController.lock(false);
+	window.onload = bitpug.gameComponents.KeyController.lock(false);
 };

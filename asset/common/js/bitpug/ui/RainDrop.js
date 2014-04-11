@@ -56,9 +56,11 @@ goog.inherits(bitpug.ui.RainDrop, goog.ui.Component);
  */
 bitpug.ui.RainDrop.prototype.renderDrop = function(coordinates)
 {
-	// Render raindrop
+	// Render RainDrop
+	var index = Math.floor(Math.random()*bitpug.settings.rain.dropClasses.length);
+	console.log(index);
 	var raindropEl = goog.dom.createDom('div', 'drop ' +
-		bitpug.settings.rain.dropClasses[0]);
+		bitpug.settings.rain.dropClasses[index]);
 
 	goog.style.setPosition(raindropEl, coordinates.x, -50);
 
