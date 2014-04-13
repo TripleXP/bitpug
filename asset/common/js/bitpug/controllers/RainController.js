@@ -3,14 +3,19 @@ goog.provide('bitpug.controllers.RainController');
 goog.require('goog.Timer');
 goog.require('goog.math.Coordinate');
 goog.require('goog.math');
+goog.require('goog.events.EventHandler');
+goog.require('goog.events.EventTarget');
 
 goog.require('bitpug.ui.RainDrop');
+goog.require('bitpug.events.PointCounter');
 
 /**
  * @constructor
  */
 bitpug.controllers.RainController = function()
 {
+	goog.base(this);
+
 	/**
 	 * @type {Array.<bitpug.ui.RainDrop>}
 	 * @private
@@ -34,7 +39,16 @@ bitpug.controllers.RainController = function()
 	 * @private
 	 */
 	this.spawnTimer_ = null;
+
+	/**
+	 * @type {Element}
+	 * @private
+	 */
+	this.wrapper_ = null;
 };
+goog.inherits(bitpug.controllers.RainController, goog.events.EventHandler);
+goog.inherits(bitpug.controllers.RainController, goog.events.EventTarget);
+
 goog.addSingletonGetter(bitpug.controllers.RainController);
 
 bitpug.controllers.RainController.prototype.init = function()
@@ -50,10 +64,10 @@ bitpug.controllers.RainController.prototype.init = function()
 	};
 
 	// Render wrapper
-	var wrapper = goog.dom.createDom('div', 'rain-wrapper');
+	this.wrapper_ = goog.dom.createDom('div', 'rain-wrapper');
 	bitpug.gameComponents.Registry.getElement(
-			'game-section')[0].appendChild(wrapper);
-	bitpug.gameComponents.Registry.addElement(wrapper);
+			'game-section')[0].appendChild(this.wrapper_);
+	bitpug.gameComponents.Registry.addElement(this.wrapper_);
 
 	// Set spawn timer
 	this.setSpawnTimer_();
@@ -98,6 +112,14 @@ bitpug.controllers.RainController.prototype.spawnRainDrop_ = function()
 	raindrop.renderDrop(spawnCoordinates);
 
 	this.rainDrops_.push(raindrop);
+
+	goog.events.listenOnce(raindrop,
+		bitpug.ui.RainDrop.EventType.MISSED, this.handleMiss_,
+		false, this);
+
+	goog.events.listenOnce(raindrop,
+		bitpug.ui.RainDrop.EventType.EATEN, this.handleEat_,
+		false, this);
 };
 
 /**
@@ -106,4 +128,30 @@ bitpug.controllers.RainController.prototype.spawnRainDrop_ = function()
 bitpug.controllers.RainController.prototype.handleSpawnTick_ = function()
 {
 	this.spawnRainDrop_();
+};
+
+/**
+ * @param {bitpug.ui.RainDrop.EventType.MISSED} e
+ * @private
+ */
+bitpug.controllers.RainController.prototype.handleMiss_ = function(e)
+{
+
+};
+
+/**
+ * @param {bitpug.ui.RainDrop.EventType.EATEN} e
+ * @private
+ */
+bitpug.controllers.RainController.prototype.handleEat_ = function(e)
+{
+	// Dispatch point add event
+	this.dispatchEvent(new bitpug.events.PointCounter(
+		bitpug.events.PointCounter.EventType.ADD,
+		e.target.dropEl.offsetWidth));
+
+	// Remove node
+	goog.Timer.callOnce(function(){
+		this.wrapper_.removeChild(e.target.dropEl);
+	}, 0, this);
 };

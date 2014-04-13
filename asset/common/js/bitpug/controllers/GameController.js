@@ -11,6 +11,7 @@ goog.require('bitpug.controllers.RegistryController');
 goog.require('bitpug.controllers.KeyController');
 goog.require('bitpug.controllers.PugController');
 goog.require('bitpug.controllers.RainController');
+goog.require('bitpug.controllers.PointController');
 
 /**
  * @constructor
@@ -26,7 +27,8 @@ bitpug.controllers.GameController = function()
 	 */
 	bitpug.gameComponents = {};
 };
-goog.inherits(bitpug.controllers.GameController, goog.events.EventTarget);
+goog.inherits(bitpug.controllers.GameController,
+	goog.events.EventTarget);
 
 bitpug.controllers.GameController.prototype.start = function()
 {
@@ -49,8 +51,13 @@ bitpug.controllers.GameController.prototype.start = function()
 	// Init rain controller
 	bitpug.gameComponents.RainController = new bitpug.controllers.RainController.getInstance();
 	bitpug.gameComponents.RainController.init();
-	bitpug.gameComponents.RainController.start();
 
-	// Unlock Key Controller after all components are loaded
+	// Init point controller (After the modules are loaded)
+	bitpug.gameComponents.PointController = new bitpug.controllers.PointController.getInstance();
+	bitpug.gameComponents.PointController.init([
+		bitpug.gameComponents.RainController]);
+
+	// Unlock Components onloadend
+	window.onload = bitpug.gameComponents.RainController.start();
 	window.onload = bitpug.gameComponents.KeyController.lock(false);
 };

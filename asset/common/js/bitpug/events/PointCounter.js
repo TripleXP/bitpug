@@ -7,12 +7,17 @@ goog.require('goog.events.Event');
  * @extends {goog.events.Event}
  * @param {string} type
  */
-bitpug.events.PointCounter = function(type)
+bitpug.events.PointCounter = function(type, points)
 {
 	goog.base(this, type);
+
+	/**
+	 * @type {Number}
+	 */
+	this.points = points
 };
 goog.inherits(bitpug.events.PointCounter, goog.events.Event);
 
 bitpug.events.PointCounter.EventType = {
-	''
+	ADD: 'add'
 };

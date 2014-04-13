@@ -65,8 +65,7 @@ bitpug.ui.StatDisplay.prototype.init = function()
 	// Add boost module to components
 	var boostModule = goog.dom.getElementByClass('boost',
 		this.statDisplay_);
-	bitpug.gameComponents.Registry.addElement(boostModule,
-		'boost-cmp');
+	this.registry_.addElement(boostModule, 'boost-cmp');
 
 	// Get point el
 	this.pointEl_ = goog.dom.getElementByClass('points',
@@ -81,6 +80,12 @@ bitpug.ui.StatDisplay.prototype.init = function()
 
 	// Render display
 	this.renderDisplay_();
+
+	// Add point element to registry
+	this.registry_.addElement(this.pointEl_, 'point-count-el');
+
+	// Add level element to registry
+	this.registry_.addElement(this.levelEl_, 'level-count-el');
 
 	// Add Component
 	bitpug.gameComponents.StatDisplay = this;

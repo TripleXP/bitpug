@@ -28,9 +28,8 @@ bitpug.ui.RainDrop = function()
 
 	/**
 	 * @type {Element}
-	 * @private
 	 */
-	this.dropEl_ = null;
+	this.dropEl = null;
 
 	/**
 	 * @type {goog.fx.Animation}
@@ -57,8 +56,9 @@ goog.inherits(bitpug.ui.RainDrop, goog.ui.Component);
 bitpug.ui.RainDrop.prototype.renderDrop = function(coordinates)
 {
 	// Render RainDrop
-	var index = Math.floor(Math.random()*bitpug.settings.rain.dropClasses.length);
-	console.log(index);
+	var index = Math.floor(
+		Math.random()*bitpug.settings.rain.dropClasses.length);
+
 	var raindropEl = goog.dom.createDom('div', 'drop ' +
 		bitpug.settings.rain.dropClasses[index]);
 
@@ -67,7 +67,7 @@ bitpug.ui.RainDrop.prototype.renderDrop = function(coordinates)
 	bitpug.gameComponents.Registry.getElement(
 		'rain-wrapper')[0].appendChild(raindropEl);
 
-	this.dropEl_ = raindropEl;
+	this.dropEl = raindropEl;
 
 	// Set animation
 	this.animation_ = new goog.fx.Animation([coordinates.x,-50],
@@ -104,7 +104,7 @@ bitpug.ui.RainDrop.prototype.handleAnimation_ = function(e)
 	}
 
 	var y = (Number) ((e.y).toFixed(0));
-	goog.style.setStyle(this.dropEl_, {top: y + 'px'});
+	goog.style.setStyle(this.dropEl, {top: y + 'px'});
 };
 
 /**
@@ -125,8 +125,8 @@ bitpug.ui.RainDrop.prototype.isInTouchWithHead_ = function()
 	}
 
 	var borderDrop = {
-		top: this.dropEl_.offsetTop + this.dropEl_.offsetHeight/2,
-		left: this.dropEl_.offsetLeft + this.dropEl_.offsetWidth/2
+		top: this.dropEl.offsetTop + this.dropEl.offsetHeight/2,
+		left: this.dropEl.offsetLeft + this.dropEl.offsetWidth/2
 	}
 
 	if(borderDrop.top > borderPug.top &&
@@ -136,12 +136,14 @@ bitpug.ui.RainDrop.prototype.isInTouchWithHead_ = function()
 	{
 		return true;
 	}
+
+	return false;
 };
 
 bitpug.ui.RainDrop.prototype.markAsEaten_ = function()
 {
 	this.isEaten_ = true;
-	goog.dom.classes.enable(this.dropEl_, 'eaten', true);
+	goog.dom.classes.enable(this.dropEl, 'eaten', true);
 	this.destroyDrop_();
 };
 
@@ -157,7 +159,21 @@ bitpug.ui.RainDrop.prototype.destroyDrop_ = function()
 	this.getHandler().unlisten(this.animation_,
 		goog.fx.Animation.EventType.END, this.destroyDrop_);
 
-	// Remove drop from dom
-	/*bitpug.gameComponents.Registry.getElement(
-		'rain-wrapper')[0].removeChild(this.dropEl_);*/
+	// Dispatch event
+	if(this.isEaten_)
+	{
+		this.dispatchEvent(bitpug.ui.RainDrop.EventType.EATEN);
+	}
+	else
+	{
+		this.dispatchEvent(bitpug.ui.RainDrop.EventType.MISSED);
+	}
+};
+
+/**
+ * Eventtypes
+ */
+bitpug.ui.RainDrop.EventType = {
+	MISSED: 'missed',
+	EATEN: 'eaten'
 };
