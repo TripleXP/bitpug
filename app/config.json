@@ -60,5 +60,16 @@
         "dropClasses": [
             "candy", "bone"
         ]
-    }
+    },
+
+    /**
+     * LEVEL SETTINGS
+     *
+     * defines the point count of each level
+     */
+    "levels": [
+        /** POINTS => LEVEL */
+        [50, 2],
+        [150, 4]
+    ]
 }

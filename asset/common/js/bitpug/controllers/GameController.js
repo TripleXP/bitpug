@@ -7,6 +7,7 @@ goog.require('goog.events.EventTarget');
 
 // Get game componentes
 goog.require('bitpug.ui.StatDisplay');
+goog.require('bitpug.ui.Clouds');
 goog.require('bitpug.controllers.RegistryController');
 goog.require('bitpug.controllers.KeyController');
 goog.require('bitpug.controllers.PugController');
@@ -60,4 +61,14 @@ bitpug.controllers.GameController.prototype.start = function()
 	// Unlock Components onloadend
 	window.onload = bitpug.gameComponents.RainController.start();
 	window.onload = bitpug.gameComponents.KeyController.lock(false);
+	window.onload = this.loadEnvironmentComponents_;
+};
+
+/**
+ * @private
+ */
+bitpug.controllers.GameController.prototype.loadEnvironmentComponents_ = function()
+{
+	// Clouds
+
 };

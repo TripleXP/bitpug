@@ -12,13 +12,9 @@ bitpug.Game = function()
     this.loadConfig_();
 };
 
-bitpug.Game.prototype.startInit = function()
-{
-    // Start game controller
-	var gameController = new bitpug.controllers.GameController();
-	gameController.start();
-};
-
+/**
+ * @private
+ */
 bitpug.Game.prototype.loadConfig_ = function()
 {
     var xhr = new goog.net.XhrIo();
@@ -29,6 +25,13 @@ bitpug.Game.prototype.loadConfig_ = function()
             bitpug.settings = e.target.getResponseJson();
             this.startInit();
         }, false, this);
+};
+
+bitpug.Game.prototype.startInit = function()
+{
+    // Start game controller
+	var gameController = new bitpug.controllers.GameController();
+	gameController.start();
 };
 
 // Seperated function to keep after it's compiled

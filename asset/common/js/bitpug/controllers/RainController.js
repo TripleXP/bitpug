@@ -23,13 +23,13 @@ bitpug.controllers.RainController = function()
 	this.rainDrops_ = [];
 
 	/**
-	 * @type {Number}
+	 * @type {number}
 	 * @private
 	 */
 	this.maxRange_ = {};
 
 	/**
-	 * @type {Number}
+	 * @type {number}
 	 * @private
 	 */
 	this.spawnInterval_ = bitpug.settings.rain.spawnInterval;
@@ -45,6 +45,12 @@ bitpug.controllers.RainController = function()
 	 * @private
 	 */
 	this.wrapper_ = null;
+
+	/**
+	 * @type {Element}
+	 * @private
+	 */
+	this.lastDrop_ = null;
 };
 goog.inherits(bitpug.controllers.RainController, goog.events.EventHandler);
 goog.inherits(bitpug.controllers.RainController, goog.events.EventTarget);
@@ -100,7 +106,22 @@ bitpug.controllers.RainController.prototype.setSpawnTimer_ = function()
  */
 bitpug.controllers.RainController.prototype.spawnRainDrop_ = function()
 {
-	var cordX = (Number) ((Math.random()*this.maxRange_.xE).toFixed(0));
+	var cordX = 0;
+	if(this.lastDrop_)
+	{
+		if(this.lastDrop_.dropEl.offsetLeft < this.maxRange_.xE/2)
+		{
+			cordX = (Number) (this.lastDrop_.dropEl.offsetLeft + (Math.random()*(this.maxRange_.xE/2)));
+		}
+		else if(this.lastDrop_.dropEl.offsetLeft > this.maxRange_.xE/2)
+		{
+			cordX = (Number) (this.lastDrop_.dropEl.offsetLeft - (Math.random()*(this.maxRange_.xE/2)));
+		}
+	}
+	else
+	{
+		cordX = (Number) ((Math.random()*this.maxRange_.xE).toFixed(0));
+	}
 	var cordY = (Number) (this.maxRange_.yE + bitpug.settings.rain.defaultSize);
 
 	cordX = goog.math.clamp(cordX, this.maxRange_.xS,
@@ -110,6 +131,7 @@ bitpug.controllers.RainController.prototype.spawnRainDrop_ = function()
 
 	var raindrop = new bitpug.ui.RainDrop();
 	raindrop.renderDrop(spawnCoordinates);
+	this.lastDrop_ = raindrop;
 
 	this.rainDrops_.push(raindrop);
 
@@ -136,7 +158,9 @@ bitpug.controllers.RainController.prototype.handleSpawnTick_ = function()
  */
 bitpug.controllers.RainController.prototype.handleMiss_ = function(e)
 {
-
+	goog.Timer.callOnce(function(){
+		this.wrapper_.removeChild(e.target.dropEl);
+	}, 200, this);
 };
 
 /**
