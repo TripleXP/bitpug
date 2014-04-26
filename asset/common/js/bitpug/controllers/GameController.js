@@ -61,7 +61,7 @@ bitpug.controllers.GameController.prototype.start = function()
 	// Unlock Components onloadend
 	window.onload = bitpug.gameComponents.RainController.start();
 	window.onload = bitpug.gameComponents.KeyController.lock(false);
-	window.onload = this.loadEnvironmentComponents_;
+	window.onload = this.loadEnvironmentComponents_();
 };
 
 /**
@@ -70,5 +70,8 @@ bitpug.controllers.GameController.prototype.start = function()
 bitpug.controllers.GameController.prototype.loadEnvironmentComponents_ = function()
 {
 	// Clouds
-
+	var cloudWrapper = goog.dom.createDom('div', 'cloud-wrapper');
+	bitpug.gameComponents.Registry.getElement(
+		'game-section')[0].appendChild(cloudWrapper);
+	new bitpug.ui.Clouds().decorate(cloudWrapper);
 };

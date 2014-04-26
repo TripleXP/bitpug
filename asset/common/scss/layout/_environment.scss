@@ -17,6 +17,17 @@
 		background: url(../img/layout/environment/ground.jpg) repeat-x;
 	}
 
+	.hut
+	{
+		position: absolute;
+		width: image-width("../img/layout/environment/hut.png");
+		height: image-height("../img/layout/environment/hut.png");
+		background: url("../img/layout/environment/hut.png") no-repeat;
+		left: 10%;
+		bottom: 40px;
+		z-index: 1;
+	}
+
 	.clouds
 	{
 		.cloud

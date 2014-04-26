@@ -51,6 +51,12 @@ bitpug.controllers.RainController = function()
 	 * @private
 	 */
 	this.lastDrop_ = null;
+
+	/**
+	 * @type {number}
+	 * @private
+	 */
+	this.missedDrops_ = 0;
 };
 goog.inherits(bitpug.controllers.RainController, goog.events.EventHandler);
 goog.inherits(bitpug.controllers.RainController, goog.events.EventTarget);
@@ -158,6 +164,13 @@ bitpug.controllers.RainController.prototype.handleSpawnTick_ = function()
  */
 bitpug.controllers.RainController.prototype.handleMiss_ = function(e)
 {
+	//this.missedDrops_ += 1;
+
+	if(this.missedDrops_ >= 3)
+	{
+		alert('DU LOSER!');
+	}
+
 	goog.Timer.callOnce(function(){
 		this.wrapper_.removeChild(e.target.dropEl);
 	}, 200, this);

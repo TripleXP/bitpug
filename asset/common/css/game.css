@@ -1,4 +1,4 @@
-/* line 17, c:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 17, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -20,45 +20,45 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, c:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 22, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, c:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 24, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, c:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 26, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, c:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 28, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, c:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 30, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, c:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 103, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, c:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 32, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, c:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 116, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block;
 }
@@ -264,6 +264,16 @@ h1.heading:before {
   bottom: 0;
   background: url(../img/layout/environment/ground.jpg) repeat-x;
 }
+/* line 21, ../scss/layout/_environment.scss */
+.environment .hut {
+  position: absolute;
+  width: 130px;
+  height: 127px;
+  background: url("../img/layout/environment/hut.png") no-repeat;
+  left: 10%;
+  bottom: 40px;
+  z-index: 1;
+}
 
 /* line 2, ../scss/layout/_pug-player.scss */
 .pug-player {
@@ -273,24 +283,25 @@ h1.heading:before {
   position: absolute;
   bottom: 35px;
   left: 100px;
+  z-index: 5;
 }
-/* line 11, ../scss/layout/_pug-player.scss */
+/* line 12, ../scss/layout/_pug-player.scss */
 .pug-player .mouth {
   position: absolute;
   left: 0;
   width: 45px;
   height: 35px;
 }
-/* line 20, ../scss/layout/_pug-player.scss */
+/* line 21, ../scss/layout/_pug-player.scss */
 .pug-player.right .mouth {
   left: auto;
   right: 0;
 }
-/* line 26, ../scss/layout/_pug-player.scss */
+/* line 27, ../scss/layout/_pug-player.scss */
 .pug-player.right {
   background-image: url(../img/layout/pugs/pug-player/pug-right-sprite.png);
 }
-/* line 36, ../scss/layout/_pug-player.scss */
+/* line 37, ../scss/layout/_pug-player.scss */
 .pug-player.jumping {
   -webkit-transition: -webkit-transform 0.5s;
   -moz-transition: -moz-transform 0.5s;
@@ -302,7 +313,7 @@ h1.heading:before {
   -o-transform: rotate(360deg);
   transform: rotate(360deg);
 }
-/* line 41, ../scss/layout/_pug-player.scss */
+/* line 42, ../scss/layout/_pug-player.scss */
 .pug-player.jumping.right {
   -webkit-transform: rotate(-360deg);
   -moz-transform: rotate(-360deg);
