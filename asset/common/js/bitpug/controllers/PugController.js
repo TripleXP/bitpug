@@ -44,8 +44,8 @@ bitpug.controllers.PugController.prototype.spawnPug_ = function()
     this.pugEl_ = goog.dom.createDom('div', 'pug-player', [
             goog.dom.createDom('div', 'mouth')
         ]);
-    var gameSection = bitpug.gameComponents.Registry.getElement('game-section')[0];
-    bitpug.gameComponents.Registry.addElement(this.pugEl_);
+    var gameSection = bitpug.gameComponents.registry.getElement('game-section')[0];
+    bitpug.gameComponents.registry.addElement(this.pugEl_);
     gameSection.appendChild(this.pugEl_);
 };
 
@@ -56,7 +56,7 @@ bitpug.controllers.PugController.prototype.listenMainControl_ = function()
 {
     // Walk listeners
     goog.events.listen(
-        bitpug.gameComponents.KeyController,
+        bitpug.gameComponents.keyController,
         bitpug.events.MainControl.EventType.WALKLEFT,
         function(e){
             this.handleWalkStart_('left');
@@ -64,14 +64,14 @@ bitpug.controllers.PugController.prototype.listenMainControl_ = function()
     );
 
     goog.events.listen(
-        bitpug.gameComponents.KeyController,
+        bitpug.gameComponents.keyController,
         bitpug.events.MainControl.EventType.WALKRIGHT,
         function(){
             this.handleWalkStart_('right');
         }, false, this);
 
     goog.events.listen(
-        bitpug.gameComponents.KeyController,
+        bitpug.gameComponents.keyController,
         bitpug.events.MainControl.EventType.STOPWALK,
         function(){
             this.handleWalkStop_();
@@ -79,13 +79,13 @@ bitpug.controllers.PugController.prototype.listenMainControl_ = function()
 
     // Jump listener
     goog.events.listen(
-        bitpug.gameComponents.KeyController,
+        bitpug.gameComponents.keyController,
         bitpug.events.MainControl.EventType.JUMP,
         this.handleJump_, false, this);
 
     // Boost listener
     goog.events.listen(
-        bitpug.gameComponents.KeyController,
+        bitpug.gameComponents.keyController,
         bitpug.events.MainControl.EventType.BOOST,
         this.handleBoost_, false, this);
 };

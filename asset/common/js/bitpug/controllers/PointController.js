@@ -46,12 +46,12 @@ bitpug.controllers.PointController.prototype.init = function(listeners)
 {
 	// Init module
 	this.module_ = {
-		'points': bitpug.gameComponents.Registry.getElement('point-count-el')[0],
-		'level': bitpug.gameComponents.Registry.getElement('level-count-el')[0]
+		'points': bitpug.gameComponents.registry.getElement('point-count-el')[0],
+		'level': bitpug.gameComponents.registry.getElement('level-count-el')[0]
 	}
 
 	// Get first points neede for level up
-	this.levelPointsNeed_ = bitpug.settings.levels[0][0];
+	this.levelPointsNeed_ = bitpug.settings['levels'][0][0];
 
 	// Add listeners from config
 	for(var i = 0; i < listeners.length; i++)
@@ -82,7 +82,7 @@ bitpug.controllers.PointController.prototype.handlePointAdd_ = function(e)
  */
 bitpug.controllers.PointController.prototype.checkLevel_ = function()
 {
-	var levelDesigner = bitpug.settings.levels;
+	var levelDesigner = bitpug.settings['levels'];
 	var levelExist = false;
 	for(var i = 0; i < levelDesigner.length; i++)
 	{

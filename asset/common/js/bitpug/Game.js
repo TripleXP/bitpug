@@ -20,7 +20,7 @@ bitpug.Game.prototype.loadConfig_ = function()
     var xhr = new goog.net.XhrIo();
     xhr.send('app/layout/jsonConfig.php');
 
-    goog.events.listenOnce(xhr, goog.net.EventType.COMPLETE,
+    goog.events.listenOnce(xhr, goog.net.EventType.SUCCESS,
         function(e){
             bitpug.settings = e.target.getResponseJson();
             this.startInit();
@@ -30,8 +30,7 @@ bitpug.Game.prototype.loadConfig_ = function()
 bitpug.Game.prototype.startInit = function()
 {
     // Start game controller
-	var gameController = new bitpug.controllers.GameController();
-	gameController.start();
+	new bitpug.controllers.GameController().start();
 };
 
 // Seperated function to keep after it's compiled

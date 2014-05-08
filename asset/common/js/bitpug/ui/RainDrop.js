@@ -57,21 +57,21 @@ bitpug.ui.RainDrop.prototype.renderDrop = function(coordinates)
 {
 	// Render RainDrop
 	var index = Math.floor(
-		Math.random()*bitpug.settings.rain.dropClasses.length);
+		Math.random()*bitpug.settings['rain']['dropClasses'].length);
 
 	var raindropEl = goog.dom.createDom('div', 'drop ' +
-		bitpug.settings.rain.dropClasses[index]);
+		bitpug.settings['rain']['dropClasses'][index]);
 
 	goog.style.setPosition(raindropEl, coordinates.x, -50);
 
-	bitpug.gameComponents.Registry.getElement(
+	bitpug.gameComponents.registry.getElement(
 		'rain-wrapper')[0].appendChild(raindropEl);
 
 	this.dropEl = raindropEl;
 
 	// Set animation
 	this.animation_ = new goog.fx.Animation([coordinates.x,-50],
-		[0,coordinates.y], bitpug.settings.rain.initialFallSpeed);
+		[0,coordinates.y], bitpug.settings['rain']['initialFallSpeed']);
 
 	// Listen for animation
 	this.getHandler().listen(this.animation_,
@@ -113,7 +113,7 @@ bitpug.ui.RainDrop.prototype.handleAnimation_ = function(e)
  */
 bitpug.ui.RainDrop.prototype.isInTouchWithHead_ = function()
 {
-	var pugPlayer = bitpug.gameComponents.Registry.getElement(
+	var pugPlayer = bitpug.gameComponents.registry.getElement(
 		'pug-player')[0];
 	var mouth = goog.dom.getElementByClass('mouth', pugPlayer);
 

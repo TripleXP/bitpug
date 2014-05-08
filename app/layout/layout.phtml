@@ -14,9 +14,13 @@
                 <div id="game"></div>
             </div>
         </div>
-        <script src="asset/closure-library/closure/goog/base.js"></script>
-        <script src="asset/common/js/deps.js"></script>
-        <script>goog.require('bitpug.Game');</script>
+        <?php if(APPLICATION_ENV != 'development'): ?>
+            <script src="asset/closure-library/closure/goog/base.js"></script>
+            <script src="asset/common/js/deps.js"></script>
+            <script>goog.require('bitpug.Game');</script>
+        <?php else: ?>
+            <script src="asset/common/js-min/app.js"></script>
+        <?php endif; ?>
         <script>bitpug.Initialize();</script>
     </body>
 </html>

@@ -21,7 +21,7 @@ bitpug.ui.StatDisplay = function()
 	 * @type {Object}
 	 * @private
 	 */
-	this.registry_ = bitpug.gameComponents.Registry;
+	this.registry_ = bitpug.gameComponents.registry;
 
 	/**
 	 * @type {Number}
@@ -59,7 +59,7 @@ bitpug.ui.StatDisplay.prototype.init = function()
 		goog.dom.createDom('div', 'module boost', [
 			goog.dom.createDom('div', 'bar-wrapper', [
 				goog.dom.createDom('div', 'bar empty')])]
-		), // Boost section
+		) // Boost section
 	]);
 
 	// Add boost module to components
@@ -97,7 +97,7 @@ bitpug.ui.StatDisplay.prototype.init = function()
 bitpug.ui.StatDisplay.prototype.renderDisplay_ = function()
 {
 	// Append display element
-	var gameField = bitpug.gameComponents.Registry.getElement(
+	var gameField = this.registry_.getElement(
 		'game-section')[0];
 	gameField.appendChild(this.statDisplay_);
 	goog.Timer.callOnce(function(){

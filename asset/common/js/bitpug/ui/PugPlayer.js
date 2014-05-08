@@ -31,7 +31,7 @@ bitpug.ui.PugPlayer = function()
 	 * @type {goog.Timer} also speed in ms
 	 * @private
 	 */
-	this.walkAnimTimer_ = new goog.Timer(bitpug.settings.pug.walkAnimationMs);
+	this.walkAnimTimer_ = new goog.Timer(bitpug.settings['pug']['walkAnimationMs']);
 
 	/**
 	 * @type {Array.<Number>}
@@ -55,19 +55,19 @@ bitpug.ui.PugPlayer = function()
 	 * @type {Number} pixels per tick
 	 * @private
 	 */
-	this.speed_ = bitpug.settings.pug.moveSpeed;
+	this.speed_ = bitpug.settings['pug']['moveSpeed'];
 
 	/**
 	 * @type {Number} pixels per tick
 	 * @private
 	 */
-	this.jumpSpeed_ = bitpug.settings.pug.jumpSpeed;
+	this.jumpSpeed_ = bitpug.settings['pug']['jumpSpeed'];
 
 	/**
 	 * @type {Number} pixels
 	 * @private
 	 */
-	this.maxJumpHeight_ = bitpug.settings.pug.maxJumpHeight;
+	this.maxJumpHeight_ = bitpug.settings['pug']['maxJumpHeight'];
 
 	/**
 	 * @type {Object}
@@ -126,7 +126,7 @@ bitpug.ui.PugPlayer = function()
 	 * @private
 	 */
 	this.boostLoader_ = new goog.fx.Animation([0,1], [0,105],
-		bitpug.settings.module.boost.reloadingDelay);
+		bitpug.settings['module']['boost']['reloadingDelay']);
 
 	/**
 	 * @type {goog.Timer}
@@ -149,7 +149,7 @@ bitpug.ui.PugPlayer.prototype.decorateInternal = function(el)
 	goog.base(this, 'decorateInternal', el);
 
 	// Get game section
-	var gameSection = bitpug.gameComponents.Registry.getElement(
+	var gameSection = bitpug.gameComponents.registry.getElement(
 			'game-section')[0];
 
 	// Set initial position
@@ -174,7 +174,7 @@ bitpug.ui.PugPlayer.prototype.decorateInternal = function(el)
 	this.walkAnimPosCur_ = 0;
 
 	// Init boost element
-	var boostModule = bitpug.gameComponents.Registry.getElement(
+	var boostModule = bitpug.gameComponents.registry.getElement(
 		'boost-cmp')[0];
 	this.boostEl_ = goog.dom.getElementByClass('bar', boostModule);
 };
@@ -316,20 +316,20 @@ bitpug.ui.PugPlayer.prototype.handleBoostMove_ = function()
 {
 	if(this.moveDirection_ == 'left')
 	{
-		this.posX.left -= this.speed_*bitpug.settings.module.boost.speedIncicator;
+		this.posX.left -= this.speed_*bitpug.settings['module']['boost']['speedIncicator'];
 	}
 	else if(this.moveDirection_ == 'right')
 	{
-		this.posX.left += this.speed_*bitpug.settings.module.boost.speedIncicator;
+		this.posX.left += this.speed_*bitpug.settings['module']['boost']['speedIncicator'];
 	}
 
-	if(this.boostTimerCounter_ < bitpug.settings.module.boost.maxCount/2)
+	if(this.boostTimerCounter_ < bitpug.settings['module']['boost']['maxCount']/2)
 	{
-		this.posY.bottom += bitpug.settings.module.boost.pixelY;
+		this.posY.bottom += bitpug.settings['module']['boost']['pixelY'];
 	}
 	else
 	{
-		this.posY.bottom -= bitpug.settings.module.boost.pixelY;
+		this.posY.bottom -= bitpug.settings['module']['boost']['pixelY'];
 	}
 
 	this.posX.left = goog.math.clamp(this.posX.left,
@@ -342,7 +342,7 @@ bitpug.ui.PugPlayer.prototype.handleBoostMove_ = function()
 
 	this.boostTimerCounter_++;
 
-	if(this.boostTimerCounter_ >= bitpug.settings.module.boost.maxCount ||
+	if(this.boostTimerCounter_ >= bitpug.settings['module']['boost']['maxCount'] ||
 		this.posX.left == this.moveRange_.max ||
 		this.posX.left == this.moveRange_.min)
 	{

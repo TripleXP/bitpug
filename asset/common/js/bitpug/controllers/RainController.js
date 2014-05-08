@@ -32,7 +32,7 @@ bitpug.controllers.RainController = function()
 	 * @type {number}
 	 * @private
 	 */
-	this.spawnInterval_ = bitpug.settings.rain.spawnInterval;
+	this.spawnInterval_ = bitpug.settings['rain']['spawnInterval'];
 
 	/**
 	 * @type {goog.Timer}
@@ -67,19 +67,19 @@ bitpug.controllers.RainController.prototype.init = function()
 {
 	// Get max range of the playground
 	this.maxRange_ = {
-		xS: 0,
-		xE: bitpug.gameComponents.Registry.getElement(
+		'xS': 0,
+		'xE': bitpug.gameComponents.registry.getElement(
 			'game-section')[0].offsetWidth,
-		yS: 0,
-		yE: bitpug.gameComponents.Registry.getElement(
-			'game-section')[0].offsetHeight,
+		'yS': 0,
+		'yE': bitpug.gameComponents.registry.getElement(
+			'game-section')[0].offsetHeight
 	};
 
 	// Render wrapper
 	this.wrapper_ = goog.dom.createDom('div', 'rain-wrapper');
-	bitpug.gameComponents.Registry.getElement(
+	bitpug.gameComponents.registry.getElement(
 			'game-section')[0].appendChild(this.wrapper_);
-	bitpug.gameComponents.Registry.addElement(this.wrapper_);
+	bitpug.gameComponents.registry.addElement(this.wrapper_);
 
 	// Set spawn timer
 	this.setSpawnTimer_();
@@ -115,23 +115,23 @@ bitpug.controllers.RainController.prototype.spawnRainDrop_ = function()
 	var cordX = 0;
 	if(this.lastDrop_)
 	{
-		if(this.lastDrop_.dropEl.offsetLeft < this.maxRange_.xE/2)
+		if(this.lastDrop_.dropEl.offsetLeft < this.maxRange_['xE']/2)
 		{
-			cordX = (Number) (this.lastDrop_.dropEl.offsetLeft + (Math.random()*(this.maxRange_.xE/2)));
+			cordX = (Number) (this.lastDrop_.dropEl.offsetLeft + (Math.random()*(this.maxRange_['xE']/2)));
 		}
-		else if(this.lastDrop_.dropEl.offsetLeft > this.maxRange_.xE/2)
+		else if(this.lastDrop_.dropEl.offsetLeft > this.maxRange_['xE']/2)
 		{
-			cordX = (Number) (this.lastDrop_.dropEl.offsetLeft - (Math.random()*(this.maxRange_.xE/2)));
+			cordX = (Number) (this.lastDrop_.dropEl.offsetLeft - (Math.random()*(this.maxRange_['xE']/2)));
 		}
 	}
 	else
 	{
-		cordX = (Number) ((Math.random()*this.maxRange_.xE).toFixed(0));
+		cordX = (Number) ((Math.random()*this.maxRange_['xE']).toFixed(0));
 	}
-	var cordY = (Number) (this.maxRange_.yE + bitpug.settings.rain.defaultSize);
+	var cordY = (Number) (this.maxRange_['yE'] + bitpug.settings['rain']['defaultSize']);
 
-	cordX = goog.math.clamp(cordX, this.maxRange_.xS,
-		this.maxRange_.xE - bitpug.settings.rain.defaultSize);
+	cordX = goog.math.clamp(cordX, this.maxRange_['xS'],
+		this.maxRange_['xE'] - bitpug.settings['rain']['defaultSize']);
 
 	var spawnCoordinates = new goog.math.Coordinate(cordX, cordY);
 

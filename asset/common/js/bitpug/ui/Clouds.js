@@ -57,7 +57,7 @@ bitpug.ui.Clouds.prototype.enterDocument = function()
  */
 bitpug.ui.Clouds.prototype.updateAnimation_ = function()
 {
-	console.log('update');
+	//console.log('update');
 };
 
 /**
