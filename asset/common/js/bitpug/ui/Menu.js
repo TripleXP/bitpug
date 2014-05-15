@@ -1,0 +1,1 @@
+goog.provide('bitpug.ui.Menu');

@@ -9,8 +9,10 @@ goog.require('goog.events.EventTarget');
 goog.require('bitpug.ui.RainDrop');
 goog.require('bitpug.events.PointCounter');
 
+
 /**
  * @constructor
+ * @extends {goog.events.EventTarget}
  */
 bitpug.controllers.RainController = function()
 {
@@ -23,7 +25,7 @@ bitpug.controllers.RainController = function()
 	this.rainDrops_ = [];
 
 	/**
-	 * @type {number}
+	 * @type {Object}
 	 * @private
 	 */
 	this.maxRange_ = {};
@@ -47,7 +49,7 @@ bitpug.controllers.RainController = function()
 	this.wrapper_ = null;
 
 	/**
-	 * @type {Element}
+	 * @type {bitpug.ui.RainDrop|Element}
 	 * @private
 	 */
 	this.lastDrop_ = null;
@@ -58,7 +60,6 @@ bitpug.controllers.RainController = function()
 	 */
 	this.missedDrops_ = 0;
 };
-goog.inherits(bitpug.controllers.RainController, goog.events.EventHandler);
 goog.inherits(bitpug.controllers.RainController, goog.events.EventTarget);
 
 goog.addSingletonGetter(bitpug.controllers.RainController);
@@ -138,7 +139,6 @@ bitpug.controllers.RainController.prototype.spawnRainDrop_ = function()
 	var raindrop = new bitpug.ui.RainDrop();
 	raindrop.renderDrop(spawnCoordinates);
 	this.lastDrop_ = raindrop;
-
 	this.rainDrops_.push(raindrop);
 
 	goog.events.listenOnce(raindrop,
@@ -159,25 +159,30 @@ bitpug.controllers.RainController.prototype.handleSpawnTick_ = function()
 };
 
 /**
- * @param {bitpug.ui.RainDrop.EventType.MISSED} e
+ * @param {goog.events.Event} e
  * @private
  */
 bitpug.controllers.RainController.prototype.handleMiss_ = function(e)
 {
-	//this.missedDrops_ += 1;
+	this.missedDrops_ += 1;
 
-	if(this.missedDrops_ >= 3)
-	{
-		alert('DU LOSER!');
-	}
+	//if(this.missedDrops_ >= 3){}
 
+	bitpug.ui.ActionMsg.getInstance().dispatchEvent(new
+			bitpug.events.ActionMsgEvent(
+				bitpug.events.ActionMsgEvent.EventType.SETMSG,
+				'Lost life! ' + goog.math.clamp(3-this.missedDrops_, 0, 3) + ' left',
+				true
+			));
+
+	// Remove raindrop
 	goog.Timer.callOnce(function(){
 		this.wrapper_.removeChild(e.target.dropEl);
 	}, 200, this);
 };
 
 /**
- * @param {bitpug.ui.RainDrop.EventType.EATEN} e
+ * @param {goog.events.Event} e
  * @private
  */
 bitpug.controllers.RainController.prototype.handleEat_ = function(e)

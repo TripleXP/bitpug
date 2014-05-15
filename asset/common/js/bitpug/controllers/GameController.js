@@ -8,6 +8,8 @@ goog.require('goog.events.EventTarget');
 // Get game componentes
 goog.require('bitpug.ui.StatDisplay');
 goog.require('bitpug.ui.Clouds');
+goog.require('bitpug.ui.ActionMsg');
+
 goog.require('bitpug.controllers.RegistryController');
 goog.require('bitpug.controllers.KeyController');
 goog.require('bitpug.controllers.PugController');
@@ -16,8 +18,7 @@ goog.require('bitpug.controllers.PointController');
 
 /**
  * @constructor
- * @param {Object} settings
- * @extends {goog.ui.Component}
+ * @extends {goog.events.EventTarget}
  */
 bitpug.controllers.GameController = function()
 {
@@ -34,34 +35,47 @@ goog.inherits(bitpug.controllers.GameController,
 bitpug.controllers.GameController.prototype.start = function()
 {
 	// Registry
-	bitpug.gameComponents.registry = new bitpug.controllers.RegistryController.getInstance();
+	bitpug.gameComponents.registry = bitpug.controllers.RegistryController.getInstance();
 	bitpug.gameComponents.registry.addElement(goog.dom.getElement('game'), 'game-section');
+
+	// Init action msg
+	bitpug.gameComponents.actionMsg = new bitpug.ui.ActionMsg();
+	bitpug.gameComponents.actionMsg.decorate(
+		goog.dom.getElement('action-msg'));
 
 	// Init statdisplay for points
 	bitpug.gameComponents.statDisplay = new bitpug.ui.StatDisplay();
 	bitpug.gameComponents.statDisplay.init();
 
 	// Init Key controller
-	bitpug.gameComponents.keyController = new bitpug.controllers.KeyController.getInstance();
+	bitpug.gameComponents.keyController = bitpug.controllers.KeyController.getInstance();
 	bitpug.gameComponents.keyController.init();
 
 	// Init player pug
-	bitpug.gameComponents.pugController = new bitpug.controllers.PugController.getInstance();
+	bitpug.gameComponents.pugController = bitpug.controllers.PugController.getInstance();
 	bitpug.gameComponents.pugController.init();
 
 	// Init rain controller
-	bitpug.gameComponents.rainController = new bitpug.controllers.RainController.getInstance();
+	bitpug.gameComponents.rainController = bitpug.controllers.RainController.getInstance();
 	bitpug.gameComponents.rainController.init();
 
 	// Init point controller (After the modules are loaded)
-	bitpug.gameComponents.pointController = new bitpug.controllers.PointController.getInstance();
+	bitpug.gameComponents.pointController = bitpug.controllers.PointController.getInstance();
 	bitpug.gameComponents.pointController.init([
 		bitpug.gameComponents.rainController]);
 
-	// Unlock Components onloadend
-	window.onload = bitpug.gameComponents.rainController.start();
-	window.onload = bitpug.gameComponents.keyController.lock(false);
-	window.onload = this.loadEnvironmentComponents_();
+	// Unlock Components after load end
+	goog.Timer.callOnce(this.pageLoadEnd_, 100, this);
+};
+
+/**
+ * @private
+ */
+bitpug.controllers.GameController.prototype.pageLoadEnd_ = function()
+{
+	bitpug.gameComponents.rainController.start();
+	bitpug.gameComponents.keyController.lock(false);
+	this.loadEnvironmentComponents_();
 };
 
 /**

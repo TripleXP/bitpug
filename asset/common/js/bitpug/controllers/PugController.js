@@ -72,9 +72,16 @@ bitpug.controllers.PugController.prototype.listenMainControl_ = function()
 
     goog.events.listen(
         bitpug.gameComponents.keyController,
-        bitpug.events.MainControl.EventType.STOPWALK,
+        bitpug.events.MainControl.EventType.STOPWALKLEFT,
         function(){
-            this.handleWalkStop_();
+            this.handleWalkStop_('left');
+        }, false, this);
+
+    goog.events.listen(
+        bitpug.gameComponents.keyController,
+        bitpug.events.MainControl.EventType.STOPWALKRIGHT,
+        function(){
+            this.handleWalkStop_('right');
         }, false, this);
 
     // Jump listener
@@ -88,11 +95,16 @@ bitpug.controllers.PugController.prototype.listenMainControl_ = function()
         bitpug.gameComponents.keyController,
         bitpug.events.MainControl.EventType.BOOST,
         this.handleBoost_, false, this);
+
+    goog.events.listen(
+            bitpug.ui.PugPlayer.getInstance(),
+            bitpug.ui.PugPlayer.EventType.STOPBOOST,
+            this.handleBoostEnd_, false, this);
 };
 
 /**
+ * @param {string} drn
  * @private
- * @param {bitpug.events.MainControl} drn
  */
 bitpug.controllers.PugController.prototype.handleWalkStart_ = function(drn)
 {
@@ -100,11 +112,16 @@ bitpug.controllers.PugController.prototype.handleWalkStart_ = function(drn)
 };
 
 /**
+ * @param {string} drn
  * @private
  */
-bitpug.controllers.PugController.prototype.handleWalkStop_ = function()
+bitpug.controllers.PugController.prototype.handleWalkStop_ = function(drn)
 {
-    this.pugPlayer_.stop();
+    if(goog.dom.classes.has(this.pugEl_, 'right') && drn == 'right' ||
+        !goog.dom.classes.has(this.pugEl_, 'right') && drn == 'left')
+    {
+        this.pugPlayer_.stop();
+    }
 };
 
 /**
@@ -121,4 +138,35 @@ bitpug.controllers.PugController.prototype.handleJump_ = function()
 bitpug.controllers.PugController.prototype.handleBoost_ = function()
 {
     this.pugPlayer_.boost();
+};
+
+/**
+ * @private
+ */
+bitpug.controllers.PugController.prototype.handleBoostEnd_ = function()
+{
+    bitpug.controllers.KeyController.activeStates['boost'] = false;
+
+    if(bitpug.controllers.KeyController.activeStates['walk'])
+    {
+        if(goog.dom.classes.has(this.pugEl_, 'right'))
+        {
+            this.handleWalkStart_('right');
+        }
+        else if(!goog.dom.classes.has(this.pugEl_, 'right'))
+        {
+            this.handleWalkStart_('left');
+        }
+    }
+    else
+    {
+        if(goog.dom.classes.has(this.pugEl_, 'right'))
+        {
+            this.handleWalkStop_('right');
+        }
+        else if(!goog.dom.classes.has(this.pugEl_, 'right'))
+        {
+            this.handleWalkStop_('left');
+        }
+    }
 };

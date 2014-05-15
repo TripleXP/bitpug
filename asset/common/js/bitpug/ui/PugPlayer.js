@@ -7,6 +7,8 @@ goog.require('goog.dom.classes');
 goog.require('goog.math');
 goog.require('goog.fx.Animation');
 
+goog.require('bitpug.events.ActionMsgEvent');
+
 /**
  * @constructor
  * @extends {goog.ui.Component}
@@ -40,7 +42,7 @@ bitpug.ui.PugPlayer = function()
 	this.walkAnimPos_ = [];
 
 	/**
-	 * @type {Number}
+	 * @type {number}
 	 * @private
 	 */
 	this.walkAnimPosCur_ = 0;
@@ -58,13 +60,13 @@ bitpug.ui.PugPlayer = function()
 	this.speed_ = bitpug.settings['pug']['moveSpeed'];
 
 	/**
-	 * @type {Number} pixels per tick
+	 * @type {number} pixels per tick
 	 * @private
 	 */
 	this.jumpSpeed_ = bitpug.settings['pug']['jumpSpeed'];
 
 	/**
-	 * @type {Number} pixels
+	 * @type {number} pixels
 	 * @private
 	 */
 	this.maxJumpHeight_ = bitpug.settings['pug']['maxJumpHeight'];
@@ -135,7 +137,7 @@ bitpug.ui.PugPlayer = function()
 	this.boostTimer_ = new goog.Timer(10);
 
 	/**
-	 * @type {Number}
+	 * @type {number}
 	 * @private
 	 */
 	this.boostTimerCounter_ = 0;
@@ -300,7 +302,7 @@ bitpug.ui.PugPlayer.prototype.boost = function()
 bitpug.ui.PugPlayer.prototype.activateBoost_ = function()
 {
 	// Lock
-	bitpug.gameComponents.KeyController.lock(true);
+	bitpug.gameComponents.keyController.lock(true);
 
 	// start boost
 	this.boostTimer_.start();
@@ -353,12 +355,15 @@ bitpug.ui.PugPlayer.prototype.handleBoostMove_ = function()
 			bottom: this.jumpRange_.min + 'px'
 		});
 
-		bitpug.gameComponents.KeyController.lock(false);
+		bitpug.ui.PugPlayer.getInstance().dispatchEvent(
+			bitpug.ui.PugPlayer.EventType.STOPBOOST);
+
+		bitpug.gameComponents.keyController.lock(false);
 	}
 };
 
 /**
- * @param  {goog.fx.Animation.EventType} e
+ * @param  {goog.fx.AnimationEvent} e
  * @private
  */
 bitpug.ui.PugPlayer.prototype.handleBoostLoad_ = function(e)
@@ -384,6 +389,12 @@ bitpug.ui.PugPlayer.prototype.handleBoostLoadEnd_ = function()
 	this.boostLoading_ = false;
 	this.boostLoaded_ = true;
 	goog.dom.classes.enable(this.boostEl_, 'loading', false);
+
+	bitpug.ui.ActionMsg.getInstance().dispatchEvent(
+		new bitpug.events.ActionMsgEvent(
+				bitpug.events.ActionMsgEvent.EventType.SETMSG,
+				'Boost loaded'
+			));
 };
 
 /**
@@ -457,4 +468,11 @@ bitpug.ui.PugPlayer.prototype.handleJumpAnimationEnd_ = function()
 	goog.dom.classes.enable(this.getElement(), 'jumping-down', false);
 	this.posY.bottom = this.jumpRange_.min;
 	this.jumpActive_ = false;
+};
+
+/**
+ * @enum {string}
+ */
+bitpug.ui.PugPlayer.EventType = {
+	STOPBOOST: 'stopboost'
 };

@@ -30,10 +30,13 @@ bitpug.Game.prototype.loadConfig_ = function()
 bitpug.Game.prototype.startInit = function()
 {
     // Start game controller
-	new bitpug.controllers.GameController().start();
+    var menu = new bitpug.ui.Menu();
+	//new bitpug.controllers.GameController().start();
 };
 
-// Seperated function to keep after it's compiled
+/**
+ * @param {Object} config
+ */
 bitpug.Initialize = function(config)
 {
 	var game = new bitpug.Game();

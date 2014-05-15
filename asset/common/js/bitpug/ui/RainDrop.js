@@ -15,13 +15,13 @@ bitpug.ui.RainDrop = function()
 	goog.base(this);
 
 	/**
-	 * @type {Number}
+	 * @type {number}
 	 * @private
 	 */
 	this.corX = 0;
 
 	/**
-	 * @type {Number}
+	 * @type {number}
 	 * @private
 	 */
 	this.corY = 0;
@@ -41,7 +41,7 @@ bitpug.ui.RainDrop = function()
 	 * @type {bitpug.ui.PugPlayer}
 	 * @private
 	 */
-	this.pugPlayer_ = new bitpug.ui.PugPlayer.getInstance();
+	this.pugPlayer_ = bitpug.ui.PugPlayer.getInstance();
 
 	/**
 	 * @type {boolean}
@@ -51,7 +51,7 @@ bitpug.ui.RainDrop = function()
 goog.inherits(bitpug.ui.RainDrop, goog.ui.Component);
 
 /**
- * @param  {goog.math.Coordinate}
+ * @param  {goog.math.Coordinate} coordinates
  */
 bitpug.ui.RainDrop.prototype.renderDrop = function(coordinates)
 {
@@ -93,7 +93,7 @@ bitpug.ui.RainDrop.prototype.dispatchDrop_ = function()
 };
 
 /**
- * @param  {goog.fx.Animation.Event} e
+ * @param  {goog.fx.AnimationEvent} e
  * @private
  */
 bitpug.ui.RainDrop.prototype.handleAnimation_ = function(e)
@@ -109,7 +109,7 @@ bitpug.ui.RainDrop.prototype.handleAnimation_ = function(e)
 
 /**
  * @private
- * @return {Boolean} [description]
+ * @return {boolean} [description]
  */
 bitpug.ui.RainDrop.prototype.isInTouchWithHead_ = function()
 {

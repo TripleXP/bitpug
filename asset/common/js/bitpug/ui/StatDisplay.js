@@ -24,7 +24,7 @@ bitpug.ui.StatDisplay = function()
 	this.registry_ = bitpug.gameComponents.registry;
 
 	/**
-	 * @type {Number}
+	 * @type {number}
 	 * @private
 	 */
 	this.gamePoints_ = 0;
@@ -36,7 +36,7 @@ bitpug.ui.StatDisplay = function()
 	this.pointEl_ = null;
 
 	/**
-	 * @type {Number}
+	 * @type {number}
 	 * @private
 	 */
 	this.gameLevel_ = 0;
@@ -103,26 +103,4 @@ bitpug.ui.StatDisplay.prototype.renderDisplay_ = function()
 	goog.Timer.callOnce(function(){
 		goog.dom.classes.enable(this.statDisplay_, 'visible', true);
 	}, 0, this);
-
-	// Set points to 0
-	this.setGamePoints(0);
-	this.setGameLevel(1);
-};
-
-/**
- * @param {Number} points
- */
-bitpug.ui.StatDisplay.prototype.setGamePoints = function(points)
-{
-	this.pointEl_.innerHTML = points;
-	this.gamePoints_ = points;
-};
-
-/**
- * @param {Number} points
- */
-bitpug.ui.StatDisplay.prototype.setGameLevel = function(level)
-{
-	this.levelEl_.innerHTML = level;
-	this.gameLevel_ = level;
 };

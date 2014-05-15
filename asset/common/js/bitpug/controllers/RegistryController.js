@@ -17,20 +17,19 @@ bitpug.controllers.RegistryController = function()
 goog.addSingletonGetter(bitpug.controllers.RegistryController);
 
 /**
- * @param {className} string
  * @param {Element} el
+ * @param {string=} opt_className
  */
-bitpug.controllers.RegistryController.prototype.addElement = function(el, className)
+bitpug.controllers.RegistryController.prototype.addElement = function(el, opt_className)
 {
-	if(!className)
-		className = '';
+	if(!opt_className) opt_className = '';
 
-	goog.dom.classes.add(el, className);
+	goog.dom.classes.add(el, opt_className);
 	this.register.elements.push(el);
 };
 
 /**
- * @param {className} string
+ * @param {string} className
  * @return {Array} Element
  */
 bitpug.controllers.RegistryController.prototype.getElement = function(className)

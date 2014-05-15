@@ -11,16 +11,17 @@
                     <div class="hut"></div>
                     <div class="ground"></div>
                 </div>
+                <div id="action-msg"></div>
                 <div id="game"></div>
             </div>
         </div>
-        <?php if(APPLICATION_ENV != 'development'): ?>
+        <?php if(APPLICATION_ENV == 'development'): ?>
             <script src="asset/closure-library/closure/goog/base.js"></script>
             <script src="asset/common/js/deps.js"></script>
             <script>goog.require('bitpug.Game');</script>
         <?php else: ?>
             <script src="asset/common/js-min/app.js"></script>
         <?php endif; ?>
-        <script>bitpug.Initialize();</script>
+        <script>bitpug.Initialize({});</script>
     </body>
 </html>

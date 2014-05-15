@@ -5,6 +5,7 @@ goog.require('goog.events.EventTarget');
 
 /**
  * @constructor
+ * @extends {goog.events.EventTarget}
  */
 bitpug.controllers.KeyController = function()
 {
@@ -28,6 +29,11 @@ bitpug.controllers.KeyController = function()
      */
     this.rightKeyActive_ = false;
 
+    /**
+     * @type {Object}
+     */
+    bitpug.controllers.KeyController.activeStates = {};
+
 };
 goog.inherits(bitpug.controllers.KeyController, goog.events.EventTarget);
 goog.addSingletonGetter(bitpug.controllers.KeyController);
@@ -35,6 +41,13 @@ goog.addSingletonGetter(bitpug.controllers.KeyController);
 bitpug.controllers.KeyController.prototype.init = function()
 {
     this.addKeyListeners_();
+
+    // Add active key properties
+    bitpug.controllers.KeyController.activeStates = {
+        'walk': false,
+        'boost': false,
+        'jump': false
+    };
 };
 
 /**
@@ -63,19 +76,20 @@ bitpug.controllers.KeyController.prototype.lock = function(isLocked)
  */
 bitpug.controllers.KeyController.prototype.handleKeyDownUp_ = function(e)
 {
-    if(this.isLocked_)
-        return;
-
     switch(e.keyCode)
     {
         case 37: // Arrow left
             if(e.type == 'keydown')
             {
+                if(this.isLocked_)
+                    return;
+
                 if(!this.leftKeyActive_)
                 {
                     this.leftKeyActive_ = true;
                     this.handleWalk_(
                         bitpug.events.MainControl.EventType.WALKLEFT);
+                    bitpug.controllers.KeyController.activeStates['walk'] = true;
                 }
             }
             else if(e.type == 'keyup')
@@ -84,7 +98,8 @@ bitpug.controllers.KeyController.prototype.handleKeyDownUp_ = function(e)
                 {
                     this.leftKeyActive_ = false;
                     this.handleWalk_(
-                        bitpug.events.MainControl.EventType.STOPWALK);
+                        bitpug.events.MainControl.EventType.STOPWALKLEFT);
+                    bitpug.controllers.KeyController.activeStates['walk'] = false;
                 }
             }
         break;
@@ -92,11 +107,15 @@ bitpug.controllers.KeyController.prototype.handleKeyDownUp_ = function(e)
         case 39: // Arrow right
             if(e.type == 'keydown')
             {
+                if(this.isLocked_)
+                    return;
+
                 if(!this.rightKeyActive_)
                 {
                     this.rightKeyActive_ = true;
                     this.handleWalk_(
                             bitpug.events.MainControl.EventType.WALKRIGHT);
+                    bitpug.controllers.KeyController.activeStates['walk'] = true;
                 }
             }
             else if(e.type == 'keyup')
@@ -105,12 +124,16 @@ bitpug.controllers.KeyController.prototype.handleKeyDownUp_ = function(e)
                 {
                     this.rightKeyActive_ = false;
                     this.handleWalk_(
-                        bitpug.events.MainControl.EventType.STOPWALK);
+                        bitpug.events.MainControl.EventType.STOPWALKRIGHT);
+                    bitpug.controllers.KeyController.activeStates['walk'] = false;
                 }
             }
         break;
 
         case 32: // Space
+            if(this.isLocked_)
+                return;
+
             if(e.type == 'keyup')
             {
                this.dispatchEvent(bitpug.events.MainControl.EventType.JUMP);
@@ -118,9 +141,13 @@ bitpug.controllers.KeyController.prototype.handleKeyDownUp_ = function(e)
         break;
 
         case 66: // b
+            if(this.isLocked_)
+                return;
+
             if(e.type == 'keydown')
             {
                this.dispatchEvent(bitpug.events.MainControl.EventType.BOOST);
+               bitpug.controllers.KeyController.activeStates['boost'] = true;
             }
         break;
     }

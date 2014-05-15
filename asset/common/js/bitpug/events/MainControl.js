@@ -13,10 +13,14 @@ bitpug.events.MainControl = function(type)
 };
 goog.inherits(bitpug.events.MainControl, goog.events.Event);
 
+/**
+ * @enum {string}
+ */
 bitpug.events.MainControl.EventType = {
     WALKLEFT: 'walkleft',
     WALKRIGHT: 'walkright',
-    STOPWALK: 'stopwalk',
+    STOPWALKLEFT: 'stopwalkleft',
+    STOPWALKRIGHT: 'stopwalkright',
     JUMP: 'jump',
     BOOST: 'boost'
-}
+};

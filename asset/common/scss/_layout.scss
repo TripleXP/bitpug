@@ -2,6 +2,7 @@ body
 {
 	//background: url(../img/layout/bg-body.svg) no-repeat;
 	@include background-size(cover);
+	overflow: hidden;
 }
 
 #page
@@ -16,3 +17,4 @@ body
 @import "layout/environment";
 @import "layout/pug-player";
 @import "layout/rain";
+@import "layout/action-msg";
