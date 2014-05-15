@@ -1,4 +1,4 @@
-goog.provide('bitpug.controllers.RainController');
+goog.provide('bp.controllers.RainController');
 
 goog.require('goog.Timer');
 goog.require('goog.math.Coordinate');
@@ -6,20 +6,20 @@ goog.require('goog.math');
 goog.require('goog.events.EventHandler');
 goog.require('goog.events.EventTarget');
 
-goog.require('bitpug.ui.RainDrop');
-goog.require('bitpug.events.PointCounter');
+goog.require('bp.ui.RainDrop');
+goog.require('bp.events.PointCounter');
 
 
 /**
  * @constructor
  * @extends {goog.events.EventTarget}
  */
-bitpug.controllers.RainController = function()
+bp.controllers.RainController = function()
 {
 	goog.base(this);
 
 	/**
-	 * @type {Array.<bitpug.ui.RainDrop>}
+	 * @type {Array.<bp.ui.RainDrop>}
 	 * @private
 	 */
 	this.rainDrops_ = [];
@@ -34,7 +34,7 @@ bitpug.controllers.RainController = function()
 	 * @type {number}
 	 * @private
 	 */
-	this.spawnInterval_ = bitpug.settings['rain']['spawnInterval'];
+	this.spawnInterval_ = bp.settings['rain']['spawnInterval'];
 
 	/**
 	 * @type {goog.Timer}
@@ -49,7 +49,7 @@ bitpug.controllers.RainController = function()
 	this.wrapper_ = null;
 
 	/**
-	 * @type {bitpug.ui.RainDrop|Element}
+	 * @type {bp.ui.RainDrop|Element}
 	 * @private
 	 */
 	this.lastDrop_ = null;
@@ -60,27 +60,27 @@ bitpug.controllers.RainController = function()
 	 */
 	this.missedDrops_ = 0;
 };
-goog.inherits(bitpug.controllers.RainController, goog.events.EventTarget);
+goog.inherits(bp.controllers.RainController, goog.events.EventTarget);
 
-goog.addSingletonGetter(bitpug.controllers.RainController);
+goog.addSingletonGetter(bp.controllers.RainController);
 
-bitpug.controllers.RainController.prototype.init = function()
+bp.controllers.RainController.prototype.init = function()
 {
 	// Get max range of the playground
 	this.maxRange_ = {
 		'xS': 0,
-		'xE': bitpug.gameComponents.registry.getElement(
+		'xE': bp.gameComponents.registry.getElement(
 			'game-section')[0].offsetWidth,
 		'yS': 0,
-		'yE': bitpug.gameComponents.registry.getElement(
+		'yE': bp.gameComponents.registry.getElement(
 			'game-section')[0].offsetHeight
 	};
 
 	// Render wrapper
 	this.wrapper_ = goog.dom.createDom('div', 'rain-wrapper');
-	bitpug.gameComponents.registry.getElement(
+	bp.gameComponents.registry.getElement(
 			'game-section')[0].appendChild(this.wrapper_);
-	bitpug.gameComponents.registry.addElement(this.wrapper_);
+	bp.gameComponents.registry.addElement(this.wrapper_);
 
 	// Set spawn timer
 	this.setSpawnTimer_();
@@ -90,12 +90,12 @@ bitpug.controllers.RainController.prototype.init = function()
 		this.handleSpawnTick_, false, this);
 };
 
-bitpug.controllers.RainController.prototype.start = function()
+bp.controllers.RainController.prototype.start = function()
 {
 	this.spawnTimer_.start();
 };
 
-bitpug.controllers.RainController.prototype.stop = function()
+bp.controllers.RainController.prototype.stop = function()
 {
 	this.spawnTimer_.stop();
 };
@@ -103,7 +103,7 @@ bitpug.controllers.RainController.prototype.stop = function()
 /**
  * @private
  */
-bitpug.controllers.RainController.prototype.setSpawnTimer_ = function()
+bp.controllers.RainController.prototype.setSpawnTimer_ = function()
 {
 	this.spawnTimer_ = new goog.Timer(this.spawnInterval_);
 };
@@ -111,7 +111,7 @@ bitpug.controllers.RainController.prototype.setSpawnTimer_ = function()
 /**
  * @private
  */
-bitpug.controllers.RainController.prototype.spawnRainDrop_ = function()
+bp.controllers.RainController.prototype.spawnRainDrop_ = function()
 {
 	var cordX = 0;
 	if(this.lastDrop_)
@@ -129,31 +129,31 @@ bitpug.controllers.RainController.prototype.spawnRainDrop_ = function()
 	{
 		cordX = (Number) ((Math.random()*this.maxRange_['xE']).toFixed(0));
 	}
-	var cordY = (Number) (this.maxRange_['yE'] + bitpug.settings['rain']['defaultSize']);
+	var cordY = (Number) (this.maxRange_['yE'] + bp.settings['rain']['defaultSize']);
 
 	cordX = goog.math.clamp(cordX, this.maxRange_['xS'],
-		this.maxRange_['xE'] - bitpug.settings['rain']['defaultSize']);
+		this.maxRange_['xE'] - bp.settings['rain']['defaultSize']);
 
 	var spawnCoordinates = new goog.math.Coordinate(cordX, cordY);
 
-	var raindrop = new bitpug.ui.RainDrop();
+	var raindrop = new bp.ui.RainDrop();
 	raindrop.renderDrop(spawnCoordinates);
 	this.lastDrop_ = raindrop;
 	this.rainDrops_.push(raindrop);
 
 	goog.events.listenOnce(raindrop,
-		bitpug.ui.RainDrop.EventType.MISSED, this.handleMiss_,
+		bp.ui.RainDrop.EventType.MISSED, this.handleMiss_,
 		false, this);
 
 	goog.events.listenOnce(raindrop,
-		bitpug.ui.RainDrop.EventType.EATEN, this.handleEat_,
+		bp.ui.RainDrop.EventType.EATEN, this.handleEat_,
 		false, this);
 };
 
 /**
  * @private
  */
-bitpug.controllers.RainController.prototype.handleSpawnTick_ = function()
+bp.controllers.RainController.prototype.handleSpawnTick_ = function()
 {
 	this.spawnRainDrop_();
 };
@@ -162,15 +162,15 @@ bitpug.controllers.RainController.prototype.handleSpawnTick_ = function()
  * @param {goog.events.Event} e
  * @private
  */
-bitpug.controllers.RainController.prototype.handleMiss_ = function(e)
+bp.controllers.RainController.prototype.handleMiss_ = function(e)
 {
 	this.missedDrops_ += 1;
 
 	//if(this.missedDrops_ >= 3){}
 
-	bitpug.ui.ActionMsg.getInstance().dispatchEvent(new
-			bitpug.events.ActionMsgEvent(
-				bitpug.events.ActionMsgEvent.EventType.SETMSG,
+	bp.ui.ActionMsg.getInstance().dispatchEvent(new
+			bp.events.ActionMsgEvent(
+				bp.events.ActionMsgEvent.EventType.SETMSG,
 				'Lost life! ' + goog.math.clamp(3-this.missedDrops_, 0, 3) + ' left',
 				true
 			));
@@ -185,11 +185,11 @@ bitpug.controllers.RainController.prototype.handleMiss_ = function(e)
  * @param {goog.events.Event} e
  * @private
  */
-bitpug.controllers.RainController.prototype.handleEat_ = function(e)
+bp.controllers.RainController.prototype.handleEat_ = function(e)
 {
 	// Dispatch point add event
-	this.dispatchEvent(new bitpug.events.PointCounter(
-		bitpug.events.PointCounter.EventType.ADD,
+	this.dispatchEvent(new bp.events.PointCounter(
+		bp.events.PointCounter.EventType.ADD,
 		e.target.dropEl.offsetWidth));
 
 	// Remove node

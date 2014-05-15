@@ -1,4 +1,4 @@
-goog.provide('bitpug.events.MainControl');
+goog.provide('bp.events.MainControl');
 
 goog.require('goog.events.Event');
 
@@ -7,16 +7,16 @@ goog.require('goog.events.Event');
  * @extends {goog.events.Event}
  * @param {string} type
  */
-bitpug.events.MainControl = function(type)
+bp.events.MainControl = function(type)
 {
     goog.base(this, type);
 };
-goog.inherits(bitpug.events.MainControl, goog.events.Event);
+goog.inherits(bp.events.MainControl, goog.events.Event);
 
 /**
  * @enum {string}
  */
-bitpug.events.MainControl.EventType = {
+bp.events.MainControl.EventType = {
     WALKLEFT: 'walkleft',
     WALKRIGHT: 'walkright',
     STOPWALKLEFT: 'stopwalkleft',

@@ -1,11 +1,11 @@
-goog.provide('bitpug.controllers.RegistryController');
+goog.provide('bp.controllers.RegistryController');
 
 goog.require('goog.dom.classes');
 
 /**
  * @constructor
  */
-bitpug.controllers.RegistryController = function()
+bp.controllers.RegistryController = function()
 {
 	/**
 	 * @type {Object}
@@ -14,13 +14,13 @@ bitpug.controllers.RegistryController = function()
 		'elements': []
 	};
 };
-goog.addSingletonGetter(bitpug.controllers.RegistryController);
+goog.addSingletonGetter(bp.controllers.RegistryController);
 
 /**
  * @param {Element} el
  * @param {string=} opt_className
  */
-bitpug.controllers.RegistryController.prototype.addElement = function(el, opt_className)
+bp.controllers.RegistryController.prototype.addElement = function(el, opt_className)
 {
 	if(!opt_className) opt_className = '';
 
@@ -32,7 +32,7 @@ bitpug.controllers.RegistryController.prototype.addElement = function(el, opt_cl
  * @param {string} className
  * @return {Array} Element
  */
-bitpug.controllers.RegistryController.prototype.getElement = function(className)
+bp.controllers.RegistryController.prototype.getElement = function(className)
 {
 	// Search in the register
 	var results = [];

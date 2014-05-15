@@ -1,15 +1,15 @@
-goog.provide('bitpug.ui.ActionMsg');
+goog.provide('bp.ui.ActionMsg');
 
 goog.require('goog.ui.Component');
 goog.require('goog.Timer');
 
-goog.require('bitpug.events.ActionMsgEvent');
+goog.require('bp.events.ActionMsgEvent');
 
 /**
  * @constructor
  * @extends {goog.ui.Component}
  */
-bitpug.ui.ActionMsg = function()
+bp.ui.ActionMsg = function()
 {
 	goog.base(this);
 
@@ -37,11 +37,11 @@ bitpug.ui.ActionMsg = function()
 	 */
 	this.shakeTimer_ = new goog.Timer(5);
 };
-goog.inherits(bitpug.ui.ActionMsg, goog.ui.Component);
-goog.addSingletonGetter(bitpug.ui.ActionMsg);
+goog.inherits(bp.ui.ActionMsg, goog.ui.Component);
+goog.addSingletonGetter(bp.ui.ActionMsg);
 
 /** @inheritDoc */
-bitpug.ui.ActionMsg.prototype.decorateInternal = function(el)
+bp.ui.ActionMsg.prototype.decorateInternal = function(el)
 {
 	goog.base(this, 'decorateInternal', el);
 
@@ -50,13 +50,13 @@ bitpug.ui.ActionMsg.prototype.decorateInternal = function(el)
 };
 
 /** @inheritDoc */
-bitpug.ui.ActionMsg.prototype.enterDocument = function()
+bp.ui.ActionMsg.prototype.enterDocument = function()
 {
 	goog.base(this, 'enterDocument');
 
 	// Listen for action msg event
-	this.getHandler().listen(bitpug.ui.ActionMsg.getInstance(),
-		bitpug.events.ActionMsgEvent.EventType.SETMSG,
+	this.getHandler().listen(bp.ui.ActionMsg.getInstance(),
+		bp.events.ActionMsgEvent.EventType.SETMSG,
 		this.enableMsg_);
 
 	// Listen for shake timer
@@ -65,10 +65,10 @@ bitpug.ui.ActionMsg.prototype.enterDocument = function()
 };
 
 /**
- * @param {bitpug.events.ActionMsgEvent} e
+ * @param {bp.events.ActionMsgEvent} e
  * @private
  */
-bitpug.ui.ActionMsg.prototype.enableMsg_ = function(e)
+bp.ui.ActionMsg.prototype.enableMsg_ = function(e)
 {
 	this.isActive_ = true;
 	var message = e.msg;
@@ -77,10 +77,10 @@ bitpug.ui.ActionMsg.prototype.enableMsg_ = function(e)
 };
 
 /**
- * @param {bitpug.events.ActionMsgEvent} e
+ * @param {bp.events.ActionMsgEvent} e
  * @private
  */
-bitpug.ui.ActionMsg.prototype.setClasses_ = function(e)
+bp.ui.ActionMsg.prototype.setClasses_ = function(e)
 {
 	goog.dom.classes.enable(this.getElement(), 'warning', e.isWarning);
 	if(e.isWarning) this.shakeTimer_.start();
@@ -99,7 +99,7 @@ bitpug.ui.ActionMsg.prototype.setClasses_ = function(e)
 /**
  * @private
  */
-bitpug.ui.ActionMsg.prototype.handleScreenShake_ = function()
+bp.ui.ActionMsg.prototype.handleScreenShake_ = function()
 {
 	var value;
 	if(this.shakeTicks_ % 2)

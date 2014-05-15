@@ -1,16 +1,16 @@
-goog.provide('bitpug.ui.RainDrop');
+goog.provide('bp.ui.RainDrop');
 
 goog.require('goog.ui.Component');
 goog.require('goog.style');
 goog.require('goog.dom.classes')
 
-goog.require('bitpug.ui.PugPlayer');
+goog.require('bp.ui.PugPlayer');
 
 /**
  * @constructor
  * @extends {goog.ui.Component}
  */
-bitpug.ui.RainDrop = function()
+bp.ui.RainDrop = function()
 {
 	goog.base(this);
 
@@ -38,40 +38,40 @@ bitpug.ui.RainDrop = function()
 	this.animation_ = null;
 
 	/**
-	 * @type {bitpug.ui.PugPlayer}
+	 * @type {bp.ui.PugPlayer}
 	 * @private
 	 */
-	this.pugPlayer_ = bitpug.ui.PugPlayer.getInstance();
+	this.pugPlayer_ = bp.ui.PugPlayer.getInstance();
 
 	/**
 	 * @type {boolean}
 	 */
 	this.isEaten_ = false;
 };
-goog.inherits(bitpug.ui.RainDrop, goog.ui.Component);
+goog.inherits(bp.ui.RainDrop, goog.ui.Component);
 
 /**
  * @param  {goog.math.Coordinate} coordinates
  */
-bitpug.ui.RainDrop.prototype.renderDrop = function(coordinates)
+bp.ui.RainDrop.prototype.renderDrop = function(coordinates)
 {
 	// Render RainDrop
 	var index = Math.floor(
-		Math.random()*bitpug.settings['rain']['dropClasses'].length);
+		Math.random()*bp.settings['rain']['dropClasses'].length);
 
 	var raindropEl = goog.dom.createDom('div', 'drop ' +
-		bitpug.settings['rain']['dropClasses'][index]);
+		bp.settings['rain']['dropClasses'][index]);
 
 	goog.style.setPosition(raindropEl, coordinates.x, -50);
 
-	bitpug.gameComponents.registry.getElement(
+	bp.gameComponents.registry.getElement(
 		'rain-wrapper')[0].appendChild(raindropEl);
 
 	this.dropEl = raindropEl;
 
 	// Set animation
 	this.animation_ = new goog.fx.Animation([coordinates.x,-50],
-		[0,coordinates.y], bitpug.settings['rain']['initialFallSpeed']);
+		[0,coordinates.y], bp.settings['rain']['initialFallSpeed']);
 
 	// Listen for animation
 	this.getHandler().listen(this.animation_,
@@ -87,7 +87,7 @@ bitpug.ui.RainDrop.prototype.renderDrop = function(coordinates)
 /**
  * @private
  */
-bitpug.ui.RainDrop.prototype.dispatchDrop_ = function()
+bp.ui.RainDrop.prototype.dispatchDrop_ = function()
 {
 	this.animation_.play();
 };
@@ -96,7 +96,7 @@ bitpug.ui.RainDrop.prototype.dispatchDrop_ = function()
  * @param  {goog.fx.AnimationEvent} e
  * @private
  */
-bitpug.ui.RainDrop.prototype.handleAnimation_ = function(e)
+bp.ui.RainDrop.prototype.handleAnimation_ = function(e)
 {
 	if(this.isInTouchWithHead_())
 	{
@@ -111,9 +111,9 @@ bitpug.ui.RainDrop.prototype.handleAnimation_ = function(e)
  * @private
  * @return {boolean} [description]
  */
-bitpug.ui.RainDrop.prototype.isInTouchWithHead_ = function()
+bp.ui.RainDrop.prototype.isInTouchWithHead_ = function()
 {
-	var pugPlayer = bitpug.gameComponents.registry.getElement(
+	var pugPlayer = bp.gameComponents.registry.getElement(
 		'pug-player')[0];
 	var mouth = goog.dom.getElementByClass('mouth', pugPlayer);
 
@@ -140,7 +140,7 @@ bitpug.ui.RainDrop.prototype.isInTouchWithHead_ = function()
 	return false;
 };
 
-bitpug.ui.RainDrop.prototype.markAsEaten_ = function()
+bp.ui.RainDrop.prototype.markAsEaten_ = function()
 {
 	this.isEaten_ = true;
 	goog.dom.classes.enable(this.dropEl, 'eaten', true);
@@ -150,7 +150,7 @@ bitpug.ui.RainDrop.prototype.markAsEaten_ = function()
 /**
  * @private
  */
-bitpug.ui.RainDrop.prototype.destroyDrop_ = function()
+bp.ui.RainDrop.prototype.destroyDrop_ = function()
 {
 	// Unlisten
 	this.getHandler().unlisten(this.animation_,
@@ -162,18 +162,18 @@ bitpug.ui.RainDrop.prototype.destroyDrop_ = function()
 	// Dispatch event
 	if(this.isEaten_)
 	{
-		this.dispatchEvent(bitpug.ui.RainDrop.EventType.EATEN);
+		this.dispatchEvent(bp.ui.RainDrop.EventType.EATEN);
 	}
 	else
 	{
-		this.dispatchEvent(bitpug.ui.RainDrop.EventType.MISSED);
+		this.dispatchEvent(bp.ui.RainDrop.EventType.MISSED);
 	}
 };
 
 /**
  * Eventtypes
  */
-bitpug.ui.RainDrop.EventType = {
+bp.ui.RainDrop.EventType = {
 	MISSED: 'missed',
 	EATEN: 'eaten'
 };

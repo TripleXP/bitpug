@@ -1,4 +1,4 @@
-goog.provide('bitpug.ui.StatDisplay');
+goog.provide('bp.ui.StatDisplay');
 
 goog.require('goog.ui.Component');
 goog.require('goog.Timer');
@@ -7,7 +7,7 @@ goog.require('goog.Timer');
  * @constructor
  * @extends {goog.ui.Component}
  */
-bitpug.ui.StatDisplay = function()
+bp.ui.StatDisplay = function()
 {
 	goog.base(this);
 
@@ -21,7 +21,7 @@ bitpug.ui.StatDisplay = function()
 	 * @type {Object}
 	 * @private
 	 */
-	this.registry_ = bitpug.gameComponents.registry;
+	this.registry_ = bp.gameComponents.registry;
 
 	/**
 	 * @type {number}
@@ -47,9 +47,9 @@ bitpug.ui.StatDisplay = function()
 	 */
 	this.levelEl_ = null;
 };
-goog.inherits(bitpug.ui.StatDisplay, goog.ui.Component);
+goog.inherits(bp.ui.StatDisplay, goog.ui.Component);
 
-bitpug.ui.StatDisplay.prototype.init = function()
+bp.ui.StatDisplay.prototype.init = function()
 {
 	// Stat display element tree (Modules)
 	this.statDisplay_ = goog.dom.createDom('div', '', [
@@ -88,13 +88,13 @@ bitpug.ui.StatDisplay.prototype.init = function()
 	this.registry_.addElement(this.levelEl_, 'level-count-el');
 
 	// Add Component
-	bitpug.gameComponents.StatDisplay = this;
+	bp.gameComponents.StatDisplay = this;
 };
 
 /**
  * @private
  */
-bitpug.ui.StatDisplay.prototype.renderDisplay_ = function()
+bp.ui.StatDisplay.prototype.renderDisplay_ = function()
 {
 	// Append display element
 	var gameField = this.registry_.getElement(
