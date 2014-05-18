@@ -1,4 +1,4 @@
-goog.provide('bitpug.ui.Clouds');
+goog.provide('bp.ui.Clouds');
 
 goog.require('goog.ui.Component');
 goog.require('goog.Timer');
@@ -7,7 +7,7 @@ goog.require('goog.Timer');
  * @constructor
  * @extends {goog.ui.Component}
  */
-bitpug.ui.Clouds = function()
+bp.ui.Clouds = function()
 {
 	goog.base(this);
 
@@ -29,10 +29,10 @@ bitpug.ui.Clouds = function()
 	 */
 	this.maxClouds_ = 5;
 };
-goog.inherits(bitpug.ui.Clouds, goog.ui.Component);
+goog.inherits(bp.ui.Clouds, goog.ui.Component);
 
 /** @inheritDoc */
-bitpug.ui.Clouds.prototype.decorateInternal = function(el)
+bp.ui.Clouds.prototype.decorateInternal = function(el)
 {
 	goog.base(this, 'decorateInternal', el);
 
@@ -44,7 +44,7 @@ bitpug.ui.Clouds.prototype.decorateInternal = function(el)
 };
 
 /** @inheritDoc */
-bitpug.ui.Clouds.prototype.enterDocument = function()
+bp.ui.Clouds.prototype.enterDocument = function()
 {
 	goog.base(this, 'enterDocument');
 
@@ -55,7 +55,7 @@ bitpug.ui.Clouds.prototype.enterDocument = function()
 /**
  * @private
  */
-bitpug.ui.Clouds.prototype.updateAnimation_ = function()
+bp.ui.Clouds.prototype.updateAnimation_ = function()
 {
 	//console.log('update');
 };
@@ -63,7 +63,7 @@ bitpug.ui.Clouds.prototype.updateAnimation_ = function()
 /**
  * @private
  */
-bitpug.ui.Clouds.prototype.renderClouds_ = function()
+bp.ui.Clouds.prototype.renderClouds_ = function()
 {
 	for(var i = 1; i <= this.maxClouds_; i++)
 	{

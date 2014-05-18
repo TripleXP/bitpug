@@ -13,7 +13,7 @@
         "jumpSpeed": 6,
 
         /* How often the animation changes the frame (ms) */
-        "walkAnimationMs": 100,
+        "walkAnimationMs": 70,
 
         /* The maximal jump height the player can reach (px) */
         "maxJumpHeight": 150,
@@ -30,7 +30,7 @@
             "speedIncicator": 3,
 
             /* Speed for the boost for reloading (ms) */
-            "reloadingDelay": 5000,
+            "reloadingDelay": 2000,
 
             /* Max repeats of one tick */
             "maxCount": 30,
@@ -70,6 +70,9 @@
     "levels": [
         /** POINTS => LEVEL */
         [50, 2],
-        [150, 4]
+        [150, 4],
+        [250, 6],
+        [350, 8],
+        [450, 10]
     ]
 }

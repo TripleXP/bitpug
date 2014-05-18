@@ -1,11 +1,11 @@
-goog.provide('bitpug.controllers.RegistryController');
+goog.provide('bp.controllers.RegistryController');
 
 goog.require('goog.dom.classes');
 
 /**
  * @constructor
  */
-bitpug.controllers.RegistryController = function()
+bp.controllers.RegistryController = function()
 {
 	/**
 	 * @type {Object}
@@ -14,26 +14,25 @@ bitpug.controllers.RegistryController = function()
 		'elements': []
 	};
 };
-goog.addSingletonGetter(bitpug.controllers.RegistryController);
+goog.addSingletonGetter(bp.controllers.RegistryController);
 
 /**
- * @param {className} string
  * @param {Element} el
+ * @param {string=} opt_className
  */
-bitpug.controllers.RegistryController.prototype.addElement = function(el, className)
+bp.controllers.RegistryController.prototype.addElement = function(el, opt_className)
 {
-	if(!className)
-		className = '';
+	if(!opt_className) opt_className = '';
 
-	goog.dom.classes.add(el, className);
+	goog.dom.classes.add(el, opt_className);
 	this.register.elements.push(el);
 };
 
 /**
- * @param {className} string
+ * @param {string} className
  * @return {Array} Element
  */
-bitpug.controllers.RegistryController.prototype.getElement = function(className)
+bp.controllers.RegistryController.prototype.getElement = function(className)
 {
 	// Search in the register
 	var results = [];

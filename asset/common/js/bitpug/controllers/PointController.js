@@ -1,12 +1,17 @@
-goog.provide('bitpug.controllers.PointController');
+goog.provide('bp.controllers.PointController');
 
 goog.require('goog.events');
 
+goog.require('bp.events.ActionMsgEvent');
+
 /**
  * @constructor
+ * @extends {goog.events.EventTarget}
  */
-bitpug.controllers.PointController = function()
+bp.controllers.PointController = function()
 {
+	goog.base(this);
+
 	/**
 	 * @type {Object}
 	 * @private
@@ -29,7 +34,7 @@ bitpug.controllers.PointController = function()
 	 * @type {number}
 	 * @private
 	 */
-	this.level_ = 1;
+	this.level_ = 0;
 
 	/**
 	 * @type {number}
@@ -37,41 +42,51 @@ bitpug.controllers.PointController = function()
 	 */
 	this.levelPointsNeed_ = 0;
 };
-goog.addSingletonGetter(bitpug.controllers.PointController);
+goog.inherits(bp.controllers.PointController, goog.events.EventTarget);
+goog.addSingletonGetter(bp.controllers.PointController);
 
 /**
  * @param {Array.<Object>} listeners
  */
-bitpug.controllers.PointController.prototype.init = function(listeners)
+bp.controllers.PointController.prototype.init = function(listeners)
 {
+	// Add self to the listeners
+	listeners.push(this);
+
 	// Init module
 	this.module_ = {
-		'points': bitpug.gameComponents.registry.getElement('point-count-el')[0],
-		'level': bitpug.gameComponents.registry.getElement('level-count-el')[0]
-	}
+		'points': bp.gameComponents.registry.getElement('point-count-el')[0],
+		'level': bp.gameComponents.registry.getElement('level-count-el')[0]
+	};
 
 	// Get first points neede for level up
-	this.levelPointsNeed_ = bitpug.settings['levels'][0][0];
+	this.levelPointsNeed_ = bp.settings['levels'][0][0];
 
 	// Add listeners from config
 	for(var i = 0; i < listeners.length; i++)
 	{
 		// Listen for point add
-		goog.events.listen(listeners[i],
-			bitpug.events.PointCounter.EventType.ADD,
+		goog.events.listen(
+			/** @type {goog.events.EventTarget} */ (listeners[i]),
+			bp.events.PointCounter.EventType.ADD,
 			this.handlePointAdd_, false, this);
 	}
+
+	// Set level and points to 0
+	this.dispatchEvent(new bp.events.PointCounter(
+		bp.events.PointCounter.EventType.ADD, '0'));
+	this.handleLevelUp_(false);
 };
 
 /**
- * @param {bitpug.events.PointCounter.EventType.ADD} e
+ * @param {bp.events.PointCounter} e
  * @private
  */
-bitpug.controllers.PointController.prototype.handlePointAdd_ = function(e)
+bp.controllers.PointController.prototype.handlePointAdd_ = function(e)
 {
 	this.points_ += (Number) (e.points);
 	this.levelPoints_ += (Number) (e.points);
-	this.module_.points.innerHTML = this.points_;
+	this.module_['points'].innerHTML = this.points_;
 
 	// Check for level up
 	this.checkLevel_();
@@ -80,9 +95,9 @@ bitpug.controllers.PointController.prototype.handlePointAdd_ = function(e)
 /**
  * @private
  */
-bitpug.controllers.PointController.prototype.checkLevel_ = function()
+bp.controllers.PointController.prototype.checkLevel_ = function()
 {
-	var levelDesigner = bitpug.settings['levels'];
+	var levelDesigner = bp.settings['levels'];
 	var levelExist = false;
 	for(var i = 0; i < levelDesigner.length; i++)
 	{
@@ -93,7 +108,7 @@ bitpug.controllers.PointController.prototype.checkLevel_ = function()
 
 			if(this.levelPoints_ >= this.levelPointsNeed_)
 			{
-				this.handleLevelUp_();
+				this.handleLevelUp_(true);
 				break;
 			}
 		}
@@ -103,17 +118,28 @@ bitpug.controllers.PointController.prototype.checkLevel_ = function()
 	{
 		if(this.levelPoints_ >= this.levelPointsNeed_)
 		{
-			this.handleLevelUp_();
+			this.handleLevelUp_(true);
 		}
 	}
 };
 
 /**
+ * @param {boolean} sendMsg
  * @private
  */
-bitpug.controllers.PointController.prototype.handleLevelUp_ = function()
+bp.controllers.PointController.prototype.handleLevelUp_ = function(sendMsg)
 {
 	this.levelPoints_ = 0;
 	this.level_ += 1;
-	this.module_.level.innerHTML = this.level_;
+	this.module_['level'].innerHTML = this.level_;
+
+	// Send action msg
+	if(sendMsg)
+	{
+		bp.ui.ActionMsg.getInstance().dispatchEvent(new
+				bp.events.ActionMsgEvent(
+					bp.events.ActionMsgEvent.EventType.SETMSG,
+					'Level up!'
+				));
+	}
 };

@@ -1,4 +1,4 @@
-goog.provide('bitpug.ui.StatDisplay');
+goog.provide('bp.ui.StatDisplay');
 
 goog.require('goog.ui.Component');
 goog.require('goog.Timer');
@@ -7,7 +7,7 @@ goog.require('goog.Timer');
  * @constructor
  * @extends {goog.ui.Component}
  */
-bitpug.ui.StatDisplay = function()
+bp.ui.StatDisplay = function()
 {
 	goog.base(this);
 
@@ -21,10 +21,10 @@ bitpug.ui.StatDisplay = function()
 	 * @type {Object}
 	 * @private
 	 */
-	this.registry_ = bitpug.gameComponents.registry;
+	this.registry_ = bp.gameComponents.registry;
 
 	/**
-	 * @type {Number}
+	 * @type {number}
 	 * @private
 	 */
 	this.gamePoints_ = 0;
@@ -36,7 +36,7 @@ bitpug.ui.StatDisplay = function()
 	this.pointEl_ = null;
 
 	/**
-	 * @type {Number}
+	 * @type {number}
 	 * @private
 	 */
 	this.gameLevel_ = 0;
@@ -47,19 +47,25 @@ bitpug.ui.StatDisplay = function()
 	 */
 	this.levelEl_ = null;
 };
-goog.inherits(bitpug.ui.StatDisplay, goog.ui.Component);
+goog.inherits(bp.ui.StatDisplay, goog.ui.Component);
 
-bitpug.ui.StatDisplay.prototype.init = function()
+bp.ui.StatDisplay.prototype.init = function()
 {
 	// Stat display element tree (Modules)
 	this.statDisplay_ = goog.dom.createDom('div', '', [
-		goog.dom.createDom('div', 'deko-pug'),
+		goog.dom.createDom('div', 'deko-pug'), // Deko
+		goog.dom.createDom('div', 'module life x3', [
+				goog.dom.createDom('div', 'hearts')
+			]), // Life section
 		goog.dom.createDom('div', 'module points'), // Point section
 		goog.dom.createDom('div', 'module level'),   // Level section
 		goog.dom.createDom('div', 'module boost', [
 			goog.dom.createDom('div', 'bar-wrapper', [
 				goog.dom.createDom('div', 'bar empty')])]
-		) // Boost section
+		), // Boost section
+		goog.dom.createDom('div', 'game-handlers', [
+				goog.dom.createDom('div', 'game-state pause')
+			]) // Game handler section (start, pause, etc.)
 	]);
 
 	// Add boost module to components
@@ -88,13 +94,16 @@ bitpug.ui.StatDisplay.prototype.init = function()
 	this.registry_.addElement(this.levelEl_, 'level-count-el');
 
 	// Add Component
-	bitpug.gameComponents.StatDisplay = this;
+	bp.gameComponents.StatDisplay = this;
+
+	// Listen for play/pause trigger
+	this.listenGameHandlers_();
 };
 
 /**
  * @private
  */
-bitpug.ui.StatDisplay.prototype.renderDisplay_ = function()
+bp.ui.StatDisplay.prototype.renderDisplay_ = function()
 {
 	// Append display element
 	var gameField = this.registry_.getElement(
@@ -103,26 +112,38 @@ bitpug.ui.StatDisplay.prototype.renderDisplay_ = function()
 	goog.Timer.callOnce(function(){
 		goog.dom.classes.enable(this.statDisplay_, 'visible', true);
 	}, 0, this);
-
-	// Set points to 0
-	this.setGamePoints(0);
-	this.setGameLevel(1);
 };
 
 /**
- * @param {Number} points
+ * @private
  */
-bitpug.ui.StatDisplay.prototype.setGamePoints = function(points)
+bp.ui.StatDisplay.prototype.listenGameHandlers_ = function()
 {
-	this.pointEl_.innerHTML = points;
-	this.gamePoints_ = points;
+	var statDisplay = bp.gameComponents.registry.getElement('stat-display')[0];
+	var gameHandlers = goog.dom.getElementByClass('game-handlers', statDisplay);
+
+	// Game state trigger
+	var gameState = goog.dom.getElementByClass('game-state', gameHandlers);
+	goog.events.listen(gameState, goog.events.EventType.CLICK,
+		this.handleGameStateClick_, false, this);
 };
 
 /**
- * @param {Number} points
+ * @param {goog.events.BrowserEvent} e
+ * @private
  */
-bitpug.ui.StatDisplay.prototype.setGameLevel = function(level)
+bp.ui.StatDisplay.prototype.handleGameStateClick_ = function(e)
 {
-	this.levelEl_.innerHTML = level;
-	this.gameLevel_ = level;
+	var gameStateController = bp.gameComponents.gameStateController;
+
+	if(goog.dom.classes.has(e.target, 'pause'))
+	{
+		goog.dom.classes.swap(e.target, 'pause', 'continue');
+		gameStateController.setPause();
+	}
+	else if (goog.dom.classes.has(e.target, 'continue'))
+	{
+		goog.dom.classes.swap(e.target, 'continue', 'pause');
+		gameStateController.setContinue();
+	}
 };

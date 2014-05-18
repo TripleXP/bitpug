@@ -1,7 +1,8 @@
 body
 {
-	//background: url(../img/layout/bg-body.svg) no-repeat;
-	@include background-size(cover);
+	background: url(../img/layout/environment/bg.png);
+	//@include background-size(cover);
+	overflow: hidden;
 }
 
 #page
@@ -10,9 +11,12 @@ body
 }
 
 // Import layout components
+@import "layout/menu";
+@import "layout/layer";
 @import "layout/off-game";
 @import "layout/playground";
 @import "layout/stat-display";
 @import "layout/environment";
 @import "layout/pug-player";
 @import "layout/rain";
+@import "layout/action-msg";

@@ -11,6 +11,7 @@
 .rain-wrapper .drop
 {
 	position: absolute;
+	z-index: 2;
 	width: 20px;
 	height: 20px;
 	background: rgba(0,0,0,0.5);

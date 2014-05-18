@@ -7,20 +7,26 @@
         <div id="page">
             <h1 class="heading">Bitpug</h1>
             <div class="playground">
+                <div id="menu inactive"></div>
                 <div class="environment">
                     <div class="hut"></div>
                     <div class="ground"></div>
                 </div>
+                <div id="action-msg"></div>
                 <div id="game"></div>
+                <div id="layer">
+                    <div class="close">x</div>
+                    <div class="content"></div>
+                </div>
             </div>
         </div>
-        <?php if(APPLICATION_ENV != 'development'): ?>
+        <?php if(APPLICATION_ENV == 'development'): ?>
             <script src="asset/closure-library/closure/goog/base.js"></script>
             <script src="asset/common/js/deps.js"></script>
-            <script>goog.require('bitpug.Game');</script>
+            <script>goog.require('bp.Game');</script>
         <?php else: ?>
             <script src="asset/common/js-min/app.js"></script>
         <?php endif; ?>
-        <script>bitpug.Initialize();</script>
+        <script>bp.Initialize({});</script>
     </body>
 </html>

@@ -1,0 +1,37 @@
+#action-msg
+{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-top: -25px;
+	margin-left: -150px;
+	width: 300px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	background-color: rgba(255,255,255,0.5);
+	font-family: "Pixel", Arial, sans-serif;
+	font-size: 30px;
+	color: gray;
+	visibility: hidden;
+	@include opacity(0.5);
+	@include transform(scale(0));
+	@include transition(transform 0.3s);
+	@include border-radius(5px);
+
+	&.warning
+	{
+		color: red;
+	}
+
+	&.active
+	{
+		visibility: visible;
+		@include transform(scale(1));
+	}
+
+	&.inactive
+	{
+		@include transform(rotate3d(1,-1,0,90deg));
+	}
+}

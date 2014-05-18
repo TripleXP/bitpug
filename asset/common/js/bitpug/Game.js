@@ -1,13 +1,14 @@
-goog.provide('bitpug.Game');
+goog.provide('bp.Game');
 
 goog.require('goog.net.XhrIo');
 
-goog.require('bitpug.controllers.GameController');
+goog.require('bp.controllers.GameController');
+goog.require('bp.ui.Menu');
 
 /**
  * @constructor
  */
-bitpug.Game = function()
+bp.Game = function()
 {
     this.loadConfig_();
 };
@@ -15,27 +16,35 @@ bitpug.Game = function()
 /**
  * @private
  */
-bitpug.Game.prototype.loadConfig_ = function()
+bp.Game.prototype.loadConfig_ = function()
 {
     var xhr = new goog.net.XhrIo();
     xhr.send('app/layout/jsonConfig.php');
 
     goog.events.listenOnce(xhr, goog.net.EventType.SUCCESS,
         function(e){
-            bitpug.settings = e.target.getResponseJson();
+            bp.settings = e.target.getResponseJson();
             this.startInit();
         }, false, this);
 };
 
-bitpug.Game.prototype.startInit = function()
+bp.Game.prototype.startInit = function()
 {
     // Start game controller
-	new bitpug.controllers.GameController().start();
+    var menu = new bp.ui.Menu();
+    //menu.renderMain();
+
+            new bp.controllers.GameController().start();
+    goog.events.listen(menu, bp.ui.Menu.EventType.MAINSTART,
+        function(){
+        }, false, this);
 };
 
-// Seperated function to keep after it's compiled
-bitpug.Initialize = function(config)
+/**
+ * @param {Object} config
+ */
+bp.Initialize = function(config)
 {
-	var game = new bitpug.Game();
+	var game = new bp.Game();
 };
-goog.exportSymbol('bitpug.Initialize', bitpug.Initialize);
+goog.exportSymbol('bp.Initialize', bp.Initialize);

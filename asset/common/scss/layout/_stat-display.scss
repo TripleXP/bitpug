@@ -53,6 +53,42 @@
 		}
 	}
 
+	// Life
+	.life
+	{
+		position: relative;
+		height: 55px;
+
+		.hearts
+		{
+			top: 20px;
+			position: absolute;
+			background: url(../img/layout/pugs/life/hearts.png) no-repeat;
+			height: 22px;
+			width: 100%;
+		}
+
+		&.x3 .hearts
+		{
+			background-position: center 0;
+		}
+
+		&.x2 .hearts
+		{
+			background-position: center -22px;
+		}
+
+		&.x1 .hearts
+		{
+			background-position: center -44px;
+		}
+
+		&.x0 .hearts
+		{
+			background-position: center -66px;
+		}
+	}
+
 	// Boost
 	.boost
 	{
@@ -88,6 +124,39 @@
 				background-color: red;
 			}
 		}
+	}
+
+	// Game handlers
+	.game-handlers
+	{
+		height: 40px;
+
+		.game-state
+		{
+			width: 20px;
+			height: 20px;
+
+			&.pause
+			{
+				background: red;
+			}
+
+			&.continue
+			{
+				background: green;
+			}
+		}
+	}
+
+	// Headers of each section
+	.game-handlers:after
+	{
+		content: "";
+	}
+
+	.life:after
+	{
+		content: "Life";
 	}
 
 	.points:after
