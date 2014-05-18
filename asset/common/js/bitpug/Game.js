@@ -32,11 +32,11 @@ bp.Game.prototype.startInit = function()
 {
     // Start game controller
     var menu = new bp.ui.Menu();
-    //menu.renderMain();
+    menu.renderMain();
 
-            new bp.controllers.GameController().start();
     goog.events.listen(menu, bp.ui.Menu.EventType.MAINSTART,
         function(){
+            new bp.controllers.GameController().start();
         }, false, this);
 };
 

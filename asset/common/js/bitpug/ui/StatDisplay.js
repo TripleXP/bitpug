@@ -46,6 +46,12 @@ bp.ui.StatDisplay = function()
 	 * @private
 	 */
 	this.levelEl_ = null;
+
+	/**
+	 * @type {Element}
+	 * @private
+	 */
+	this.gameStateEl_ = null;
 };
 goog.inherits(bp.ui.StatDisplay, goog.ui.Component);
 
@@ -123,9 +129,28 @@ bp.ui.StatDisplay.prototype.listenGameHandlers_ = function()
 	var gameHandlers = goog.dom.getElementByClass('game-handlers', statDisplay);
 
 	// Game state trigger
-	var gameState = goog.dom.getElementByClass('game-state', gameHandlers);
-	goog.events.listen(gameState, goog.events.EventType.CLICK,
-		this.handleGameStateClick_, false, this);
+	this.gameStateEl_ = goog.dom.getElementByClass('game-state', gameHandlers);
+	this.getHandler().listen(this.gameStateEl_, goog.events.EventType.CLICK,
+		this.handleGameStateClick_);
+
+	// Listen to change classes
+	var handler = bp.handlers.GameHandler.getInstance();
+	this.getHandler().listen(handler, [
+			bp.events.GameEvent.EventType.PAUSE,
+			bp.events.GameEvent.EventType.CONTINUE,
+		], this.handleStateChange_);
+};
+
+/**
+ * @param {goog.events.Event} e
+ * @private
+ */
+bp.ui.StatDisplay.prototype.handleStateChange_ = function(e)
+{
+	if(e.type == 'pause')
+		goog.dom.classes.swap(this.gameStateEl_ , 'pause', 'continue');
+	else if (e.type == 'continue')
+		goog.dom.classes.swap(this.gameStateEl_ , 'continue', 'pause');
 };
 
 /**
@@ -135,15 +160,5 @@ bp.ui.StatDisplay.prototype.listenGameHandlers_ = function()
 bp.ui.StatDisplay.prototype.handleGameStateClick_ = function(e)
 {
 	var gameStateController = bp.gameComponents.gameStateController;
-
-	if(goog.dom.classes.has(e.target, 'pause'))
-	{
-		goog.dom.classes.swap(e.target, 'pause', 'continue');
-		gameStateController.setPause();
-	}
-	else if (goog.dom.classes.has(e.target, 'continue'))
-	{
-		goog.dom.classes.swap(e.target, 'continue', 'pause');
-		gameStateController.setContinue();
-	}
+	gameStateController.toggleState();
 };

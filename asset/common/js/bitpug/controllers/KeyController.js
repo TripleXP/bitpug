@@ -68,6 +68,8 @@ bp.controllers.KeyController.prototype.addKeyListeners_ = function()
 bp.controllers.KeyController.prototype.lock = function(isLocked)
 {
     this.isLocked_ = isLocked;
+    this.handleWalk_(bp.events.MainControl.EventType.STOPWALKLEFT);
+    this.handleWalk_(bp.events.MainControl.EventType.STOPWALKRIGHT);
 };
 
 /**
@@ -152,8 +154,11 @@ bp.controllers.KeyController.prototype.handleKeyDownUp_ = function(e)
         break;
 
         case 80: // Pause
-            var gameStateController = bp.gameComponents.gameStateController();
-            gameStateController.toggleState();
+            if(e.type == 'keyup')
+            {
+                var gameStateController = bp.gameComponents.gameStateController;
+                gameStateController.toggleState();
+            }
         break;
     }
 };

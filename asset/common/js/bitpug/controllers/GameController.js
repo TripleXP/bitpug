@@ -60,6 +60,7 @@ bp.controllers.GameController.prototype.start = function()
 
 	// Init game state controller
 	bp.gameComponents.gameStateController = bp.controllers.GameStateController.getInstance();
+	bp.gameComponents.gameStateController.init();
 
 	// Init Key controller
 	bp.gameComponents.keyController = bp.controllers.KeyController.getInstance();

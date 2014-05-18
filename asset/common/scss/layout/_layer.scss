@@ -10,6 +10,7 @@
 	visibility: hidden;
 	@include opacity(0);
 	@include transition(opacity 0.5s);
+	@include border-radius(10px);
 
 	&.active
 	{

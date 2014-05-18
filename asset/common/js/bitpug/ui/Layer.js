@@ -1,6 +1,7 @@
 goog.provide('bp.ui.Layer');
 
 goog.require('goog.dom.classes');
+goog.require('goog.ui.Component');
 
 /**
  * @constructor

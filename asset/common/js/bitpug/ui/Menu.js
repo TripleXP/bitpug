@@ -25,10 +25,14 @@ bp.ui.Menu = function()
 };
 goog.inherits(bp.ui.Menu, goog.ui.Component);
 
+/**
+ * @private
+ */
 bp.ui.Menu.prototype.init_ = function()
 {
 	this.menu_ = goog.dom.getElement('menu');
 	goog.dom.classes.enable(this.menu_, 'inactive', false);
+
 	this.layer_.init();
 };
 
@@ -41,17 +45,52 @@ bp.ui.Menu.prototype.renderMain = function()
 			goog.dom.createDom('div', 'button', 'Howto play')
 		]);
 
+	this.renderMenu_(el, this.handleMainButtonClick_);
+};
+
+bp.ui.Menu.prototype.renderPause = function()
+{
+	this.init_();
+
+	var el = goog.dom.createDom('div', 'submenu main', [
+			goog.dom.createDom('div', 'button', 'Continue'),
+			goog.dom.createDom('div', 'button', 'Howto play')
+		]);
+
+	this.renderMenu_(el, this.handlePauseButtonClick_);
+};
+
+/**
+ * @param {Element} el
+ * @param {Function} callbackClickFnc
+ * @private
+ */
+bp.ui.Menu.prototype.renderMenu_ = function(el, callbackClickFnc)
+{
+	// Add listeners to button click
 	var buttons = goog.dom.getChildren(el);
 	for(var i = 0; i < buttons.length; i++)
 	{
 		this.getHandler().listen(buttons[i],
-			goog.events.EventType.CLICK, this.handleMainButtonClick_);
+			goog.events.EventType.CLICK, callbackClickFnc);
 	}
 
-	goog.dom.getElement('menu').appendChild(el);
-
-	//this.dispatchEvent(bp.ui.Menu.EventType.MAINSTART);
+	// Render to html
+	var menuEl = goog.dom.getElement('menu');
+	menuEl.innerHTML = '';
+	menuEl.appendChild(el);
 };
+
+bp.ui.Menu.prototype.disableMenu = function()
+{
+	goog.dom.classes.enable(this.menu_, 'inactive', true);
+};
+
+/**
+ * *
+ * All callback functions for each menu
+ * *
+ */
 
 /**
  * @param {goog.events.BrowserEvent} e
@@ -64,7 +103,7 @@ bp.ui.Menu.prototype.handleMainButtonClick_ = function(e)
 	{
 		case "Start":
 			this.dispatchEvent(bp.ui.Menu.EventType.MAINSTART);
-			this.disableMenu_();
+			this.disableMenu();
 		break;
 		case "Howto play":
 			this.layer_.setContent('howto');
@@ -73,17 +112,30 @@ bp.ui.Menu.prototype.handleMainButtonClick_ = function(e)
 };
 
 /**
+ * @param {goog.events.BrowserEvent} e
  * @private
  */
-bp.ui.Menu.prototype.disableMenu_ = function()
+bp.ui.Menu.prototype.handlePauseButtonClick_ = function(e)
 {
-	goog.dom.classes.enable(this.menu_, 'inactive', true);
+	var value = e.target.innerHTML;
+	switch(value)
+	{
+		case "Continue":
+			this.dispatchEvent(bp.ui.Menu.EventType.PAUSECONTINUE);
+		break;
+		case "Howto play":
+			this.handleMainButtonClick_(e);
+		break;
+	}
 };
 
 /**
  * @enum {string}
  */
 bp.ui.Menu.EventType = {
+	// Main menu
 	'MAINSTART': 'mainStart',
-	'MAINHOWTOPLAY': 'mainHowtoPlay'
+	'MAINHOWTOPLAY': 'mainHowtoPlay',
+	// Pause menu
+	'PAUSECONTINUE': 'pauseContinue'
 };

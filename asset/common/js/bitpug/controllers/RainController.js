@@ -209,7 +209,7 @@ bp.controllers.RainController.prototype.handleMiss_ = function(e)
 
 	// Remove from list
 	var index = this.rainDrops_.indexOf(e.target);
-	this.rainDrops_.splice(0, index);
+	this.rainDrops_.splice(index, 1);
 
 	// Remove raindrop
 	goog.Timer.callOnce(function(){
@@ -230,7 +230,7 @@ bp.controllers.RainController.prototype.handleEat_ = function(e)
 
 	// Remove from list
 	var index = this.rainDrops_.indexOf(e.target);
-	this.rainDrops_.splice(0, index);
+	this.rainDrops_.splice(index, 0);
 
 	// Remove node
 	goog.Timer.callOnce(function(){
