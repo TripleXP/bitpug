@@ -84,12 +84,12 @@ bp.ui.RainDrop.prototype.renderDrop = function(coordinates)
 	this.dispatchDrop_();
 };
 
-bp.ui.RainDrop.prototype.pause = function()
+bp.ui.RainDrop.prototype.pauseAnimation = function()
 {
 	this.animation_.pause();
 };
 
-bp.ui.RainDrop.prototype.continue = function()
+bp.ui.RainDrop.prototype.continueAnimation = function()
 {
 	this.animation_.play();
 };

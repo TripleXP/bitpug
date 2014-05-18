@@ -108,7 +108,7 @@ bp.controllers.RainController.prototype.start = function()
 	// Reactivate active drops
 	for(var i = 0; i < this.rainDrops_.length; i++)
 	{
-		this.rainDrops_[i].continue();
+		this.rainDrops_[i].continueAnimation();
 	}
 };
 
@@ -119,7 +119,7 @@ bp.controllers.RainController.prototype.stop = function()
 	// Freeze active drops
 	for(var i = 0; i < this.rainDrops_.length; i++)
 	{
-		this.rainDrops_[i].pause();
+		this.rainDrops_[i].pauseAnimation();
 	}
 };
 

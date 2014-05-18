@@ -40,7 +40,7 @@ bp.ui.Layer.prototype.init = function()
 };
 
 /**
- * @param {string} file
+ * @param {string} filename
  */
 bp.ui.Layer.prototype.setContent = function(filename)
 {
@@ -54,7 +54,7 @@ bp.ui.Layer.prototype.setContent = function(filename)
 };
 
 /**
- * @param {goog.net.Event} e
+ * @param {goog.events.Event} e
  * @private
  */
 bp.ui.Layer.prototype.handleContentLoadComplete_ = function(e)

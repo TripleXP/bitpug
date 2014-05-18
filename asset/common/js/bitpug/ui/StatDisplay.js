@@ -137,7 +137,7 @@ bp.ui.StatDisplay.prototype.listenGameHandlers_ = function()
 	var handler = bp.handlers.GameHandler.getInstance();
 	this.getHandler().listen(handler, [
 			bp.events.GameEvent.EventType.PAUSE,
-			bp.events.GameEvent.EventType.CONTINUE,
+			bp.events.GameEvent.EventType.CONTINUE
 		], this.handleStateChange_);
 };
 
