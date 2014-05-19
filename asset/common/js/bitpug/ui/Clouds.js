@@ -2,6 +2,7 @@ goog.provide('bp.ui.Clouds');
 
 goog.require('goog.ui.Component');
 goog.require('goog.Timer');
+goog.require('goog.math');
 
 /**
  * @constructor
@@ -15,7 +16,7 @@ bp.ui.Clouds = function()
 	 * @type {goog.Timer}
 	 * @private
 	 */
-	this.animTimer_ = new goog.Timer(2000);
+	this.animTimer_ = new goog.Timer(10000);
 
 	/**
 	 * @type {Array.<Element>}
@@ -28,6 +29,12 @@ bp.ui.Clouds = function()
 	 * @private
 	 */
 	this.maxClouds_ = 5;
+
+	/**
+	 * @type {number}
+	 * @private
+	 */
+	this.maxCloudStyles_ = 1;
 };
 goog.inherits(bp.ui.Clouds, goog.ui.Component);
 
@@ -41,6 +48,8 @@ bp.ui.Clouds.prototype.decorateInternal = function(el)
 
 	// Start animation tick
 	this.animTimer_.start();
+
+	this.updateAnimation_();
 };
 
 /** @inheritDoc */
@@ -57,7 +66,11 @@ bp.ui.Clouds.prototype.enterDocument = function()
  */
 bp.ui.Clouds.prototype.updateAnimation_ = function()
 {
-	//console.log('update');
+	for(var i = 0; i < this.cloudsEl_.length; i++)
+	{
+		this.cloudsEl_[i].style.left = Math.round(goog.math.uniformRandom(this.cloudsEl_[i].offsetWidth,
+			goog.dom.getElementByClass('playground').offsetWidth) - this.cloudsEl_[i].offsetWidth) + 'px';
+	}
 };
 
 /**
@@ -67,7 +80,8 @@ bp.ui.Clouds.prototype.renderClouds_ = function()
 {
 	for(var i = 1; i <= this.maxClouds_; i++)
 	{
-		var cloud = goog.dom.createDom('div', 'cloud c' + i);
+		var index = Math.round(goog.math.uniformRandom(1, this.maxCloudStyles_));
+		var cloud = goog.dom.createDom('div', 'cloud c' + index);
 		this.getElement().appendChild(cloud);
 		this.cloudsEl_.push(cloud);
 	}

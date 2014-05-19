@@ -34,8 +34,14 @@ bp.controllers.KeyController = function()
      */
     bp.controllers.KeyController.activeStates = {};
 
+    /**
+     * @type {bp.controllers.GameStateController}
+     * @private
+     */
+    this.gameStateController_ = bp.gameComponents.gameStateController;
 };
-goog.inherits(bp.controllers.KeyController, goog.events.EventTarget);
+goog.inherits(bp.controllers.KeyController,
+    goog.events.EventTarget);
 goog.addSingletonGetter(bp.controllers.KeyController);
 
 bp.controllers.KeyController.prototype.init = function()
@@ -156,8 +162,17 @@ bp.controllers.KeyController.prototype.handleKeyDownUp_ = function(e)
         case 80: // Pause
             if(e.type == 'keyup')
             {
-                var gameStateController = bp.gameComponents.gameStateController;
-                gameStateController.toggleState();
+                this.gameStateController_.toggleState();
+            }
+        break;
+
+        case 27: // ESC
+            if(
+                bp.isPaused &&
+                !bp.isPlaying &&
+                e.type == 'keydown'
+            ){
+                this.gameStateController_.setContinue();
             }
         break;
     }

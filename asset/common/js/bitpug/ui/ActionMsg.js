@@ -40,20 +40,25 @@ bp.ui.ActionMsg = function()
 goog.inherits(bp.ui.ActionMsg, goog.ui.Component);
 goog.addSingletonGetter(bp.ui.ActionMsg);
 
-/** @inheritDoc */
-bp.ui.ActionMsg.prototype.decorateInternal = function(el)
+bp.ui.ActionMsg.prototype.init = function()
 {
-	goog.base(this, 'decorateInternal', el);
+	// Set element
+	var statDisplay = bp.gameComponents.registry.getElement('stat-display')[0];
+	var el = goog.dom.getElementByClass('action-msg', statDisplay);
+	this.setElementInternal(el);
 
 	// Init shake el
 	this.shakeEl_ = goog.dom.getElementByClass('playground');
+
+	// Listen for messages
+	this.listenMessages_();
 };
 
-/** @inheritDoc */
-bp.ui.ActionMsg.prototype.enterDocument = function()
+/**
+ * @private
+ */
+bp.ui.ActionMsg.prototype.listenMessages_ = function()
 {
-	goog.base(this, 'enterDocument');
-
 	// Listen for action msg event
 	this.getHandler().listen(bp.ui.ActionMsg.getInstance(),
 		bp.events.ActionMsgEvent.EventType.SETMSG,

@@ -28,11 +28,21 @@
 		z-index: 1;
 	}
 
-	.clouds
+	.cloud-wrapper
 	{
 		.cloud
 		{
+			top: 50px;
+			position: absolute;
+			background: transparent no-repeat;
+			@include transition(left 10s);
 
+			&.c1
+			{
+				width: image-width("../img/layout/environment/cloud1.png");
+				height: image-height("../img/layout/environment/cloud1.png");
+				background-image: url("../img/layout/environment/cloud1.png");
+			}
 		}
 	}
 }

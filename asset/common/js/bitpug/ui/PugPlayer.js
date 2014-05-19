@@ -179,6 +179,13 @@ bp.ui.PugPlayer.prototype.decorateInternal = function(el)
 	var boostModule = bp.gameComponents.registry.getElement(
 		'boost-cmp')[0];
 	this.boostEl_ = goog.dom.getElementByClass('bar', boostModule);
+
+	// Add pause function for boost
+	var handler = bp.handlers.GameHandler.getInstance();
+	this.getHandler().listen(handler, [
+			bp.events.GameEvent.EventType.PAUSE,
+			bp.events.GameEvent.EventType.CONTINUE
+		], this.handleGameStateChangeBoost_);
 };
 
 /** @inheritDoc */
@@ -403,10 +410,27 @@ bp.ui.PugPlayer.prototype.handleBoostLoadEnd_ = function()
 bp.ui.PugPlayer.prototype.loadBoost_ = function()
 {
 	this.boostLoader_.play();
+
 	this.boostLoading_ = true;
 	this.boostLoaded_ = false;
 	goog.dom.classes.enable(this.boostEl_, 'loading', true);
 	goog.dom.classes.enable(this.boostEl_, 'empty', false);
+};
+
+/**
+ * @param {goog.events.Event} e
+ * @private
+ */
+bp.ui.PugPlayer.prototype.handleGameStateChangeBoost_ = function(e)
+{
+	if(e.type == 'pause')
+	{
+		this.boostLoader_.pause();
+	}
+	else if(e.type == 'continue')
+	{
+		this.boostLoader_.play();
+	}
 };
 
 /**

@@ -2,15 +2,17 @@
 {
 	position: absolute;
 	width: 100px;
-	left: -100px;
+	left: 0;
 	top: 15px;
 	background: rgba(255,255,255,0.8);
+	z-index: -1;
 	@include opacity(0);
 	@include border-radius(10px 0 0 10px);
-	@include transition(opacity 1s);
+	@include transition(opacity 1s, left 0.5s);
 
 	&.visible
 	{
+		left: -100px;
 		@include opacity(1);
 	}
 
@@ -148,6 +150,12 @@
 		}
 	}
 
+	// Action MSG
+	.action-msg
+	{
+		height: 60px;
+	}
+
 	// Headers of each section
 	.game-handlers:after
 	{
@@ -172,5 +180,10 @@
 	.boost:after
 	{
 		content: "Boost";
+	}
+
+	.action-msg:after
+	{
+		content: "Message";
 	}
 }

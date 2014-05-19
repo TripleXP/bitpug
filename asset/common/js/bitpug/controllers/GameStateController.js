@@ -45,6 +45,7 @@ bp.controllers.GameStateController.prototype.setPause  = function()
 	if(bp.isPlaying)
 	{
 		bp.isPlaying = false;
+		bp.isPaused = true;
 		bp.gameComponents.keyController.lock(true);
 
 		this.handler_.dispatchEvent(new bp.events.GameEvent(
@@ -59,6 +60,7 @@ bp.controllers.GameStateController.prototype.setContinue = function()
 	if(!bp.isPlaying)
 	{
 		bp.isPlaying = true;
+		bp.isPaused = false;
 		bp.gameComponents.keyController.lock(false);
 		this.handler_.dispatchEvent(new bp.events.GameEvent(
 			bp.events.GameEvent.EventType.CONTINUE));

@@ -39,6 +39,12 @@ bp.controllers.GameController = function()
 	 * @const
 	 */
 	bp.isPlaying = false;
+
+	/**
+	 * @type {boolean}
+	 * @const
+	 */
+	bp.isPaused = false;
 };
 goog.inherits(bp.controllers.GameController,
 	goog.events.EventTarget);
@@ -49,14 +55,13 @@ bp.controllers.GameController.prototype.start = function()
 	bp.gameComponents.registry = bp.controllers.RegistryController.getInstance();
 	bp.gameComponents.registry.addElement(goog.dom.getElement('game'), 'game-section');
 
-	// Init action msg
-	bp.gameComponents.actionMsg = new bp.ui.ActionMsg();
-	bp.gameComponents.actionMsg.decorate(
-		goog.dom.getElement('action-msg'));
-
 	// Init statdisplay for points
 	bp.gameComponents.statDisplay = new bp.ui.StatDisplay();
 	bp.gameComponents.statDisplay.init();
+
+	// Init action msg
+	bp.gameComponents.actionMsg = bp.ui.ActionMsg.getInstance();
+	bp.gameComponents.actionMsg.init();
 
 	// Init game state controller
 	bp.gameComponents.gameStateController = bp.controllers.GameStateController.getInstance();
@@ -103,7 +108,6 @@ bp.controllers.GameController.prototype.loadEnvironmentComponents_ = function()
 {
 	// Clouds
 	var cloudWrapper = goog.dom.createDom('div', 'cloud-wrapper');
-	bp.gameComponents.registry.getElement(
-		'game-section')[0].appendChild(cloudWrapper);
+	goog.dom.getElementByClass('environment').appendChild(cloudWrapper);
 	new bp.ui.Clouds().decorate(cloudWrapper);
 };

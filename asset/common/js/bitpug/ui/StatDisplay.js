@@ -69,6 +69,7 @@ bp.ui.StatDisplay.prototype.init = function()
 			goog.dom.createDom('div', 'bar-wrapper', [
 				goog.dom.createDom('div', 'bar empty')])]
 		), // Boost section
+		goog.dom.createDom('div', 'module action-msg'), // Action msg
 		goog.dom.createDom('div', 'game-handlers', [
 				goog.dom.createDom('div', 'game-state pause')
 			]) // Game handler section (start, pause, etc.)
@@ -112,8 +113,7 @@ bp.ui.StatDisplay.prototype.init = function()
 bp.ui.StatDisplay.prototype.renderDisplay_ = function()
 {
 	// Append display element
-	var gameField = this.registry_.getElement(
-		'game-section')[0];
+	var gameField = goog.dom.getElementByClass('playground');
 	gameField.appendChild(this.statDisplay_);
 	goog.Timer.callOnce(function(){
 		goog.dom.classes.enable(this.statDisplay_, 'visible', true);
@@ -148,9 +148,15 @@ bp.ui.StatDisplay.prototype.listenGameHandlers_ = function()
 bp.ui.StatDisplay.prototype.handleStateChange_ = function(e)
 {
 	if(e.type == 'pause')
+	{
+		goog.dom.classes.enable(this.statDisplay_, 'visible', false);
 		goog.dom.classes.swap(this.gameStateEl_ , 'pause', 'continue');
+	}
 	else if (e.type == 'continue')
+	{
+		goog.dom.classes.enable(this.statDisplay_, 'visible', true);
 		goog.dom.classes.swap(this.gameStateEl_ , 'continue', 'pause');
+	}
 };
 
 /**
