@@ -9,14 +9,16 @@ goog.addDependency('../../../common/js/bitpug/controllers/PugController.js', ['b
 goog.addDependency('../../../common/js/bitpug/controllers/RainController.js', ['bp.controllers.RainController'], ['bp.events.PointCounter', 'bp.handlers.GameHandler', 'bp.ui.RainDrop', 'goog.Timer', 'goog.events.EventHandler', 'goog.events.EventTarget', 'goog.math', 'goog.math.Coordinate']);
 goog.addDependency('../../../common/js/bitpug/controllers/RegistryController.js', ['bp.controllers.RegistryController'], ['goog.dom.classes']);
 goog.addDependency('../../../common/js/bitpug/events/ActionMsgEvent.js', ['bp.events.ActionMsgEvent'], ['goog.events.Event']);
+goog.addDependency('../../../common/js/bitpug/events/FormularEvent.js', ['bp.events.FormularEvent'], ['goog.events.Event']);
 goog.addDependency('../../../common/js/bitpug/events/GameEvent.js', ['bp.events.GameEvent'], ['goog.events.Event']);
 goog.addDependency('../../../common/js/bitpug/events/MainControl.js', ['bp.events.MainControl'], ['goog.events.Event']);
 goog.addDependency('../../../common/js/bitpug/events/PointCounter.js', ['bp.events.PointCounter'], ['goog.events.Event']);
 goog.addDependency('../../../common/js/bitpug/handlers/GameHandler.js', ['bp.handlers.GameHandler'], ['goog.events.EventTarget']);
 goog.addDependency('../../../common/js/bitpug/ui/ActionMsg.js', ['bp.ui.ActionMsg'], ['bp.events.ActionMsgEvent', 'goog.Timer', 'goog.ui.Component']);
-goog.addDependency('../../../common/js/bitpug/ui/Clouds.js', ['bp.ui.Clouds'], ['goog.Timer', 'goog.ui.Component']);
+goog.addDependency('../../../common/js/bitpug/ui/Clouds.js', ['bp.ui.Clouds'], ['goog.Timer', 'goog.math', 'goog.style', 'goog.ui.Component']);
+goog.addDependency('../../../common/js/bitpug/ui/Formular.js', ['bp.ui.Formular'], ['bp.events.FormularEvent', 'goog.ui.Component']);
 goog.addDependency('../../../common/js/bitpug/ui/Layer.js', ['bp.ui.Layer'], ['goog.dom.classes', 'goog.ui.Component']);
-goog.addDependency('../../../common/js/bitpug/ui/Menu.js', ['bp.ui.Menu'], ['bp.ui.Layer', 'goog.ui.Component']);
+goog.addDependency('../../../common/js/bitpug/ui/Menu.js', ['bp.ui.Menu'], ['bp.ui.Formular', 'bp.ui.Layer', 'goog.ui.Component']);
 goog.addDependency('../../../common/js/bitpug/ui/PugPlayer.js', ['bp.ui.PugPlayer'], ['bp.events.ActionMsgEvent', 'goog.Timer', 'goog.dom.classes', 'goog.fx.Animation', 'goog.math', 'goog.style', 'goog.ui.Component']);
 goog.addDependency('../../../common/js/bitpug/ui/RainDrop.js', ['bp.ui.RainDrop'], ['bp.ui.PugPlayer', 'goog.dom.classes', 'goog.style', 'goog.ui.Component']);
 goog.addDependency('../../../common/js/bitpug/ui/StatDisplay.js', ['bp.ui.StatDisplay'], ['goog.Timer', 'goog.ui.Component']);

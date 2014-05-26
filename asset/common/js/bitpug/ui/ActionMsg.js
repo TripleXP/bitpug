@@ -77,7 +77,7 @@ bp.ui.ActionMsg.prototype.enableMsg_ = function(e)
 {
 	this.isActive_ = true;
 	var message = e.msg;
-	this.getElement().innerHTML = message;
+	this.getElement().innerHTML = "<span>" + message + "<span>";
 	this.setClasses_(e);
 };
 
@@ -89,16 +89,6 @@ bp.ui.ActionMsg.prototype.setClasses_ = function(e)
 {
 	goog.dom.classes.enable(this.getElement(), 'warning', e.isWarning);
 	if(e.isWarning) this.shakeTimer_.start();
-
-	goog.dom.classes.enable(this.getElement(), 'active', true);
-	goog.Timer.callOnce(function(){
-		goog.dom.classes.enable(this.getElement(), 'inactive', true);
-		goog.Timer.callOnce(function(){
-			goog.dom.classes.enable(this.getElement(), 'inactive', false);
-			goog.dom.classes.enable(this.getElement(), 'active', false);
-			this.isActive_ = false;
-		}, 400, this);
-	}, 1500, this);
 };
 
 /**

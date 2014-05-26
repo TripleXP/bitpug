@@ -41,9 +41,19 @@ bp.ui.Layer.prototype.init = function()
 
 /**
  * @param {string} filename
+ * @param {string=} opt_className
  */
-bp.ui.Layer.prototype.setContent = function(filename)
+bp.ui.Layer.prototype.setContent = function(filename, opt_className)
 {
+	if(opt_className)
+	{
+		goog.dom.classes.enable(this.layerEl_, opt_className, true);
+	}
+	else
+	{
+		this.layerEl_.className = "";
+	}
+
 	var gaXhr = new goog.net.XhrIo();
 	gaXhr.send('/app/views/' + filename + '.php');
 
@@ -61,6 +71,7 @@ bp.ui.Layer.prototype.handleContentLoadComplete_ = function(e)
 {
 	var response = e.target.getResponseText();
 	this.contentEl_.innerHTML = response;
+	this.dispatchEvent(bp.ui.Layer.EventType.READY);
 };
 
 /**
@@ -76,4 +87,11 @@ bp.ui.Layer.prototype.setLayerState_ = function(isActive)
 		var loadingCircle = goog.dom.createDom('div', 'loading-circle');
 		this.contentEl_.appendChild(loadingCircle);
 	}
+};
+
+/**
+ * @enum {string}
+ */
+bp.ui.Layer.EventType = {
+	'READY': 'ready'
 };

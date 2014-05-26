@@ -2,7 +2,8 @@
 require_once "app/lib/BitpugLayout.php";
 
 // Define application environment
-if(preg_match('/local/', $_SERVER['HTTP_HOST']))
+if(preg_match('/local/', $_SERVER['HTTP_HOST']) ||
+	preg_match('/nb/', $_SERVER['HTTP_HOST']))
 {
 	define('APPLICATION_ENV', 'development');
 }

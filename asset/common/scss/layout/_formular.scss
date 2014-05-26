@@ -1,0 +1,54 @@
+form
+{
+	.input-wrapper
+	{
+		width: 100%;
+	}
+
+	input,
+	select
+	{
+		@include appearance(none);
+		outline-width: 0;
+	}
+
+	.input-wrapper input
+	{
+		display: block;
+		padding: 0;
+		width: 100%;
+		font-size: 35px;
+		text-align: center;
+		font-family: "Pixel";
+		border: none;
+		border-bottom: 2px solid black;
+	}
+
+	.input-wrapper.submit input
+	{
+		float: left;
+		width: 80%;
+	}
+
+	.input-wrapper.submit input[type="submit"]
+	{
+		float: right;
+		width: 20%;
+		background: black;
+		border-bottom: 2px solid black;
+		color: white;
+		cursor: pointer;
+
+	}
+
+	.input-wrapper label
+	{
+		width: 100%;
+		display: block;
+		text-align: left;
+		font-size: 19px;
+		color: #808080;
+		padding: 5px 0;
+		font-family: "Pixel", sans-serif;
+	}
+}

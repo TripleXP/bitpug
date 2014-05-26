@@ -2,6 +2,7 @@ goog.provide('bp.ui.Menu');
 
 goog.require('goog.ui.Component');
 goog.require('bp.ui.Layer');
+goog.require('bp.ui.Formular');
 
 /**
  * @constructor
@@ -103,12 +104,37 @@ bp.ui.Menu.prototype.handleMainButtonClick_ = function(e)
 	{
 		case "Start":
 			this.dispatchEvent(bp.ui.Menu.EventType.MAINSTART);
-			this.disableMenu();
+			this.layer_.setContent('name', 'dynamic');
+
+			this.getHandler().listenOnce(this.layer_, bp.ui.Layer.EventType.READY,
+				this.handleMainLayerLoadComplete_);
 		break;
 		case "Howto play":
 			this.layer_.setContent('howto');
 		break;
 	}
+};
+
+/**
+ * @private
+ */
+bp.ui.Menu.prototype.handleMainLayerLoadComplete_ = function()
+{
+	var formEl = goog.dom.getElement('username-injection');
+	var formular = new bp.ui.Formular();
+	formular.decorate(formEl);
+
+	this.getHandler().listen(formular, bp.events.FormularEvent.EventType.READY,
+		this.handleMainFormularLoadComplete_);
+};
+
+/**
+ * @param  {bp.events.FormularEvent}
+ * @private
+ */
+bp.ui.Menu.prototype.handleMainFormularLoadComplete_ = function(e)
+{
+	console.log(e);
 };
 
 /**

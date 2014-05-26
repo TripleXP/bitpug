@@ -30,18 +30,54 @@
 
 	.cloud-wrapper
 	{
+		width: 100%;
+		overflow: hidden;
+
 		.cloud
 		{
 			top: 50px;
 			position: absolute;
 			background: transparent no-repeat;
-			@include transition(left 10s);
+			@include opacity(0.8);
 
 			&.c1
 			{
-				width: image-width("../img/layout/environment/cloud1.png");
-				height: image-height("../img/layout/environment/cloud1.png");
-				background-image: url("../img/layout/environment/cloud1.png");
+				width: image-width("../img/layout/environment/clouds/cloud1.png");
+				height: image-height("../img/layout/environment/clouds/cloud1.png");
+				background-image: url("../img/layout/environment/clouds/cloud1.png");
+				@include opacity(0.7);
+			}
+
+			&.c2
+			{
+				width: image-width("../img/layout/environment/clouds/cloud2.png");
+				height: image-height("../img/layout/environment/clouds/cloud2.png");
+				background-image: url("../img/layout/environment/clouds/cloud2.png");
+				@include opacity(0.7);
+			}
+
+			&.c3
+			{
+				width: image-width("../img/layout/environment/clouds/cloud1.png");
+				height: image-height("../img/layout/environment/clouds/cloud1.png");
+				background-image: url("../img/layout/environment/clouds/cloud1.png");
+				@include transform(scale(0.7));
+			}
+
+			&.c4
+			{
+				width: image-width("../img/layout/environment/clouds/cloud2.png");
+				height: image-height("../img/layout/environment/clouds/cloud2.png");
+				background-image: url("../img/layout/environment/clouds/cloud2.png");
+				@include transform(scale(0.5));
+			}
+
+			&.c5
+			{
+				width: image-width("../img/layout/environment/clouds/cloud2.png");
+				height: image-height("../img/layout/environment/clouds/cloud2.png");
+				background-image: url("../img/layout/environment/clouds/cloud2.png");
+				@include transform(scale(0.8));
 			}
 		}
 	}

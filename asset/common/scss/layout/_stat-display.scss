@@ -131,21 +131,44 @@
 	// Game handlers
 	.game-handlers
 	{
-		height: 40px;
+		height: 30px;
 
 		.game-state
 		{
+			margin: 10px 5px;
 			width: 20px;
 			height: 20px;
+			cursor: pointer;
 
 			&.pause
 			{
-				background: red;
+				&:after,
+				&:before
+				{
+					content: "";
+					width: 9px;
+					height: 20px;
+					background: #808080;
+				}
+
+				&:after
+				{
+					float: left;
+				}
+
+				&:before
+				{
+					float: right;
+				}
 			}
 
 			&.continue
 			{
-				background: green;
+				width: 0;
+				height: 0;
+				border-top: 10px solid transparent;
+				border-bottom: 10px solid transparent;
+				border-left: 15px solid #808080;
 			}
 		}
 	}
@@ -153,7 +176,26 @@
 	// Action MSG
 	.action-msg
 	{
-		height: 60px;
+		height: 30px;
+		line-height: 100%;
+		font-size: 12px;
+		text-align: left;
+		padding: 22px 5px 0 5px;
+
+		&.warning
+		{
+			color: red;
+
+			&:after
+			{
+				color: #808080;
+			}
+		}
+
+		span
+		{
+			display: block;
+		}
 	}
 
 	// Headers of each section
@@ -184,6 +226,6 @@
 
 	.action-msg:after
 	{
-		content: "Message";
+		content: "Last message";
 	}
 }

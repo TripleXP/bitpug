@@ -46,4 +46,17 @@
 		font-family: "Arial", sans-serif;
 		@include border-radius(30px);
 	}
+
+	// Extra classes
+	&.small .content
+	{
+		top: 30%;
+		height: 30%;
+	}
+
+	&.dynamic .content
+	{
+		height: auto;
+		top: 30%;
+	}
 }

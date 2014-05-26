@@ -8,13 +8,10 @@
     "pug": {
         /* The sped the pugs moves each 10ms (px) */
     	"moveSpeed": 2.5,
-
         /* Jump speed the pug takes up multiplied by 2 when falls down (increase px) */
         "jumpSpeed": 6,
-
         /* How often the animation changes the frame (ms) */
         "walkAnimationMs": 70,
-
         /* The maximal jump height the player can reach (px) */
         "maxJumpHeight": 150,
     },
@@ -28,13 +25,10 @@
         "boost": {
             /* Multiplied by default speed */
             "speedIncicator": 3,
-
             /* Speed for the boost for reloading (ms) */
             "reloadingDelay": 2000,
-
             /* Max repeats of one tick */
             "maxCount": 30,
-
             /* Pixels add on tick */
             "pixelY": 1
         }
@@ -49,17 +43,34 @@
     "rain": {
         /* Fall speed on loading (ms) */
         "initialFallSpeed": 5000,
-
         /* Spawn interval of each drop (ms) */
         "spawnInterval": 2000,
-
         /* HIGHEST size of one drop for calculating all ranges (px) */
         "defaultSize": 40,
-
         /* Classes and values for default drop (chosen randomly) */
         "dropClasses": [
             "candy", "bone"
         ]
+    },
+
+    /**
+     * ENVIRONMENT SETTINGS
+     *
+     * configure the environment components
+     */
+    "environment": {
+        /* Properties of the clouds */
+        "clouds": {
+            /* Update clouds position (should be 1 sendond under the transition speed, which is set in CSS) */
+            "updateTrigger": 60000,
+            /* Classes will count from 1 to {GIVEN NUMBER} */
+            "classCount": 5,
+            /* Amoun of the clouds, which will be spawned between this values (randomly) */
+            "amount": {
+                "min": 10,
+                "max": 20
+            }
+        }
     },
 
     /**
