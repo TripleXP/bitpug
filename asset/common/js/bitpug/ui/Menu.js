@@ -61,6 +61,20 @@ bp.ui.Menu.prototype.renderPause = function()
 	this.renderMenu_(el, this.handlePauseButtonClick_);
 };
 
+bp.ui.Menu.prototype.renderLost = function()
+{
+	this.init_();
+
+	var el = goog.dom.createDom('div', 'submenu main', [
+			goog.dom.createDom('div', 'button', 'Play again'),
+			goog.dom.createDom('div', 'button', 'Howto play'),
+			goog.dom.createDom('div', 'button', 'Credits')
+		]);
+
+	this.renderMenu_(el, this.handleLostButtonClick_);
+};
+
+
 /**
  * @param {Element} el
  * @param {Function} callbackClickFnc
@@ -103,9 +117,7 @@ bp.ui.Menu.prototype.handleMainButtonClick_ = function(e)
 	switch(value)
 	{
 		case "Start":
-			this.dispatchEvent(bp.ui.Menu.EventType.MAINSTART);
 			this.layer_.setContent('name', 'dynamic');
-
 			this.getHandler().listenOnce(this.layer_, bp.ui.Layer.EventType.READY,
 				this.handleMainLayerLoadComplete_);
 		break;
@@ -134,7 +146,13 @@ bp.ui.Menu.prototype.handleMainLayerLoadComplete_ = function()
  */
 bp.ui.Menu.prototype.handleMainFormularLoadComplete_ = function(e)
 {
-	console.log(e);
+	var username = e['values'][0]['el'].value;
+	bp.username = username;
+
+	// Send ready state
+	this.layer_.setLayerState(false);
+	this.disableMenu();
+	this.dispatchEvent(bp.ui.Menu.EventType.MAINSTART);
 };
 
 /**
@@ -156,6 +174,27 @@ bp.ui.Menu.prototype.handlePauseButtonClick_ = function(e)
 };
 
 /**
+ * @param {goog.events.BrowserEvent} e
+ * @private
+ */
+bp.ui.Menu.prototype.handleLostButtonClick_ = function(e)
+{
+	var value = e.target.innerHTML;
+	switch(value)
+	{
+		case "Play again":
+			this.dispatchEvent(bp.ui.Menu.EventType.LOSTRESTART);
+		break;
+		case "Howto play":
+			this.handleMainButtonClick_(e);
+		break;
+		case "Credits":
+			console.log('credits');
+		break;
+	}
+};
+
+/**
  * @enum {string}
  */
 bp.ui.Menu.EventType = {
@@ -163,5 +202,7 @@ bp.ui.Menu.EventType = {
 	'MAINSTART': 'mainStart',
 	'MAINHOWTOPLAY': 'mainHowtoPlay',
 	// Pause menu
-	'PAUSECONTINUE': 'pauseContinue'
+	'PAUSECONTINUE': 'pauseContinue',
+	// Lost menu
+	'LOSTRESTART': 'lostRestart'
 };

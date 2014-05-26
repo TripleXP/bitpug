@@ -18,5 +18,8 @@ goog.inherits(bp.events.GameEvent, goog.events.Event);
 bp.events.GameEvent.EventType = {
 	PAUSE: 'pause',
     CONTINUE: 'continue',
-    GAMEOVER: 'gameover'
+    STOPGAME: 'stopgame',
+    RESTARTGAME: 'restartgame',
+    GAMEOVER: 'gameover',
+    PLAYAGAIN: 'playagain'
 };

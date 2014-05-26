@@ -9,6 +9,8 @@ goog.require('goog.events.EventTarget');
 goog.require('bp.handlers.GameHandler');
 goog.require('bp.ui.RainDrop');
 goog.require('bp.events.PointCounter');
+goog.require('bp.events.GameEvent');
+goog.require('bp.handlers.GameHandler');
 
 
 /**
@@ -60,6 +62,12 @@ bp.controllers.RainController = function()
 	 * @private
 	 */
 	this.missedDrops_ = 0;
+
+	/**
+	 * @type {bp.handlers.GameHandler}
+	 * @private
+	 */
+	this.handler_ = bp.handlers.GameHandler.getInstance();
 };
 goog.inherits(bp.controllers.RainController, goog.events.EventTarget);
 goog.addSingletonGetter(bp.controllers.RainController);
@@ -99,6 +107,14 @@ bp.controllers.RainController.prototype.init = function()
 	// Listen for continue
 	goog.events.listen(handler, bp.events.GameEvent.EventType.CONTINUE,
 		this.start, false, this);
+
+	// Listen for full stop
+	goog.events.listen(handler, bp.events.GameEvent.EventType.STOPGAME,
+		this.handleFullStop_, false, this);
+
+	// Listen for play again
+	goog.events.listen(handler, bp.events.GameEvent.EventType.PLAYAGAIN,
+		this.start, false, this);	
 };
 
 bp.controllers.RainController.prototype.start = function()
@@ -120,6 +136,21 @@ bp.controllers.RainController.prototype.stop = function()
 	for(var i = 0; i < this.rainDrops_.length; i++)
 	{
 		this.rainDrops_[i].pauseAnimation();
+	}
+};
+
+/**
+ * @private
+ */
+bp.controllers.RainController.prototype.handleFullStop_ = function()
+{
+	this.spawnTimer_.stop();
+
+	// Freeze active drops
+	for(var i = 0; i < this.rainDrops_.length; i++)
+	{
+		this.rainDrops_[i].stopAnimation();
+		//this.wrapper_.removeChild(this.rainDrops_[i].dropEl);
 	}
 };
 
@@ -192,8 +223,13 @@ bp.controllers.RainController.prototype.handleMiss_ = function(e)
 		this.missedDrops_ += 1;
 	}
 
-
-	//if(this.missedDrops_ >= 3){}
+	// Dispatch gameover state
+	if(this.missedDrops_ >= 3)
+	{
+		this.handler_.dispatchEvent(new bp.events.GameEvent(
+				bp.events.GameEvent.EventType.GAMEOVER
+			));
+	}
 
 	bp.ui.ActionMsg.getInstance().dispatchEvent(new
 			bp.events.ActionMsgEvent(

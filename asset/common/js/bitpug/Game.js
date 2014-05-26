@@ -35,9 +35,15 @@ bp.Game.prototype.startInit = function()
     menu.renderMain();
 
     goog.events.listen(menu, bp.ui.Menu.EventType.MAINSTART,
-        function(){
-            //new bp.controllers.GameController().start();
-        }, false, this);
+        this.startGame_, false, this);
+};
+
+/**
+ * @private
+ */
+bp.Game.prototype.startGame_ = function(e)
+{
+    new bp.controllers.GameController().start();
 };
 
 /**

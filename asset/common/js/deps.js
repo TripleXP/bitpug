@@ -6,7 +6,7 @@ goog.addDependency('../../../common/js/bitpug/controllers/GameStateController.js
 goog.addDependency('../../../common/js/bitpug/controllers/KeyController.js', ['bp.controllers.KeyController'], ['bp.events.MainControl', 'goog.events.EventTarget']);
 goog.addDependency('../../../common/js/bitpug/controllers/PointController.js', ['bp.controllers.PointController'], ['bp.events.ActionMsgEvent', 'goog.events']);
 goog.addDependency('../../../common/js/bitpug/controllers/PugController.js', ['bp.controllers.PugController'], ['bp.controllers.RegistryController', 'bp.events.MainControl', 'bp.ui.PugPlayer']);
-goog.addDependency('../../../common/js/bitpug/controllers/RainController.js', ['bp.controllers.RainController'], ['bp.events.PointCounter', 'bp.handlers.GameHandler', 'bp.ui.RainDrop', 'goog.Timer', 'goog.events.EventHandler', 'goog.events.EventTarget', 'goog.math', 'goog.math.Coordinate']);
+goog.addDependency('../../../common/js/bitpug/controllers/RainController.js', ['bp.controllers.RainController'], ['bp.events.GameEvent', 'bp.events.PointCounter', 'bp.handlers.GameHandler', 'bp.ui.RainDrop', 'goog.Timer', 'goog.events.EventHandler', 'goog.events.EventTarget', 'goog.math', 'goog.math.Coordinate']);
 goog.addDependency('../../../common/js/bitpug/controllers/RegistryController.js', ['bp.controllers.RegistryController'], ['goog.dom.classes']);
 goog.addDependency('../../../common/js/bitpug/events/ActionMsgEvent.js', ['bp.events.ActionMsgEvent'], ['goog.events.Event']);
 goog.addDependency('../../../common/js/bitpug/events/FormularEvent.js', ['bp.events.FormularEvent'], ['goog.events.Event']);

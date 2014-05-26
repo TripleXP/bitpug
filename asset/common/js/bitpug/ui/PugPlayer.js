@@ -141,6 +141,12 @@ bp.ui.PugPlayer = function()
 	 * @private
 	 */
 	this.boostTimerCounter_ = 0;
+
+	/**
+	 * @type {bp.handlers.GameHandler}
+	 * @private
+	 */
+	this.gameHandler_ = bp.handlers.GameHandler.getInstance()
 };
 goog.inherits(bp.ui.PugPlayer, goog.ui.Component);
 goog.addSingletonGetter(bp.ui.PugPlayer);
@@ -173,19 +179,11 @@ bp.ui.PugPlayer.prototype.decorateInternal = function(el)
 
 	// Init walk animation frames
 	this.walkAnimPos_ = [0, -62, -124, -185];
-	this.walkAnimPosCur_ = 0;
 
 	// Init boost element
 	var boostModule = bp.gameComponents.registry.getElement(
 		'boost-cmp')[0];
 	this.boostEl_ = goog.dom.getElementByClass('bar', boostModule);
-
-	// Add pause function for boost
-	var handler = bp.handlers.GameHandler.getInstance();
-	this.getHandler().listen(handler, [
-			bp.events.GameEvent.EventType.PAUSE,
-			bp.events.GameEvent.EventType.CONTINUE
-		], this.handleGameStateChangeBoost_);
 };
 
 /** @inheritDoc */
@@ -213,6 +211,25 @@ bp.ui.PugPlayer.prototype.enterDocument = function()
 
 	this.getHandler().listen(this.boostTimer_,
 		goog.Timer.TICK, this.handleBoostMove_);
+
+	// Add pause function for boost
+	this.getHandler().listen(this.gameHandler_, [
+			bp.events.GameEvent.EventType.PAUSE,
+			bp.events.GameEvent.EventType.CONTINUE,
+			bp.events.GameEvent.EventType.STOPGAME
+		], this.handleGameStateChangeBoost_);
+
+	// Handle hide pug on stopgame
+	this.getHandler().listen(this.gameHandler_, 
+		bp.events.GameEvent.EventType.STOPGAME, this.hidePug_);
+};
+
+/**
+ * @private
+ */
+bp.ui.PugPlayer.prototype.hidePug_ = function()
+{
+	goog.dom.classes.enable(this.getElement(), 'inactive', true);
 };
 
 /**
@@ -430,6 +447,10 @@ bp.ui.PugPlayer.prototype.handleGameStateChangeBoost_ = function(e)
 	else if(e.type == 'continue')
 	{
 		this.boostLoader_.play();
+	}
+	else if(e.type == 'stopgame')
+	{
+		this.boostLoader_.stop();
 	}
 };
 

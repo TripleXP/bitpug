@@ -507,6 +507,10 @@ h1.heading:before {
   opacity: 0.8;
 }
 /* line 44, ../scss/layout/_environment.scss */
+.environment .cloud-wrapper .cloud.inactive {
+  display: none;
+}
+/* line 49, ../scss/layout/_environment.scss */
 .environment .cloud-wrapper .cloud.c1 {
   width: 200px;
   height: 55px;
@@ -514,7 +518,7 @@ h1.heading:before {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
   opacity: 0.7;
 }
-/* line 52, ../scss/layout/_environment.scss */
+/* line 57, ../scss/layout/_environment.scss */
 .environment .cloud-wrapper .cloud.c2 {
   width: 150px;
   height: 41px;
@@ -522,7 +526,7 @@ h1.heading:before {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
   opacity: 0.7;
 }
-/* line 60, ../scss/layout/_environment.scss */
+/* line 65, ../scss/layout/_environment.scss */
 .environment .cloud-wrapper .cloud.c3 {
   width: 200px;
   height: 55px;
@@ -533,7 +537,7 @@ h1.heading:before {
   -o-transform: scale(0.7);
   transform: scale(0.7);
 }
-/* line 68, ../scss/layout/_environment.scss */
+/* line 73, ../scss/layout/_environment.scss */
 .environment .cloud-wrapper .cloud.c4 {
   width: 150px;
   height: 41px;
@@ -544,7 +548,7 @@ h1.heading:before {
   -o-transform: scale(0.5);
   transform: scale(0.5);
 }
-/* line 76, ../scss/layout/_environment.scss */
+/* line 81, ../scss/layout/_environment.scss */
 .environment .cloud-wrapper .cloud.c5 {
   width: 150px;
   height: 41px;
@@ -567,22 +571,26 @@ h1.heading:before {
   z-index: 5;
 }
 /* line 12, ../scss/layout/_pug-player.scss */
+.pug-player.inactive {
+  display: none;
+}
+/* line 17, ../scss/layout/_pug-player.scss */
 .pug-player .mouth {
   position: absolute;
   left: 0;
   width: 45px;
   height: 35px;
 }
-/* line 21, ../scss/layout/_pug-player.scss */
+/* line 26, ../scss/layout/_pug-player.scss */
 .pug-player.right .mouth {
   left: auto;
   right: 0;
 }
-/* line 27, ../scss/layout/_pug-player.scss */
+/* line 32, ../scss/layout/_pug-player.scss */
 .pug-player.right {
   background-image: url(../img/layout/pugs/pug-player/pug-right-sprite.png);
 }
-/* line 37, ../scss/layout/_pug-player.scss */
+/* line 42, ../scss/layout/_pug-player.scss */
 .pug-player.jumping {
   -webkit-transition: -webkit-transform 0.5s;
   -moz-transition: -moz-transform 0.5s;
@@ -594,7 +602,7 @@ h1.heading:before {
   -o-transform: rotate(360deg);
   transform: rotate(360deg);
 }
-/* line 42, ../scss/layout/_pug-player.scss */
+/* line 47, ../scss/layout/_pug-player.scss */
 .pug-player.jumping.right {
   -webkit-transform: rotate(-360deg);
   -moz-transform: rotate(-360deg);

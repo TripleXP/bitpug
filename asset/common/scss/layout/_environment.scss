@@ -40,6 +40,11 @@
 			background: transparent no-repeat;
 			@include opacity(0.8);
 
+			&.inactive
+			{
+				display: none;
+			}
+
 			&.c1
 			{
 				width: image-width("../img/layout/environment/clouds/cloud1.png");

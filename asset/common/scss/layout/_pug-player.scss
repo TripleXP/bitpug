@@ -8,6 +8,11 @@
 	left: 100px;
 	z-index: 5;
 
+	&.inactive
+	{
+		display: none;
+	}
+
 	.mouth
 	{
 		position: absolute;

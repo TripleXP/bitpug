@@ -61,10 +61,8 @@ bp.controllers.KeyController.prototype.init = function()
  */
 bp.controllers.KeyController.prototype.addKeyListeners_ = function()
 {
-    goog.events.listen(window, goog.events.EventType.KEYDOWN,
-        this.handleKeyDownUp_, false, this);
-
-    goog.events.listen(window, goog.events.EventType.KEYUP,
+    goog.events.listen(window, 
+        [goog.events.EventType.KEYUP, goog.events.EventType.KEYDOWN],
         this.handleKeyDownUp_, false, this);
 };
 
@@ -159,20 +157,11 @@ bp.controllers.KeyController.prototype.handleKeyDownUp_ = function(e)
             }
         break;
 
+        case 27: // ESC
         case 80: // Pause
             if(e.type == 'keyup')
             {
                 this.gameStateController_.toggleState();
-            }
-        break;
-
-        case 27: // ESC
-            if(
-                bp.isPaused &&
-                !bp.isPlaying &&
-                e.type == 'keydown'
-            ){
-                this.gameStateController_.setContinue();
             }
         break;
     }

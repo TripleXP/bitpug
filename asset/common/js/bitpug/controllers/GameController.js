@@ -30,21 +30,28 @@ bp.controllers.GameController = function()
 
 	/**
 	 * @type {Object}
-	 * @const
 	 */
 	bp.gameComponents = {};
 
 	/**
 	 * @type {boolean}
-	 * @const
 	 */
 	bp.isPlaying = false;
 
 	/**
 	 * @type {boolean}
-	 * @const
 	 */
 	bp.isPaused = false;
+
+	/**
+	 * @type {boolean}
+	 */
+	bp.isLost = false;
+
+	/**
+	 * @type {string}
+	 */
+	bp.username = "unnamed";
 };
 goog.inherits(bp.controllers.GameController,
 	goog.events.EventTarget);

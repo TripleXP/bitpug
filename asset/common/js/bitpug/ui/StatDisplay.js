@@ -137,7 +137,8 @@ bp.ui.StatDisplay.prototype.listenGameHandlers_ = function()
 	var handler = bp.handlers.GameHandler.getInstance();
 	this.getHandler().listen(handler, [
 			bp.events.GameEvent.EventType.PAUSE,
-			bp.events.GameEvent.EventType.CONTINUE
+			bp.events.GameEvent.EventType.CONTINUE,
+			bp.events.GameEvent.EventType.STOPGAME,
 		], this.handleStateChange_);
 };
 
@@ -147,7 +148,7 @@ bp.ui.StatDisplay.prototype.listenGameHandlers_ = function()
  */
 bp.ui.StatDisplay.prototype.handleStateChange_ = function(e)
 {
-	if(e.type == 'pause')
+	if(e.type == 'pause' || e.type == 'stopgame')
 	{
 		goog.dom.classes.enable(this.statDisplay_, 'visible', false);
 		goog.dom.classes.swap(this.gameStateEl_ , 'pause', 'continue');

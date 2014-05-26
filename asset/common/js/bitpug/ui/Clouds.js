@@ -5,6 +5,8 @@ goog.require('goog.Timer');
 goog.require('goog.math');
 goog.require('goog.style');
 
+goog.require('bp.handlers.GameHandler');
+
 /**
  * @constructor
  * @extends {goog.ui.Component}
@@ -44,6 +46,12 @@ bp.ui.Clouds = function()
 	 * @private
 	 */
 	this.lastCloudLeft_ = 0;
+
+	/**
+	 * @type {bp.handlers.GameHandler}
+	 * @private
+	 */
+	this.handler_ = bp.handlers.GameHandler.getInstance();
 };
 goog.inherits(bp.ui.Clouds, goog.ui.Component);
 
@@ -60,6 +68,11 @@ bp.ui.Clouds.prototype.decorateInternal = function(el)
 
 	// Update animation on init
 	this.updateAnimation_();
+
+	// Listen for game stop
+	goog.events.listen(this.handler_, bp.events.GameEvent.EventType.STOPGAME,
+		this.handleFullStop_, false, this);
+
 };
 
 /** @inheritDoc */
@@ -96,29 +109,52 @@ bp.ui.Clouds.prototype.renderClouds_ = function()
 {
 	var transition = "left " + (bp.settings['environment']['clouds']['updateTrigger'] + 1000) / 1000 + "s linear"
 
-	for(var i = 1; i <= this.maxClouds_; i++)
+	if(this.cloudsEl_.length <= 0)
 	{
-		var index = Math.round(goog.math.uniformRandom(1, this.maxCloudStyles_));
-		var cloud = goog.dom.createDom('div', 'cloud c' + index);
-		this.getElement().appendChild(cloud);
-
-		goog.style.setStyle(cloud, {
-			"-webkit-transition": transition,
-			"-moz-transition": transition,
-			"-o-transition": transition,
-			"-ms-transition": transition,
-			"transition:": transition,
-			"left": this.lastCloudLeft_ + 'px',
-			"top": (cloud.offsetTop + goog.math.uniformRandom(-cloud.offsetHeight, cloud.offsetHeight)) + 'px'
-		});
-
-		this.lastCloudLeft_ = this.lastCloudLeft_ + cloud.offsetWidth - Math.round(goog.math.uniformRandom(50, cloud.offsetWidth/2));
-
-		if(this.lastCloudLeft_ + cloud.offsetWidth + 40 >= goog.dom.getElementByClass('playground').offsetWidth)
+		for(var i = 1; i <= this.maxClouds_; i++)
 		{
-			this.lastCloudLeft_ = cloud.offsetWidth - Math.round(goog.math.uniformRandom(50, 150));
-		}
+			var index = Math.round(goog.math.uniformRandom(1, this.maxCloudStyles_));
+			var cloud = goog.dom.createDom('div', 'cloud c' + index);
+			this.getElement().appendChild(cloud);
 
-		this.cloudsEl_.push(cloud);
+			goog.style.setStyle(cloud, {
+				"-webkit-transition": transition,
+				"-moz-transition": transition,
+				"-o-transition": transition,
+				"-ms-transition": transition,
+				"transition:": transition,
+				"left": this.lastCloudLeft_ + 'px',
+				"top": (cloud.offsetTop + goog.math.uniformRandom(-cloud.offsetHeight, cloud.offsetHeight)) + 'px'
+			});
+
+			this.lastCloudLeft_ = this.lastCloudLeft_ + cloud.offsetWidth - Math.round(goog.math.uniformRandom(50, cloud.offsetWidth/2));
+
+			if(this.lastCloudLeft_ + cloud.offsetWidth + 40 >= goog.dom.getElementByClass('playground').offsetWidth)
+			{
+				this.lastCloudLeft_ = cloud.offsetWidth - Math.round(goog.math.uniformRandom(50, 150));
+			}
+
+			this.cloudsEl_.push(cloud);
+		}
+	}
+	else
+	{
+		for(var i = 0; i < this.cloudsEl_.length; i++)
+		{
+			goog.dom.classes.enable(this.cloudsEl_[i], 'inactive', false);
+		}		
+	}
+};
+
+/**
+ * @private
+ */
+bp.ui.Clouds.prototype.handleFullStop_ = function()
+{
+	this.animTimer_.stop();
+
+	for(var i = 0; i < this.cloudsEl_.length; i++)
+	{
+		goog.dom.classes.enable(this.cloudsEl_[i], 'inactive', true);
 	}
 };

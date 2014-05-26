@@ -35,7 +35,7 @@ bp.ui.Layer.prototype.init = function()
 	var close = goog.dom.getElementByClass('close', this.layerEl_);
 	this.getHandler().listen(close, goog.events.EventType.CLICK,
 		function(){
-			this.setLayerState_(false);
+			this.setLayerState(false);
 		});
 };
 
@@ -57,7 +57,7 @@ bp.ui.Layer.prototype.setContent = function(filename, opt_className)
 	var gaXhr = new goog.net.XhrIo();
 	gaXhr.send('/app/views/' + filename + '.php');
 
-	this.setLayerState_(true);
+	this.setLayerState(true);
 
 	this.getHandler().listen(gaXhr, goog.net.EventType.SUCCESS,
 		this.handleContentLoadComplete_);
@@ -76,9 +76,8 @@ bp.ui.Layer.prototype.handleContentLoadComplete_ = function(e)
 
 /**
  * @param {boolean} isActive
- * @private
  */
-bp.ui.Layer.prototype.setLayerState_ = function(isActive)
+bp.ui.Layer.prototype.setLayerState = function(isActive)
 {
 	goog.dom.classes.enable(this.layerEl_, 'active', isActive);
 
