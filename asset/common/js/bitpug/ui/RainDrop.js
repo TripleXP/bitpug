@@ -94,11 +94,6 @@ bp.ui.RainDrop.prototype.continueAnimation = function()
 	this.animation_.play();
 };
 
-bp.ui.RainDrop.prototype.stopAnimation = function()
-{
-	this.animation_.stop();
-};
-
 /**
  * @private
  */

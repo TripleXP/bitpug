@@ -42,9 +42,9 @@
      */
     "rain": {
         /* Fall speed on loading (ms) */
-        "initialFallSpeed": 500/*5000*/,
+        "initialFallSpeed": 5000/*5000*/,
         /* Spawn interval of each drop (ms) */
-        "spawnInterval": 500/*2000*/,
+        "spawnInterval": 1000/*2000*/,
         /* HIGHEST size of one drop for calculating all ranges (px) */
         "defaultSize": 40,
         /* Classes and values for default drop (chosen randomly) */

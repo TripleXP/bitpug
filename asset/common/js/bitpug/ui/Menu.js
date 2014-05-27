@@ -43,10 +43,11 @@ bp.ui.Menu.prototype.renderMain = function()
 
 	var el = goog.dom.createDom('div', 'submenu main', [
 			goog.dom.createDom('div', 'button', 'Start'),
-			goog.dom.createDom('div', 'button', 'Howto play')
+			goog.dom.createDom('div', 'button', 'Howto play'),
+			goog.dom.createDom('div', 'button', 'Credits')
 		]);
 
-	this.renderMenu_(el, this.handleMainButtonClick_);
+	this.renderMenu_(el, this.handleMainButtonClick_, 'Bitpug');
 };
 
 bp.ui.Menu.prototype.renderPause = function()
@@ -58,7 +59,7 @@ bp.ui.Menu.prototype.renderPause = function()
 			goog.dom.createDom('div', 'button', 'Howto play')
 		]);
 
-	this.renderMenu_(el, this.handlePauseButtonClick_);
+	this.renderMenu_(el, this.handlePauseButtonClick_, 'Pause');
 };
 
 bp.ui.Menu.prototype.renderLost = function()
@@ -71,16 +72,17 @@ bp.ui.Menu.prototype.renderLost = function()
 			goog.dom.createDom('div', 'button', 'Credits')
 		]);
 
-	this.renderMenu_(el, this.handleLostButtonClick_);
+	this.renderMenu_(el, this.handleLostButtonClick_, 'Game over');
 };
 
 
 /**
  * @param {Element} el
  * @param {Function} callbackClickFnc
+ * @param {string=} opt_heading
  * @private
  */
-bp.ui.Menu.prototype.renderMenu_ = function(el, callbackClickFnc)
+bp.ui.Menu.prototype.renderMenu_ = function(el, callbackClickFnc, opt_heading)
 {
 	// Add listeners to button click
 	var buttons = goog.dom.getChildren(el);
@@ -93,6 +95,14 @@ bp.ui.Menu.prototype.renderMenu_ = function(el, callbackClickFnc)
 	// Render to html
 	var menuEl = goog.dom.getElement('menu');
 	menuEl.innerHTML = '';
+
+	// Set heading
+	if(opt_heading)
+	{
+		var headingEl = goog.dom.createDom('h2', '', opt_heading);
+		menuEl.appendChild(headingEl);
+	}
+
 	menuEl.appendChild(el);
 };
 
@@ -124,6 +134,9 @@ bp.ui.Menu.prototype.handleMainButtonClick_ = function(e)
 		case "Howto play":
 			this.layer_.setContent('howto');
 		break;
+		case "Credits":
+			this.layer_.setContent('credits');
+		break;		
 	}
 };
 
@@ -189,7 +202,7 @@ bp.ui.Menu.prototype.handleLostButtonClick_ = function(e)
 			this.handleMainButtonClick_(e);
 		break;
 		case "Credits":
-			console.log('credits');
+			this.handleMainButtonClick_(e);
 		break;
 	}
 };

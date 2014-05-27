@@ -7,6 +7,16 @@
 	z-index: 6;
 	@include border-radius(10px);
 
+	h2 
+	{
+		font-size: 40px;
+		font-family: "Pixel", Arial, sans-serif;
+		text-transform: uppercase;
+		font-weight: bold;
+		color: white;
+		margin: 10px 0 0 10px;
+	}
+
 	&.inactive
 	{
 		display: none;

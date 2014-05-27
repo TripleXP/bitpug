@@ -36,6 +36,12 @@ bp.ui.ActionMsg = function()
 	 * @private
 	 */
 	this.shakeTimer_ = new goog.Timer(5);
+
+	/**
+	 * @type {bp.handlers.GameHandler}
+	 * @private
+	 */
+	this.gameHandler_ = bp.handlers.GameHandler.getInstance();
 };
 goog.inherits(bp.ui.ActionMsg, goog.ui.Component);
 goog.addSingletonGetter(bp.ui.ActionMsg);
@@ -67,6 +73,11 @@ bp.ui.ActionMsg.prototype.listenMessages_ = function()
 	// Listen for shake timer
 	this.getHandler().listen(this.shakeTimer_, goog.Timer.TICK,
 		this.handleScreenShake_);
+
+	// Listen for replay
+	this.getHandler().listen(this.gameHandler_, 
+		bp.events.GameEvent.EventType.PLAYAGAIN,
+		this.clearMessage_);
 };
 
 /**
@@ -79,6 +90,14 @@ bp.ui.ActionMsg.prototype.enableMsg_ = function(e)
 	var message = e.msg;
 	this.getElement().innerHTML = "<span>" + message + "<span>";
 	this.setClasses_(e);
+};
+
+/**
+ * @private
+ */
+bp.ui.ActionMsg.prototype.clearMessage_ = function()
+{
+	this.getElement().innerHTML = '';
 };
 
 /**

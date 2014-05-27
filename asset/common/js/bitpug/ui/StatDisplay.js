@@ -138,6 +138,7 @@ bp.ui.StatDisplay.prototype.listenGameHandlers_ = function()
 	this.getHandler().listen(handler, [
 			bp.events.GameEvent.EventType.PAUSE,
 			bp.events.GameEvent.EventType.CONTINUE,
+			bp.events.GameEvent.EventType.PLAYAGAIN,
 			bp.events.GameEvent.EventType.STOPGAME,
 		], this.handleStateChange_);
 };
@@ -153,7 +154,7 @@ bp.ui.StatDisplay.prototype.handleStateChange_ = function(e)
 		goog.dom.classes.enable(this.statDisplay_, 'visible', false);
 		goog.dom.classes.swap(this.gameStateEl_ , 'pause', 'continue');
 	}
-	else if (e.type == 'continue')
+	else if (e.type == 'continue' || e.type == 'playagain')
 	{
 		goog.dom.classes.enable(this.statDisplay_, 'visible', true);
 		goog.dom.classes.swap(this.gameStateEl_ , 'continue', 'pause');

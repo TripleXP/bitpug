@@ -3,6 +3,7 @@ goog.provide('bp.controllers.PointController');
 goog.require('goog.events');
 
 goog.require('bp.events.ActionMsgEvent');
+goog.require('bp.handlers.GameHandler');
 
 /**
  * @constructor
@@ -41,6 +42,12 @@ bp.controllers.PointController = function()
 	 * @private
 	 */
 	this.levelPointsNeed_ = 0;
+
+	/**
+	 * @type {bp.handlers.GameHandler}
+	 * @private
+	 */
+	this.handler_ = bp.handlers.GameHandler.getInstance();
 };
 goog.inherits(bp.controllers.PointController, goog.events.EventTarget);
 goog.addSingletonGetter(bp.controllers.PointController);
@@ -76,6 +83,22 @@ bp.controllers.PointController.prototype.init = function(listeners)
 	this.dispatchEvent(new bp.events.PointCounter(
 		bp.events.PointCounter.EventType.ADD, '0'));
 	this.handleLevelUp_(false);
+
+	// Listen for play again 
+	goog.events.listen(this.handler_, bp.events.GameEvent.EventType.PLAYAGAIN,
+		this.resetAll_, false, this);
+};
+
+/**
+ * @private
+ */
+bp.controllers.PointController.prototype.resetAll_ = function()
+{
+	this.points_ = 0;
+	this.module_['points'].innerHTML = this.points_;
+	this.level_ = 0;
+	this.handleLevelUp_(false);
+	this.checkLevel_();
 };
 
 /**

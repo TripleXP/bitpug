@@ -119,5 +119,5 @@ bp.ui.Formular.prototype.checkInputs_ = function()
  */
 bp.ui.Formular.prototype.setError_ = function(error)
 {
-	this.errorEl_.innerHTML = error;
+	this.errorEl_.innerHTML = "&raquo; " + error;
 };

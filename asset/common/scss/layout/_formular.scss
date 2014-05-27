@@ -51,4 +51,15 @@ form
 		padding: 5px 0;
 		font-family: "Pixel", sans-serif;
 	}
+
+	.error
+	{
+		font-family: "Pixel", Arial, sans-serif;
+		font-weight: bold;
+		font-size: 18px;
+		display: block;
+		color: red;
+		padding: 10px 0 0 0;
+		clear: both;
+	}
 }

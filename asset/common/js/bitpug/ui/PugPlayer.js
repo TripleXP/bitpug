@@ -167,14 +167,14 @@ bp.ui.PugPlayer.prototype.decorateInternal = function(el)
 
 	// Set move range X
 	this.moveRange_ = {
-		min: 0,
-		max: gameSection.offsetWidth - el.offsetWidth
+		'min': 0,
+		'max': gameSection.offsetWidth - el.offsetWidth
 	}
 
 	// Set jump range Y
 	this.jumpRange_ = {
-		min: this.posY.bottom,
-		max: gameSection.offsetHeight - el.offsetHeight
+		'min': this.posY.bottom,
+		'max': gameSection.offsetHeight - el.offsetHeight
 	}
 
 	// Init walk animation frames
@@ -216,12 +216,17 @@ bp.ui.PugPlayer.prototype.enterDocument = function()
 	this.getHandler().listen(this.gameHandler_, [
 			bp.events.GameEvent.EventType.PAUSE,
 			bp.events.GameEvent.EventType.CONTINUE,
-			bp.events.GameEvent.EventType.STOPGAME
+			bp.events.GameEvent.EventType.STOPGAME,
+			bp.events.GameEvent.EventType.PLAYAGAIN
 		], this.handleGameStateChangeBoost_);
 
 	// Handle hide pug on stopgame
 	this.getHandler().listen(this.gameHandler_, 
 		bp.events.GameEvent.EventType.STOPGAME, this.hidePug_);
+
+	// Listen for play again
+	goog.events.listen(this.gameHandler_, bp.events.GameEvent.EventType.PLAYAGAIN,
+		this.showPug_, false, this);		
 };
 
 /**
@@ -230,6 +235,14 @@ bp.ui.PugPlayer.prototype.enterDocument = function()
 bp.ui.PugPlayer.prototype.hidePug_ = function()
 {
 	goog.dom.classes.enable(this.getElement(), 'inactive', true);
+};
+
+/**
+ * @private
+ */
+bp.ui.PugPlayer.prototype.showPug_ = function()
+{
+	goog.dom.classes.enable(this.getElement(), 'inactive', false);
 };
 
 /**
@@ -247,10 +260,10 @@ bp.ui.PugPlayer.prototype.handleMoveX_ = function()
 	}
 
 	this.posX.left = goog.math.clamp(this.posX.left,
-						this.moveRange_.min, this.moveRange_.max);
+						this.moveRange_['min'], this.moveRange_['max']);
 
-	if(this.posX.left <= this.moveRange_.min ||
-		this.posX.left >= this.moveRange_.max)
+	if(this.posX.left <= this.moveRange_['min'] ||
+		this.posX.left >= this.moveRange_['max'])
 	{
 		goog.dom.classes.enable(
 			this.getElement(), 'walking', false);
@@ -359,7 +372,7 @@ bp.ui.PugPlayer.prototype.handleBoostMove_ = function()
 	}
 
 	this.posX.left = goog.math.clamp(this.posX.left,
-						this.moveRange_.min, this.moveRange_.max);
+						this.moveRange_['min'], this.moveRange_['max']);
 
 	goog.style.setStyle(this.getElement(), {
 		left: this.posX.left + 'px',
@@ -369,8 +382,8 @@ bp.ui.PugPlayer.prototype.handleBoostMove_ = function()
 	this.boostTimerCounter_++;
 
 	if(this.boostTimerCounter_ >= bp.settings['module']['boost']['maxCount'] ||
-		this.posX.left == this.moveRange_.max ||
-		this.posX.left == this.moveRange_.min)
+		this.posX.left == this.moveRange_['max'] ||
+		this.posX.left == this.moveRange_['min'])
 	{
 		this.boostTimer_.stop();
 		this.boostTimerCounter_ = 0;
@@ -440,17 +453,20 @@ bp.ui.PugPlayer.prototype.loadBoost_ = function()
  */
 bp.ui.PugPlayer.prototype.handleGameStateChangeBoost_ = function(e)
 {
-	if(e.type == 'pause')
+	switch(e.type)
 	{
-		this.boostLoader_.pause();
-	}
-	else if(e.type == 'continue')
-	{
-		this.boostLoader_.play();
-	}
-	else if(e.type == 'stopgame')
-	{
-		this.boostLoader_.stop();
+		case 'pause':
+			this.boostLoader_.pause();
+		break;
+		case 'continue':
+			this.boostLoader_.play();
+		break;
+		case 'stopgame':
+			this.boostLoader_.stop();
+		break;
+		case 'playagain':
+			this.loadBoost_();
+		break;
 	}
 };
 
@@ -491,13 +507,13 @@ bp.ui.PugPlayer.prototype.handleJumpAnimation_ = function()
 	}
 
 	this.posY.bottom = goog.math.clamp(this.posY.bottom,
-			this.jumpRange_.min, this.jumpRange_.max);
+			this.jumpRange_['min'], this.jumpRange_['max']);
 
 	goog.style.setStyle(this.getElement(), {
 		bottom: this.posY.bottom + 'px'
 	});
 
-	if(this.posY.bottom <= this.jumpRange_.min)
+	if(this.posY.bottom <= this.jumpRange_['min'])
 	{
 		this.handleJumpAnimationEnd_();
 	}
@@ -511,7 +527,7 @@ bp.ui.PugPlayer.prototype.handleJumpAnimationEnd_ = function()
 	this.jumpTimer_.stop();
 	goog.dom.classes.enable(this.getElement(), 'jumping', false);
 	goog.dom.classes.enable(this.getElement(), 'jumping-down', false);
-	this.posY.bottom = this.jumpRange_.min;
+	this.posY.bottom = this.jumpRange_['min'];
 	this.jumpActive_ = false;
 };
 

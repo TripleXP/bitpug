@@ -91,10 +91,19 @@ body {
   border-radius: 10px;
 }
 /* line 11, ../scss/layout/_menu.scss */
+#menu h2 {
+  font-size: 40px;
+  font-family: "Pixel", Arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: white;
+  margin: 10px 0 0 10px;
+}
+/* line 21, ../scss/layout/_menu.scss */
 #menu.inactive {
   display: none;
 }
-/* line 16, ../scss/layout/_menu.scss */
+/* line 26, ../scss/layout/_menu.scss */
 #menu .submenu {
   position: absolute;
   width: 400px;
@@ -102,7 +111,7 @@ body {
   left: 50%;
   margin-left: -200px;
 }
-/* line 25, ../scss/layout/_menu.scss */
+/* line 35, ../scss/layout/_menu.scss */
 #menu .button {
   width: 100%;
   padding: 10px 0;
@@ -121,7 +130,7 @@ body {
   -o-transition: box-shadow 0.5s;
   transition: box-shadow 0.5s;
 }
-/* line 39, ../scss/layout/_menu.scss */
+/* line 49, ../scss/layout/_menu.scss */
 #menu .button:hover {
   -webkit-box-shadow: 0px 0px 5px black;
   -moz-box-shadow: 0px 0px 5px black;
@@ -164,7 +173,7 @@ body {
   height: 80%;
   top: 5%;
   left: 50%;
-  margin-left: -200px;
+  margin-left: -210px;
   overflow: auto;
   background: white;
   font-family: Arial, sans-serif;
@@ -177,24 +186,35 @@ body {
   cursor: pointer;
   position: absolute;
   background: red;
-  padding: 8px 14px;
+  padding: 5px 10px;
+  font-family: "Pixel", Arial, sans-serif;
   font-size: 20px;
   color: white;
-  top: 10px;
-  right: 10px;
+  top: 0px;
+  right: 0px;
   font-family: "Arial", sans-serif;
-  -webkit-border-radius: 30px;
-  -moz-border-radius: 30px;
-  -ms-border-radius: 30px;
-  -o-border-radius: 30px;
-  border-radius: 30px;
+  -webkit-border-radius: 3px 10px 3px 3px;
+  -moz-border-radius: 3px 10px 3px 3px;
+  -ms-border-radius: 3px 10px 3px 3px;
+  -o-border-radius: 3px 10px 3px 3px;
+  border-radius: 3px 10px 3px 3px;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+  opacity: 0.5;
+  -webkit-box-shadow: -1px 1px 3px black;
+  -moz-box-shadow: -1px 1px 3px black;
+  box-shadow: -1px 1px 3px black;
 }
-/* line 52, ../scss/layout/_layer.scss */
+/* line 53, ../scss/layout/_layer.scss */
+#layer .close:hover {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  opacity: 1;
+}
+/* line 60, ../scss/layout/_layer.scss */
 #layer.small .content {
   top: 30%;
   height: 30%;
 }
-/* line 58, ../scss/layout/_layer.scss */
+/* line 66, ../scss/layout/_layer.scss */
 #layer.dynamic .content {
   height: auto;
   top: 30%;
@@ -208,7 +228,7 @@ h1.heading {
   width: 350px;
   left: 50%;
   margin-left: -175px;
-  color: white;
+  color: #152525;
   text-align: center;
   margin-top: 2%;
 }
@@ -220,7 +240,7 @@ h1.heading:after, h1.heading:before {
   margin-top: -5px;
   height: 10px;
   width: 200px;
-  background-color: white;
+  background-color: #152525;
 }
 /* line 26, ../scss/layout/_off-game.scss */
 h1.heading:after {
@@ -690,4 +710,14 @@ form .input-wrapper label {
   color: #808080;
   padding: 5px 0;
   font-family: "Pixel", sans-serif;
+}
+/* line 56, ../scss/layout/_formular.scss */
+form .error {
+  font-family: "Pixel", Arial, sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+  display: block;
+  color: red;
+  padding: 10px 0 0 0;
+  clear: both;
 }

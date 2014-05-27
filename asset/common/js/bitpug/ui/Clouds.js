@@ -66,13 +66,13 @@ bp.ui.Clouds.prototype.decorateInternal = function(el)
 	// Start animation tick
 	this.animTimer_.start();
 
-	// Update animation on init
-	this.updateAnimation_();
-
 	// Listen for game stop
 	goog.events.listen(this.handler_, bp.events.GameEvent.EventType.STOPGAME,
 		this.handleFullStop_, false, this);
 
+	// Listen for replay
+	goog.events.listen(this.handler_, bp.events.GameEvent.EventType.PLAYAGAIN,
+		this.renderClouds_, false, this);
 };
 
 /** @inheritDoc */
@@ -144,6 +144,9 @@ bp.ui.Clouds.prototype.renderClouds_ = function()
 			goog.dom.classes.enable(this.cloudsEl_[i], 'inactive', false);
 		}		
 	}
+
+	// Update animation immediately
+	this.updateAnimation_();	
 };
 
 /**

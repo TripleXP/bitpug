@@ -114,7 +114,7 @@ bp.controllers.RainController.prototype.init = function()
 
 	// Listen for play again
 	goog.events.listen(handler, bp.events.GameEvent.EventType.PLAYAGAIN,
-		this.start, false, this);	
+		this.restart, false, this);	
 };
 
 bp.controllers.RainController.prototype.start = function()
@@ -126,6 +126,19 @@ bp.controllers.RainController.prototype.start = function()
 	{
 		this.rainDrops_[i].continueAnimation();
 	}
+};
+
+bp.controllers.RainController.prototype.restart = function()	
+{
+	this.start();
+
+	// Reset vars
+	this.missedDrops_ = 0;
+
+	// Reset hearts
+	var statDisplay = bp.gameComponents.registry.getElement('stat-display')[0];
+	var life = goog.dom.getElementByClass('life', statDisplay);
+	goog.dom.classes.swap(life, 'x0', 'x3');
 };
 
 bp.controllers.RainController.prototype.stop = function()
@@ -144,14 +157,14 @@ bp.controllers.RainController.prototype.stop = function()
  */
 bp.controllers.RainController.prototype.handleFullStop_ = function()
 {
-	this.spawnTimer_.stop();
+	// Pause all rain drops
+	this.stop();
 
-	// Freeze active drops
-	for(var i = 0; i < this.rainDrops_.length; i++)
-	{
-		this.rainDrops_[i].stopAnimation();
-		//this.wrapper_.removeChild(this.rainDrops_[i].dropEl);
-	}
+	// Clear all raindrops from save
+	this.rainDrops_ = [];
+
+	// Remove all rain drops
+	goog.dom.removeChildren(this.wrapper_);
 };
 
 /**
@@ -223,14 +236,6 @@ bp.controllers.RainController.prototype.handleMiss_ = function(e)
 		this.missedDrops_ += 1;
 	}
 
-	// Dispatch gameover state
-	if(this.missedDrops_ >= 3)
-	{
-		this.handler_.dispatchEvent(new bp.events.GameEvent(
-				bp.events.GameEvent.EventType.GAMEOVER
-			));
-	}
-
 	bp.ui.ActionMsg.getInstance().dispatchEvent(new
 			bp.events.ActionMsgEvent(
 				bp.events.ActionMsgEvent.EventType.SETMSG,
@@ -246,6 +251,15 @@ bp.controllers.RainController.prototype.handleMiss_ = function(e)
 	// Remove from list
 	var index = this.rainDrops_.indexOf(e.target);
 	this.rainDrops_.splice(index, 1);
+
+	// Dispatch gameover state
+	if(this.missedDrops_ >= 3)
+	{
+		this.handler_.dispatchEvent(new bp.events.GameEvent(
+				bp.events.GameEvent.EventType.GAMEOVER
+			));
+		return;
+	}
 
 	// Remove raindrop
 	goog.Timer.callOnce(function(){
