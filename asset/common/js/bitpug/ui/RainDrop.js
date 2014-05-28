@@ -38,12 +38,6 @@ bp.ui.RainDrop = function()
 	this.animation_ = null;
 
 	/**
-	 * @type {bp.ui.PugPlayer}
-	 * @private
-	 */
-	this.pugPlayer_ = bp.ui.PugPlayer.getInstance();
-
-	/**
 	 * @type {boolean}
 	 */
 	this.isEaten_ = false;

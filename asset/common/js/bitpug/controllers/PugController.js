@@ -97,9 +97,9 @@ bp.controllers.PugController.prototype.listenMainControl_ = function()
         this.handleBoost_, false, this);
 
     goog.events.listen(
-            bp.ui.PugPlayer.getInstance(),
-            bp.ui.PugPlayer.EventType.STOPBOOST,
-            this.handleBoostEnd_, false, this);
+        bp.ui.PugPlayer.getInstance(),
+        bp.ui.PugPlayer.EventType.STOPBOOST,
+        this.handleBoostEnd_, false, this);
 };
 
 /**
@@ -120,7 +120,7 @@ bp.controllers.PugController.prototype.handleWalkStop_ = function(drn)
     if(goog.dom.classes.has(this.pugEl_, 'right') && drn == 'right' ||
         !goog.dom.classes.has(this.pugEl_, 'right') && drn == 'left')
     {
-        this.pugPlayer_.stop();
+        this.pugPlayer_.stop('from PugController.js');
     }
 };
 

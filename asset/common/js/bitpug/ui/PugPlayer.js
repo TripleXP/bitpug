@@ -282,7 +282,7 @@ bp.ui.PugPlayer.prototype.handleMoveX_ = function()
 
 /**
  * Move the player in X directions
- * @param  {string} drn
+ * @param {string} drn
  */
 bp.ui.PugPlayer.prototype.moveX = function(drn)
 {
