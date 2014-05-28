@@ -21,9 +21,8 @@ bp.controllers.PointController = function()
 
 	/**
 	 * @type {number}
-	 * @private
 	 */
-	this.points_ = 0;
+	this.points = 0;
 
 	/**
 	 * @type {number}
@@ -94,8 +93,8 @@ bp.controllers.PointController.prototype.init = function(listeners)
  */
 bp.controllers.PointController.prototype.resetAll_ = function()
 {
-	this.points_ = 0;
-	this.module_['points'].innerHTML = this.points_;
+	this.points = 0;
+	this.module_['points'].innerHTML = this.points;
 	this.level_ = 0;
 	this.handleLevelUp_(false);
 	this.checkLevel_();
@@ -107,9 +106,9 @@ bp.controllers.PointController.prototype.resetAll_ = function()
  */
 bp.controllers.PointController.prototype.handlePointAdd_ = function(e)
 {
-	this.points_ += (Number) (e.points);
+	this.points += (Number) (e.points);
 	this.levelPoints_ += (Number) (e.points);
-	this.module_['points'].innerHTML = this.points_;
+	this.module_['points'].innerHTML = this.points;
 
 	// Check for level up
 	this.checkLevel_();

@@ -384,7 +384,7 @@ bp.ui.PugPlayer.prototype.handleBoostMove_ = function()
 	if(this.boostTimerCounter_ >= bp.settings['module']['boost']['maxCount'] ||
 		this.posX.left == this.moveRange_['max'] ||
 		this.posX.left == this.moveRange_['min'])
-	{
+	{	
 		this.boostTimer_.stop();
 		this.boostTimerCounter_ = 0;
 

@@ -72,8 +72,12 @@ bp.controllers.KeyController.prototype.addKeyListeners_ = function()
 bp.controllers.KeyController.prototype.lock = function(isLocked)
 {
     this.isLocked_ = isLocked;
-    this.handleWalk_(bp.events.MainControl.EventType.STOPWALKLEFT);
-    this.handleWalk_(bp.events.MainControl.EventType.STOPWALKRIGHT);
+
+    if(bp.isPaused)
+    {
+        this.handleWalk_(bp.events.MainControl.EventType.STOPWALKLEFT);
+        this.handleWalk_(bp.events.MainControl.EventType.STOPWALKRIGHT);
+    }
 };
 
 /**
