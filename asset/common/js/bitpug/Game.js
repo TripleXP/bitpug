@@ -3,6 +3,7 @@ goog.provide('bp.Game');
 goog.require('goog.net.XhrIo');
 
 goog.require('bp.controllers.GameController');
+goog.require('bp.controllers.SoundController');
 goog.require('bp.ui.Menu');
 
 /**
@@ -10,6 +11,12 @@ goog.require('bp.ui.Menu');
  */
 bp.Game = function()
 {
+    /**
+     * @type {string}
+     */
+    bp.username = "unnamed";
+
+    // Load config to start the game with initial configuration
     this.loadConfig_();
 };
 
@@ -30,11 +37,12 @@ bp.Game.prototype.loadConfig_ = function()
 
 bp.Game.prototype.startInit = function()
 {
+    // Init sound controller
+    bp.controllers.SoundController.getInstance().init();
+
     // Start game controller
     var menu = new bp.ui.Menu();
-    //menu.renderMain();
-
-    this.startGame_();
+    menu.renderMain();
 
     goog.events.listen(menu, bp.ui.Menu.EventType.MAINSTART,
         this.startGame_, false, this);

@@ -50,4 +50,33 @@
 			@include box-shadow(0px 0px 5px black);
 		}
 	}
+
+	.user-info
+	{
+		position: absolute;	
+		font-family: "Pixel";
+		font-size: 25px;
+		color: white;
+		left: 10px;
+		bottom: 10px;
+		width: 100%;
+
+		div.username
+		{
+			float: left;
+			margin-right: 10px;
+		}
+
+		div.level,
+		div.points
+		{
+			float: right;
+			padding-right: 7px;
+		}
+
+		div.points
+		{
+			padding-right: 17px;
+		}
+	}
 }

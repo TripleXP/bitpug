@@ -49,7 +49,7 @@
         "defaultSize": 40,
         /* Classes and values for default drop (chosen randomly) */
         "dropClasses": [
-            "candy", "bone"
+            "candy", "bone", "hotdog"
         ]
     },
 

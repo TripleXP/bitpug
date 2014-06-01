@@ -1,10 +1,21 @@
 @font-face {
     font-family: 'Pixel';
-    src: url('../fonts/moonracr/regular/moonracr-webfont.eot');
-    src: url('../fonts/moonracr/regular/moonracr-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/moonracr/regular/moonracr-webfont.woff') format('woff'),
-         url('../fonts/moonracr/regular/moonracr-webfont.ttf') format('truetype'),
-         url('../fonts/moonracr/regular/moonracr-webfont.svg#04b03regular') format('svg');
+    src: url('../fonts/orangeki/regular/orangeki-webfont.eot');
+    src: url('../fonts/orangeki/regular/orangeki-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/orangeki/regular/orangeki-webfont.woff') format('woff'),
+         url('../fonts/orangeki/regular/orangeki-webfont.ttf') format('truetype'),
+         url('../fonts/orangeki/regular/orangeki-webfont.svg#04b03regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pixel-Arcade';
+    src: url('../fonts/arcade/regular/arcade-webfont.eot');
+    src: url('../fonts/arcade/regular/arcade-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/arcade/regular/arcade-webfont.woff') format('woff'),
+         url('../fonts/arcade/regular/arcade-webfont.ttf') format('truetype'),
+         url('../fonts/arcade/regular/arcade-webfont.svg#04b03regular') format('svg');
     font-weight: normal;
     font-style: normal;
 }

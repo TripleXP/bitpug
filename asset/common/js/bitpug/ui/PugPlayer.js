@@ -146,7 +146,13 @@ bp.ui.PugPlayer = function()
 	 * @type {bp.handlers.GameHandler}
 	 * @private
 	 */
-	this.gameHandler_ = bp.handlers.GameHandler.getInstance()
+	this.gameHandler_ = bp.handlers.GameHandler.getInstance();
+
+	/**
+	 * @type {bp.controllers.SoundController}
+	 * @private
+	 */
+	this.sounds_ = bp.controllers.SoundController.getInstance();
 };
 goog.inherits(bp.ui.PugPlayer, goog.ui.Component);
 goog.addSingletonGetter(bp.ui.PugPlayer);
@@ -312,6 +318,7 @@ bp.ui.PugPlayer.prototype.jump = function()
 {
 	if(!this.jumpActive_)
 	{
+		this.sounds_.playSound('jump');
 		this.jumpTimer_.start();
 		goog.dom.classes.enable(this.getElement(), 'jumping', true);
 		this.jumpActive_ = true;
@@ -338,6 +345,9 @@ bp.ui.PugPlayer.prototype.boost = function()
  */
 bp.ui.PugPlayer.prototype.activateBoost_ = function()
 {
+	// Play sound
+	this.sounds_.playSound('boost');
+
 	// Lock
 	bp.gameComponents.keyController.lock(true);
 

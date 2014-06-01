@@ -47,11 +47,6 @@ bp.controllers.GameController = function()
 	 * @type {boolean}
 	 */
 	bp.isLost = false;
-
-	/**
-	 * @type {string}
-	 */
-	bp.username = "unnamed";
 };
 goog.inherits(bp.controllers.GameController,
 	goog.events.EventTarget);

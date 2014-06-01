@@ -68,6 +68,12 @@ bp.controllers.RainController = function()
 	 * @private
 	 */
 	this.handler_ = bp.handlers.GameHandler.getInstance();
+
+	/**
+	 * @type {bp.controllers.SoundController}
+	 * @private
+	 */
+	this.sounds_ = bp.controllers.SoundController.getInstance();	
 };
 goog.inherits(bp.controllers.RainController, goog.events.EventTarget);
 goog.addSingletonGetter(bp.controllers.RainController);
@@ -185,11 +191,11 @@ bp.controllers.RainController.prototype.spawnRainDrop_ = function()
 	{
 		if(this.lastDrop_.dropEl.offsetLeft < this.maxRange_['xE']/2)
 		{
-			cordX = (Number) (this.lastDrop_.dropEl.offsetLeft + (Math.random()*(this.maxRange_['xE']/2)));
+			cordX = (Number) (this.lastDrop_.dropEl.offsetLeft + (Math.random()*(this.maxRange_['xE']/3)));
 		}
 		else if(this.lastDrop_.dropEl.offsetLeft > this.maxRange_['xE']/2)
 		{
-			cordX = (Number) (this.lastDrop_.dropEl.offsetLeft - (Math.random()*(this.maxRange_['xE']/2)));
+			cordX = (Number) (this.lastDrop_.dropEl.offsetLeft - (Math.random()*(this.maxRange_['xE']/3)));
 		}
 	}
 	else
@@ -235,6 +241,9 @@ bp.controllers.RainController.prototype.handleMiss_ = function(e)
 	{
 		this.missedDrops_ += 1;
 	}
+
+	// Play sound
+	this.sounds_.playSound('lost-drop');
 
 	bp.ui.ActionMsg.getInstance().dispatchEvent(new
 			bp.events.ActionMsgEvent(

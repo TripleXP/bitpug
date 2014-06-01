@@ -2,7 +2,8 @@ goog.provide('bp.ui.RainDrop');
 
 goog.require('goog.ui.Component');
 goog.require('goog.style');
-goog.require('goog.dom.classes')
+goog.require('goog.dom.classes');
+goog.require('goog.math');
 
 goog.require('bp.ui.PugPlayer');
 

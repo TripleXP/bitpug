@@ -1,4 +1,4 @@
-/* line 17, ../../../../../../lib/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 17, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -20,53 +20,61 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../../lib/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 22, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../../lib/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 24, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../../lib/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 26, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../../lib/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 28, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../../lib/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 30, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../../lib/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 103, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../../lib/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 32, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../../lib/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 116, c:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block;
 }
 
 @font-face {
   font-family: 'Pixel';
-  src: url("../fonts/moonracr/regular/moonracr-webfont.eot");
-  src: url("../fonts/moonracr/regular/moonracr-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/moonracr/regular/moonracr-webfont.woff") format("woff"), url("../fonts/moonracr/regular/moonracr-webfont.ttf") format("truetype"), url("../fonts/moonracr/regular/moonracr-webfont.svg#04b03regular") format("svg");
+  src: url("../fonts/orangeki/regular/orangeki-webfont.eot");
+  src: url("../fonts/orangeki/regular/orangeki-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/orangeki/regular/orangeki-webfont.woff") format("woff"), url("../fonts/orangeki/regular/orangeki-webfont.ttf") format("truetype"), url("../fonts/orangeki/regular/orangeki-webfont.svg#04b03regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pixel-Arcade';
+  src: url("../fonts/arcade/regular/arcade-webfont.eot");
+  src: url("../fonts/arcade/regular/arcade-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/arcade/regular/arcade-webfont.woff") format("woff"), url("../fonts/arcade/regular/arcade-webfont.ttf") format("truetype"), url("../fonts/arcade/regular/arcade-webfont.svg#04b03regular") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -135,6 +143,31 @@ body {
   -webkit-box-shadow: 0px 0px 5px black;
   -moz-box-shadow: 0px 0px 5px black;
   box-shadow: 0px 0px 5px black;
+}
+/* line 55, ../scss/layout/_menu.scss */
+#menu .user-info {
+  position: absolute;
+  font-family: "Pixel";
+  font-size: 25px;
+  color: white;
+  left: 10px;
+  bottom: 10px;
+  width: 100%;
+}
+/* line 65, ../scss/layout/_menu.scss */
+#menu .user-info div.username {
+  float: left;
+  margin-right: 10px;
+}
+/* line 72, ../scss/layout/_menu.scss */
+#menu .user-info div.level,
+#menu .user-info div.points {
+  float: right;
+  padding-right: 7px;
+}
+/* line 78, ../scss/layout/_menu.scss */
+#menu .user-info div.points {
+  padding-right: 17px;
 }
 
 /* line 2, ../scss/layout/_layer.scss */
@@ -598,7 +631,7 @@ h1.heading:before {
 .pug-player .mouth {
   position: absolute;
   left: 0;
-  width: 45px;
+  width: 100%;
   height: 35px;
 }
 /* line 26, ../scss/layout/_pug-player.scss */
@@ -662,6 +695,12 @@ h1.heading:before {
   width: 32px;
   height: 32px;
   background: url(../img/layout/rain/bone.png) no-repeat;
+}
+/* line 37, ../scss/layout/_rain.scss */
+.rain-wrapper .drop.hotdog {
+  width: 32px;
+  height: 14px;
+  background: url(../img/layout/rain/hotdog.png) no-repeat;
 }
 
 /* line 4, ../scss/layout/_formular.scss */

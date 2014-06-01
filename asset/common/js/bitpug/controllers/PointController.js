@@ -34,7 +34,7 @@ bp.controllers.PointController = function()
 	 * @type {number}
 	 * @private
 	 */
-	this.level_ = 0;
+	this.level = 0;
 
 	/**
 	 * @type {number}
@@ -47,6 +47,12 @@ bp.controllers.PointController = function()
 	 * @private
 	 */
 	this.handler_ = bp.handlers.GameHandler.getInstance();
+
+	/**
+	 * @type {bp.controllers.SoundController}
+	 * @private
+	 */
+	this.sounds_ = bp.controllers.SoundController.getInstance();
 };
 goog.inherits(bp.controllers.PointController, goog.events.EventTarget);
 goog.addSingletonGetter(bp.controllers.PointController);
@@ -95,7 +101,7 @@ bp.controllers.PointController.prototype.resetAll_ = function()
 {
 	this.points = 0;
 	this.module_['points'].innerHTML = this.points;
-	this.level_ = 0;
+	this.level = 0;
 	this.handleLevelUp_(false);
 	this.checkLevel_();
 };
@@ -123,7 +129,7 @@ bp.controllers.PointController.prototype.checkLevel_ = function()
 	var levelExist = false;
 	for(var i = 0; i < levelDesigner.length; i++)
 	{
-		if(levelDesigner[i][1] == this.level_+1)
+		if(levelDesigner[i][1] == this.level+1)
 		{
 			levelExist = true;
 			this.levelPointsNeed_ = levelDesigner[i][0];
@@ -152,8 +158,10 @@ bp.controllers.PointController.prototype.checkLevel_ = function()
 bp.controllers.PointController.prototype.handleLevelUp_ = function(sendMsg)
 {
 	this.levelPoints_ = 0;
-	this.level_ += 1;
-	this.module_['level'].innerHTML = this.level_;
+	this.level += 1;
+	this.module_['level'].innerHTML = this.level;
+
+	this.sounds_.playSound('lvlup');
 
 	// Send action msg
 	if(sendMsg)

@@ -68,11 +68,29 @@ bp.ui.Menu.prototype.renderLost = function()
 
 	var el = goog.dom.createDom('div', 'submenu main', [
 			goog.dom.createDom('div', 'button', 'Play again'),
+			goog.dom.createDom('div', 'button', 'Highscores'),
 			goog.dom.createDom('div', 'button', 'Howto play'),
 			goog.dom.createDom('div', 'button', 'Credits')
 		]);
 
+	// Get userinfo
+	var pointController = bp.gameComponents.pointController;
+	var points = pointController.points.toString();
+	var level = pointController.level.toString();
+	var username = bp.username;
+
+	// Set userinfo
+	var userInfoEl = goog.dom.createDom('div', 'user-info', [
+			goog.dom.createDom('div', 'username', username),
+			goog.dom.createDom('div', 'points', 'with ' + points + ' points'),
+			goog.dom.createDom('div', 'level', 'reached lvl. ' + level)
+		]);
+
 	this.renderMenu_(el, this.handleLostButtonClick_, 'Game over');
+
+	// Append userinfo after menu element was filled
+	var menuEl = goog.dom.getElement('menu');
+	menuEl.appendChild(userInfoEl);
 };
 
 
@@ -200,6 +218,9 @@ bp.ui.Menu.prototype.handleLostButtonClick_ = function(e)
 		break;
 		case "Howto play":
 			this.handleMainButtonClick_(e);
+		break;
+		case "Highscores":
+			this.layer_.setContent('highscores');
 		break;
 		case "Credits":
 			this.handleMainButtonClick_(e);
