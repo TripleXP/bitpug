@@ -31,6 +31,11 @@ class BitpugLayout extends HighscoreHandler{
             }
             exit;
         }
+
+        if(isset($_GET['hsload']) && $_GET['hsload'] == true)
+        {
+            $this->listHighscores();
+        }
     }
 
     public function bootstrap()

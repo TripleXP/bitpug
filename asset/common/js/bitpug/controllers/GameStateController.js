@@ -2,6 +2,7 @@ goog.provide('bp.controllers.GameStateController');
 
 goog.require('bp.events.GameEvent');
 goog.require('bp.handlers.GameHandler');
+goog.require('bp.controllers.HighscoreController');
 goog.require('bp.ui.Menu');
 
 /**
@@ -91,6 +92,11 @@ bp.controllers.GameStateController.prototype.handleGameOver_ = function()
 			bp.events.GameEvent.EventType.STOPGAME));
 
 		this.menu_.renderLost();
+
+		// Write highscore
+		var pointController = bp.controllers.PointController.getInstance();
+		var highscoreController = bp.controllers.HighscoreController.getInstance();
+		highscoreController.writeHighscore(pointController.level, pointController.points);
 	}
 };
 
@@ -105,7 +111,7 @@ bp.controllers.GameStateController.prototype.handlePlayAgain_ = function()
 		bp.isLost = false;
 		bp.gameComponents.keyController.lock(false);
 		this.handler_.dispatchEvent(new bp.events.GameEvent(
-			bp.events.GameEvent.EventType.PLAYAGAIN));		
+			bp.events.GameEvent.EventType.PLAYAGAIN));
 
 		this.menu_.disableMenu();
 	}

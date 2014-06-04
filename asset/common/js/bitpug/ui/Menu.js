@@ -44,6 +44,7 @@ bp.ui.Menu.prototype.renderMain = function()
 	var el = goog.dom.createDom('div', 'submenu main', [
 			goog.dom.createDom('div', 'button', 'Start'),
 			goog.dom.createDom('div', 'button', 'Howto play'),
+			goog.dom.createDom('div', 'button', 'Highscores'),
 			goog.dom.createDom('div', 'button', 'Credits')
 		]);
 
@@ -149,12 +150,15 @@ bp.ui.Menu.prototype.handleMainButtonClick_ = function(e)
 			this.getHandler().listenOnce(this.layer_, bp.ui.Layer.EventType.READY,
 				this.handleMainLayerLoadComplete_);
 		break;
+		case "Highscores":
+			this.handleLostButtonClick_(e);
+		break;
 		case "Howto play":
 			this.layer_.setContent('howto');
 		break;
 		case "Credits":
 			this.layer_.setContent('credits');
-		break;		
+		break;
 	}
 };
 
@@ -221,11 +225,25 @@ bp.ui.Menu.prototype.handleLostButtonClick_ = function(e)
 		break;
 		case "Highscores":
 			this.layer_.setContent('highscores');
+			this.getHandler().listen(this.layer_, bp.ui.Layer.EventType.READY,
+				this.handleHighscoreLayerReady_);
 		break;
 		case "Credits":
 			this.handleMainButtonClick_(e);
 		break;
 	}
+};
+
+bp.ui.Menu.prototype.handleHighscoreLayerReady_ = function(e)
+{
+	var highscoreEl = goog.dom.getElement('highscore-list');
+	var gaXhr = new goog.net.XhrIo();
+
+	gaXhr.send('/?hsload=true');
+	this.getHandler().listen(gaXhr, goog.net.EventType.COMPLETE,
+		function(e){
+			highscoreEl.innerHTML = e.target.getResponse();
+		});
 };
 
 /**
