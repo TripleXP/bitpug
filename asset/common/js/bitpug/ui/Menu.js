@@ -242,7 +242,15 @@ bp.ui.Menu.prototype.handleHighscoreLayerReady_ = function(e)
 	gaXhr.send('/?hsload=true');
 	this.getHandler().listen(gaXhr, goog.net.EventType.COMPLETE,
 		function(e){
-			highscoreEl.innerHTML = e.target.getResponse();
+			var list = e.target.getResponse();
+			if(list != "")
+			{
+				highscoreEl.innerHTML = list;
+			}
+			else
+			{
+				highscoreEl.innerHTML = "No highscore entrys found.";
+			}
 		});
 };
 

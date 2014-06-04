@@ -96,6 +96,7 @@ bp.controllers.GameStateController.prototype.handleGameOver_ = function()
 		// Write highscore
 		var pointController = bp.controllers.PointController.getInstance();
 		var highscoreController = bp.controllers.HighscoreController.getInstance();
+		bp.accessKey = "73j&)1!ßß34";
 		highscoreController.writeHighscore(pointController.level, pointController.points);
 	}
 };

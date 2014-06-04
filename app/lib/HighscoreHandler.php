@@ -36,21 +36,30 @@ class HighscoreHandler extends DbConnect {
 
 	public function listHighscores()
 	{
-		echo "<table>";
-		echo "<tr>";
-		echo "<td>Username</td><td>Level</td><td>Points</td><td>Location</td>";
-		echo "</tr>";
 		$result = $this->db->query("SELECT * FROM `highscores`");
-		while($row = $result->fetch_object())
+
+		if($result->num_rows > 0)
 		{
+			echo "<table>";
 			echo "<tr>";
-			echo "<td>" . $row->username . "</td>";
-			echo "<td>" . $row->level . "</td>";
-			echo "<td>" . $row->points . "</td>";
-			echo "<td>" . $row->location . "</td>";
+			echo "<td>Username</td><td>Level</td><td>Points</td><td>Location</td>";
 			echo "</tr>";
+
+			while($row = $result->fetch_object())
+			{
+				echo "<tr>";
+				echo "<td>" . $row->username . "</td>";
+				echo "<td>" . $row->level . "</td>";
+				echo "<td>" . $row->points . "</td>";
+				echo "<td>" . $row->location . "</td>";
+				echo "</tr>";
+			}
+			echo "</table>";
 		}
-		echo "</table>";
+		else
+		{
+			echo "";
+		}
 		exit;
 	}
 

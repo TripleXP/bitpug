@@ -1,4 +1,7 @@
 <?php
+// Get layout class
+require_once "app/lib/BitpugLayout.php";
+
 // Define application environment and handle error reporting
 if(preg_match('/local/', $_SERVER['HTTP_HOST']) ||
 	preg_match('/nb/', $_SERVER['HTTP_HOST']) ||
@@ -31,9 +34,6 @@ define("DB_NAME", 'bitpug');
 
 // SQL Dump
 define("SQL_DUMP_FILE", 'asset/common/sql/defaultTables.sql');
-
-// Get layout class
-require_once "app/lib/BitpugLayout.php";
 
 // Create page from layout
 $bitpug = new BitpugLayout;

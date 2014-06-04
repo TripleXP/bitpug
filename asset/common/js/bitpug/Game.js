@@ -16,6 +16,11 @@ bp.Game = function()
      */
     bp.username = "unnamed";
 
+    /**
+     * @type {string}
+     */
+    bp.accessKey = "";
+
     // Load config to start the game with initial configuration
     this.loadConfig_();
 };
