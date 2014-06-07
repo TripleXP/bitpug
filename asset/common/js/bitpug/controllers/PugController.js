@@ -44,8 +44,8 @@ bp.controllers.PugController.prototype.spawnPug_ = function()
     this.pugEl_ = goog.dom.createDom('div', 'pug-player', [
             goog.dom.createDom('div', 'mouth')
         ]);
-    var gameSection = bp.gameComponents.registry.getElement('game-section')[0];
-    bp.gameComponents.registry.addElement(this.pugEl_);
+    var gameSection = bp.gameComponents['registry'].getElement('game-section')[0];
+    bp.gameComponents['registry'].addElement(this.pugEl_);
     gameSection.appendChild(this.pugEl_);
 };
 
@@ -56,7 +56,7 @@ bp.controllers.PugController.prototype.listenMainControl_ = function()
 {
     // Walk listeners
     goog.events.listen(
-        bp.gameComponents.keyController,
+        bp.gameComponents['keyController'],
         bp.events.MainControl.EventType.WALKLEFT,
         function(e){
             this.handleWalkStart_('left');
@@ -64,21 +64,21 @@ bp.controllers.PugController.prototype.listenMainControl_ = function()
     );
 
     goog.events.listen(
-        bp.gameComponents.keyController,
+        bp.gameComponents['keyController'],
         bp.events.MainControl.EventType.WALKRIGHT,
         function(){
             this.handleWalkStart_('right');
         }, false, this);
 
     goog.events.listen(
-        bp.gameComponents.keyController,
+        bp.gameComponents['keyController'],
         bp.events.MainControl.EventType.STOPWALKLEFT,
         function(){
             this.handleWalkStop_('left');
         }, false, this);
 
     goog.events.listen(
-        bp.gameComponents.keyController,
+        bp.gameComponents['keyController'],
         bp.events.MainControl.EventType.STOPWALKRIGHT,
         function(){
             this.handleWalkStop_('right');
@@ -86,13 +86,13 @@ bp.controllers.PugController.prototype.listenMainControl_ = function()
 
     // Jump listener
     goog.events.listen(
-        bp.gameComponents.keyController,
+        bp.gameComponents['keyController'],
         bp.events.MainControl.EventType.JUMP,
         this.handleJump_, false, this);
 
     // Boost listener
     goog.events.listen(
-        bp.gameComponents.keyController,
+        bp.gameComponents['keyController'],
         bp.events.MainControl.EventType.BOOST,
         this.handleBoost_, false, this);
 
@@ -120,7 +120,7 @@ bp.controllers.PugController.prototype.handleWalkStop_ = function(drn)
     if(goog.dom.classes.has(this.pugEl_, 'right') && drn == 'right' ||
         !goog.dom.classes.has(this.pugEl_, 'right') && drn == 'left')
     {
-        this.pugPlayer_.stop('from PugController.js');
+        this.pugPlayer_.stop();
     }
 };
 

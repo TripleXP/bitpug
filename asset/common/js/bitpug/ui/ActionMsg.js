@@ -49,7 +49,7 @@ goog.addSingletonGetter(bp.ui.ActionMsg);
 bp.ui.ActionMsg.prototype.init = function()
 {
 	// Set element
-	var statDisplay = bp.gameComponents.registry.getElement('stat-display')[0];
+	var statDisplay = bp.gameComponents['registry'].getElement('stat-display')[0];
 	var el = goog.dom.getElementByClass('action-msg', statDisplay);
 	this.setElementInternal(el);
 
@@ -75,7 +75,7 @@ bp.ui.ActionMsg.prototype.listenMessages_ = function()
 		this.handleScreenShake_);
 
 	// Listen for replay
-	this.getHandler().listen(this.gameHandler_, 
+	this.getHandler().listen(this.gameHandler_,
 		bp.events.GameEvent.EventType.PLAYAGAIN,
 		this.clearMessage_);
 };

@@ -59,7 +59,7 @@ bp.ui.RainDrop.prototype.renderDrop = function(coordinates)
 
 	goog.style.setPosition(raindropEl, coordinates.x, -50);
 
-	bp.gameComponents.registry.getElement(
+	bp.gameComponents['registry'].getElement(
 		'rain-wrapper')[0].appendChild(raindropEl);
 
 	this.dropEl = raindropEl;
@@ -118,7 +118,7 @@ bp.ui.RainDrop.prototype.handleAnimation_ = function(e)
  */
 bp.ui.RainDrop.prototype.isInTouchWithHead_ = function()
 {
-	var pugPlayer = bp.gameComponents.registry.getElement(
+	var pugPlayer = bp.gameComponents['registry'].getElement(
 		'pug-player')[0];
 	var mouth = goog.dom.getElementByClass('mouth', pugPlayer);
 

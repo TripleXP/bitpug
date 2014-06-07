@@ -38,7 +38,7 @@ bp.controllers.KeyController = function()
      * @type {bp.controllers.GameStateController}
      * @private
      */
-    this.gameStateController_ = bp.gameComponents.gameStateController;
+    this.gameStateController_ = bp.gameComponents['gameStateController'];
 };
 goog.inherits(bp.controllers.KeyController,
     goog.events.EventTarget);
@@ -61,7 +61,7 @@ bp.controllers.KeyController.prototype.init = function()
  */
 bp.controllers.KeyController.prototype.addKeyListeners_ = function()
 {
-    goog.events.listen(window, 
+    goog.events.listen(window,
         [goog.events.EventType.KEYUP, goog.events.EventType.KEYDOWN],
         this.handleKeyDownUp_, false, this);
 };

@@ -1,6 +1,13 @@
 {
+    /**
+     * HIGHSCORE SETTINGS
+     *
+     * set some settings for the highscore control
+     */
     "highscore": {
-        "pointsNeed": 2000,
+        /* Points you need to get in the highscore list */
+        "pointsNeed": 500,
+        /* The access key to pare with the request from database */
         "accessKey": "73j&)1!ßß34",
     },
 
@@ -66,9 +73,9 @@
     "environment": {
         /* Properties of the clouds */
         "clouds": {
-            /* Update clouds position (should be 1 sendond under the transition speed, which is set in CSS) */
-            "updateTrigger": 60000,
-            /* Classes will count from 1 to {GIVEN NUMBER} */
+            /* Update clouds position (should be 1 second under the transition speed, which is set in CSS) */
+            "updateTrigger": 60000, /* Animation not supported at the moment */
+            /* Classes will count from 1 to {GIVEN_NUMBER} */
             "classCount": 5,
             /* Amoun of the clouds, which will be spawned between this values (randomly) */
             "amount": {
@@ -81,11 +88,35 @@
     /**
      * LEVEL SETTINGS
      *
-     * defines the point count of each level
+     * ------------------------------------------
+     *
+     * A little functions/component -name "library-overview":
+     *
+     * {
+     *     "rainController" = {
+     *         "newSpawnInterval(int ms)",
+     *         "newDropFallspeed(int ms)"
+     *     }
+     * }
+     *
+     * ------------------------------------------
+     *
+     * SOME THINGS TO KNOW:
+     * - The first value is the points a user needs...
+     * - ...to reach the given level in the second value
+     * - The third value is the name of the component
+     * - The fourth value is for the functionname called from the component
+     * - With the third and the fourth values you can manipulate the behaviour of some components
+     * - Strings as parameters in functions don't need quotation marks
+     * - To see the current value of a function from this game look to the last given value or to
+     *   the default value from above
+     *
+     * IMPORTANT:
+     * - Do not use names that aren't in the library
+     * - Keep the array clear if it's get bigger
      */
     "levels": [
-        /** POINTS => LEVEL */
-        [50, 2],
+        [50, 2, "rainController", "newSpawnInterval(400)"],
         [150, 4],
         [250, 6],
         [350, 8],

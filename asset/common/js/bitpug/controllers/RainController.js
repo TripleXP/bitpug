@@ -73,7 +73,7 @@ bp.controllers.RainController = function()
 	 * @type {bp.controllers.SoundController}
 	 * @private
 	 */
-	this.sounds_ = bp.controllers.SoundController.getInstance();	
+	this.sounds_ = bp.controllers.SoundController.getInstance();
 };
 goog.inherits(bp.controllers.RainController, goog.events.EventTarget);
 goog.addSingletonGetter(bp.controllers.RainController);
@@ -83,18 +83,18 @@ bp.controllers.RainController.prototype.init = function()
 	// Get max range of the playground
 	this.maxRange_ = {
 		'xS': 0,
-		'xE': bp.gameComponents.registry.getElement(
+		'xE': bp.gameComponents['registry'].getElement(
 			'game-section')[0].offsetWidth,
 		'yS': 0,
-		'yE': bp.gameComponents.registry.getElement(
+		'yE': bp.gameComponents['registry'].getElement(
 			'game-section')[0].offsetHeight
 	};
 
 	// Render wrapper
 	this.wrapper_ = goog.dom.createDom('div', 'rain-wrapper');
-	bp.gameComponents.registry.getElement(
+	bp.gameComponents['registry'].getElement(
 			'game-section')[0].appendChild(this.wrapper_);
-	bp.gameComponents.registry.addElement(this.wrapper_);
+	bp.gameComponents['registry'].addElement(this.wrapper_);
 
 	// Set spawn timer
 	this.setSpawnTimer_();
@@ -120,7 +120,7 @@ bp.controllers.RainController.prototype.init = function()
 
 	// Listen for play again
 	goog.events.listen(handler, bp.events.GameEvent.EventType.PLAYAGAIN,
-		this.restart, false, this);	
+		this.restart, false, this);
 };
 
 bp.controllers.RainController.prototype.start = function()
@@ -134,7 +134,7 @@ bp.controllers.RainController.prototype.start = function()
 	}
 };
 
-bp.controllers.RainController.prototype.restart = function()	
+bp.controllers.RainController.prototype.restart = function()
 {
 	this.start();
 
@@ -142,7 +142,7 @@ bp.controllers.RainController.prototype.restart = function()
 	this.missedDrops_ = 0;
 
 	// Reset hearts
-	var statDisplay = bp.gameComponents.registry.getElement('stat-display')[0];
+	var statDisplay = bp.gameComponents['registry'].getElement('stat-display')[0];
 	var life = goog.dom.getElementByClass('life', statDisplay);
 	goog.dom.classes.swap(life, 'x0', 'x3');
 };
@@ -253,7 +253,7 @@ bp.controllers.RainController.prototype.handleMiss_ = function(e)
 			));
 
 	// Set lifes in stat display
-	var statDisplay = bp.gameComponents.registry.getElement('stat-display')[0];
+	var statDisplay = bp.gameComponents['registry'].getElement('stat-display')[0];
 	var life = goog.dom.getElementByClass('life', statDisplay);
 	goog.dom.classes.swap(life, 'x' + Number(3 - this.missedDrops_ + 1), 'x' + Number(3 - this.missedDrops_));
 
@@ -272,7 +272,10 @@ bp.controllers.RainController.prototype.handleMiss_ = function(e)
 
 	// Remove raindrop
 	goog.Timer.callOnce(function(){
-		this.wrapper_.removeChild(e.target.dropEl);
+		if(e.target.dropEl)
+		{
+			this.wrapper_.removeChild(e.target.dropEl);
+		}
 	}, 200, this);
 };
 
@@ -296,3 +299,28 @@ bp.controllers.RainController.prototype.handleEat_ = function(e)
 		this.wrapper_.removeChild(e.target.dropEl);
 	}, 0, this);
 };
+
+/**
+ * *
+ * Functions called from the configuration of the user
+ * IMPORTANT: All functions need a expose
+ * *
+ */
+
+/**
+ * @expose
+ */
+bp.controllers.RainController.prototype.newSpawnInterval = function()
+{
+	var spawnInterval = parseInt(arguments[0], 10);
+	this.spawnTimer_.setInterval(spawnInterval);
+};
+
+/**
+ * @expose
+ */
+bp.controllers.RainController.prototype.newDropFallspeed = function()
+{
+	var fallspeed = parseInt(arguments[0], 10);
+	bp.settings['rain']['initialFallSpeed'] = fallspeed;
+}

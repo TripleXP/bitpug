@@ -42,7 +42,7 @@ class HighscoreHandler extends DbConnect {
 		{
 			echo "<table>";
 			echo "<tr>";
-			echo "<td>Username</td><td>Level</td><td>Points</td><td>Location</td>";
+			echo "<th>Username</th><th>Level</th><th>Points</th><th>Country</th>";
 			echo "</tr>";
 
 			while($row = $result->fetch_object())
@@ -51,7 +51,7 @@ class HighscoreHandler extends DbConnect {
 				echo "<td>" . $row->username . "</td>";
 				echo "<td>" . $row->level . "</td>";
 				echo "<td>" . $row->points . "</td>";
-				echo "<td>" . $row->location . "</td>";
+				echo "<td><div class='flag center flag-" . $row->location . "' title='" . strtoupper($row->location) . "'></div></td>";
 				echo "</tr>";
 			}
 			echo "</table>";

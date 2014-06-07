@@ -6,6 +6,7 @@ goog.require('bp.events.FormularEvent');
 
 /**
  * @constructor
+ * @extends {goog.ui.Component}
  */
 bp.ui.Formular = function()
 {
@@ -43,11 +44,12 @@ bp.ui.Formular.prototype.decorateInternal = function(el)
 	var inputsRaw = goog.dom.getElementsByTagNameAndClass('input', '', el);
 	for(var i = 0; i < inputsRaw.length; i++)
 	{
-		this.inputs_.push({
+		this.inputs_[inputsRaw[i].id || inputsRaw[i].name || inputsRaw[i].type] = {
 			"id": inputsRaw[i].id,
+			"el": inputsRaw[i],
 			"type": inputsRaw[i].type,
-			"el": inputsRaw[i]
-		});
+			"value": inputsRaw[i].value
+		};
 	}
 };
 
@@ -68,6 +70,12 @@ bp.ui.Formular.prototype.handleSubmit_ = function(e)
 {
 	e.preventDefault();
 
+	// Update inputs value
+	for(var id in this.inputs_)
+	{
+		this.inputs_[id]['value'] = this.inputs_[id]['el'].value;
+	}
+
 	if(this.checkInputs_())
 	{
 		this.dispatchEvent(
@@ -84,20 +92,20 @@ bp.ui.Formular.prototype.handleSubmit_ = function(e)
  */
 bp.ui.Formular.prototype.checkInputs_ = function()
 {
-	for(var i = 0; i < this.inputs_.length; i++)
+	for(var id in this.inputs_)
 	{
-		switch(this.inputs_[i]['type'])
+		switch(this.inputs_[id]['type'])
 		{
 			case 'text':
-				if(this.inputs_[i]['el'].value == '')
+				if(this.inputs_[id]['el'].value == '')
 				{
 					this.setError_('Please enter a username');
 				}
-				else if(this.inputs_[i]['el'].value.length < 4)
+				else if(this.inputs_[id]['el'].value.length < 4)
 				{
 					this.setError_('You have to enter at least 4 signs');
 				}
-				else if(this.inputs_[i]['el'].value.length > 20)
+				else if(this.inputs_[id]['el'].value.length > 20)
 				{
 					this.setError_('Username too big!');
 				}

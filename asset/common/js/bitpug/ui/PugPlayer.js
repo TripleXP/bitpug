@@ -163,7 +163,7 @@ bp.ui.PugPlayer.prototype.decorateInternal = function(el)
 	goog.base(this, 'decorateInternal', el);
 
 	// Get game section
-	var gameSection = bp.gameComponents.registry.getElement(
+	var gameSection = bp.gameComponents['registry'].getElement(
 			'game-section')[0];
 
 	// Set initial position
@@ -187,7 +187,7 @@ bp.ui.PugPlayer.prototype.decorateInternal = function(el)
 	this.walkAnimPos_ = [0, -62, -124, -185];
 
 	// Init boost element
-	var boostModule = bp.gameComponents.registry.getElement(
+	var boostModule = bp.gameComponents['registry'].getElement(
 		'boost-cmp')[0];
 	this.boostEl_ = goog.dom.getElementByClass('bar', boostModule);
 };
@@ -227,12 +227,12 @@ bp.ui.PugPlayer.prototype.enterDocument = function()
 		], this.handleGameStateChangeBoost_);
 
 	// Handle hide pug on stopgame
-	this.getHandler().listen(this.gameHandler_, 
+	this.getHandler().listen(this.gameHandler_,
 		bp.events.GameEvent.EventType.STOPGAME, this.hidePug_);
 
 	// Listen for play again
 	goog.events.listen(this.gameHandler_, bp.events.GameEvent.EventType.PLAYAGAIN,
-		this.showPug_, false, this);		
+		this.showPug_, false, this);
 };
 
 /**
@@ -349,7 +349,7 @@ bp.ui.PugPlayer.prototype.activateBoost_ = function()
 	this.sounds_.playSound('boost');
 
 	// Lock
-	bp.gameComponents.keyController.lock(true);
+	bp.gameComponents['keyController'].lock(true);
 
 	// start boost
 	this.boostTimer_.start();
@@ -394,7 +394,7 @@ bp.ui.PugPlayer.prototype.handleBoostMove_ = function()
 	if(this.boostTimerCounter_ >= bp.settings['module']['boost']['maxCount'] ||
 		this.posX.left == this.moveRange_['max'] ||
 		this.posX.left == this.moveRange_['min'])
-	{	
+	{
 		this.boostTimer_.stop();
 		this.boostTimerCounter_ = 0;
 
@@ -405,7 +405,7 @@ bp.ui.PugPlayer.prototype.handleBoostMove_ = function()
 		bp.ui.PugPlayer.getInstance().dispatchEvent(
 			bp.ui.PugPlayer.EventType.STOPBOOST);
 
-		bp.gameComponents.keyController.lock(false);
+		bp.gameComponents['keyController'].lock(false);
 	}
 };
 

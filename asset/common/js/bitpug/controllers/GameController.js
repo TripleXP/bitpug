@@ -54,37 +54,37 @@ goog.inherits(bp.controllers.GameController,
 bp.controllers.GameController.prototype.start = function()
 {
 	// Registry
-	bp.gameComponents.registry = bp.controllers.RegistryController.getInstance();
-	bp.gameComponents.registry.addElement(goog.dom.getElement('game'), 'game-section');
+	bp.gameComponents['registry'] = bp.controllers.RegistryController.getInstance();
+	bp.gameComponents['registry'].addElement(goog.dom.getElement('game'), 'game-section');
 
 	// Init statdisplay for points
-	bp.gameComponents.statDisplay = new bp.ui.StatDisplay();
-	bp.gameComponents.statDisplay.init();
+	bp.gameComponents['statDisplay'] = new bp.ui.StatDisplay();
+	bp.gameComponents['statDisplay'].init();
 
 	// Init action msg
-	bp.gameComponents.actionMsg = bp.ui.ActionMsg.getInstance();
-	bp.gameComponents.actionMsg.init();
+	bp.gameComponents['actionMsg'] = bp.ui.ActionMsg.getInstance();
+	bp.gameComponents['actionMsg'].init();
 
 	// Init game state controller
-	bp.gameComponents.gameStateController = bp.controllers.GameStateController.getInstance();
-	bp.gameComponents.gameStateController.init();
+	bp.gameComponents['gameStateController'] = bp.controllers.GameStateController.getInstance();
+	bp.gameComponents['gameStateController'].init();
 
 	// Init Key controller
-	bp.gameComponents.keyController = bp.controllers.KeyController.getInstance();
-	bp.gameComponents.keyController.init();
+	bp.gameComponents['keyController'] = bp.controllers.KeyController.getInstance();
+	bp.gameComponents['keyController'].init();
 
 	// Init player pug
-	bp.gameComponents.pugController = bp.controllers.PugController.getInstance();
-	bp.gameComponents.pugController.init();
+	bp.gameComponents['pugController'] = bp.controllers.PugController.getInstance();
+	bp.gameComponents['pugController'].init();
 
 	// Init rain controller
-	bp.gameComponents.rainController = bp.controllers.RainController.getInstance();
-	bp.gameComponents.rainController.init();
+	bp.gameComponents['rainController'] = bp.controllers.RainController.getInstance();
+	bp.gameComponents['rainController'].init();
 
 	// Init point controller (After the modules are loaded)
-	bp.gameComponents.pointController = bp.controllers.PointController.getInstance();
-	bp.gameComponents.pointController.init([
-		bp.gameComponents.rainController]);
+	bp.gameComponents['pointController'] = bp.controllers.PointController.getInstance();
+	bp.gameComponents['pointController'].init([
+		bp.gameComponents['rainController']]);
 
 	// Unlock Components after load end
 	goog.Timer.callOnce(this.pageLoadEnd_, 100, this);
@@ -95,8 +95,8 @@ bp.controllers.GameController.prototype.start = function()
  */
 bp.controllers.GameController.prototype.pageLoadEnd_ = function()
 {
-	bp.gameComponents.rainController.start();
-	bp.gameComponents.keyController.lock(false);
+	bp.gameComponents['rainController'].start();
+	bp.gameComponents['keyController'].lock(false);
 	this.loadEnvironmentComponents_();
 
 	// Set playing state

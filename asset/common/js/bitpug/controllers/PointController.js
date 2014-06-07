@@ -32,7 +32,6 @@ bp.controllers.PointController = function()
 
 	/**
 	 * @type {number}
-	 * @private
 	 */
 	this.level = 0;
 
@@ -67,8 +66,8 @@ bp.controllers.PointController.prototype.init = function(listeners)
 
 	// Init module
 	this.module_ = {
-		'points': bp.gameComponents.registry.getElement('point-count-el')[0],
-		'level': bp.gameComponents.registry.getElement('level-count-el')[0]
+		'points': bp.gameComponents['registry'].getElement('point-count-el')[0],
+		'level': bp.gameComponents['registry'].getElement('level-count-el')[0]
 	};
 
 	// Get first points neede for level up
@@ -89,7 +88,7 @@ bp.controllers.PointController.prototype.init = function(listeners)
 		bp.events.PointCounter.EventType.ADD, '0'));
 	this.handleLevelUp_(false);
 
-	// Listen for play again 
+	// Listen for play again
 	goog.events.listen(this.handler_, bp.events.GameEvent.EventType.PLAYAGAIN,
 		this.resetAll_, false, this);
 };
@@ -127,15 +126,31 @@ bp.controllers.PointController.prototype.checkLevel_ = function()
 {
 	var levelDesigner = bp.settings['levels'];
 	var levelExist = false;
+
 	for(var i = 0; i < levelDesigner.length; i++)
 	{
 		if(levelDesigner[i][1] == this.level+1)
 		{
 			levelExist = true;
+
 			this.levelPointsNeed_ = levelDesigner[i][0];
 
 			if(this.levelPoints_ >= this.levelPointsNeed_)
 			{
+				if(levelDesigner[i][2] && levelDesigner[i][3])
+				{
+					var componentName = levelDesigner[i][2];
+					var component = bp.gameComponents[componentName];
+
+					var fncName = levelDesigner[i][3].split('(')[0];
+					var args = levelDesigner[i][3].split('(')[1].replace(')', '').split(', ');
+
+					if(typeof component[fncName] == 'function')
+					{
+						component[fncName].apply(component, args);
+					}
+				}
+
 				this.handleLevelUp_(true);
 				break;
 			}

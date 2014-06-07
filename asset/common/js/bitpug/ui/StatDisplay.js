@@ -21,7 +21,7 @@ bp.ui.StatDisplay = function()
 	 * @type {Object}
 	 * @private
 	 */
-	this.registry_ = bp.gameComponents.registry;
+	this.registry_ = bp.gameComponents['registry'];
 
 	/**
 	 * @type {number}
@@ -101,7 +101,7 @@ bp.ui.StatDisplay.prototype.init = function()
 	this.registry_.addElement(this.levelEl_, 'level-count-el');
 
 	// Add Component
-	bp.gameComponents.StatDisplay = this;
+	bp.gameComponents['StatDisplay'] = this;
 
 	// Listen for play/pause trigger
 	this.listenGameHandlers_();
@@ -125,7 +125,7 @@ bp.ui.StatDisplay.prototype.renderDisplay_ = function()
  */
 bp.ui.StatDisplay.prototype.listenGameHandlers_ = function()
 {
-	var statDisplay = bp.gameComponents.registry.getElement('stat-display')[0];
+	var statDisplay = this.registry_.getElement('stat-display')[0];
 	var gameHandlers = goog.dom.getElementByClass('game-handlers', statDisplay);
 
 	// Game state trigger
@@ -139,7 +139,7 @@ bp.ui.StatDisplay.prototype.listenGameHandlers_ = function()
 			bp.events.GameEvent.EventType.PAUSE,
 			bp.events.GameEvent.EventType.CONTINUE,
 			bp.events.GameEvent.EventType.PLAYAGAIN,
-			bp.events.GameEvent.EventType.STOPGAME,
+			bp.events.GameEvent.EventType.STOPGAME
 		], this.handleStateChange_);
 };
 
@@ -167,6 +167,6 @@ bp.ui.StatDisplay.prototype.handleStateChange_ = function(e)
  */
 bp.ui.StatDisplay.prototype.handleGameStateClick_ = function(e)
 {
-	var gameStateController = bp.gameComponents.gameStateController;
+	var gameStateController = bp.gameComponents['gameStateController'];
 	gameStateController.toggleState();
 };

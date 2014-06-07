@@ -43,7 +43,7 @@ bp.ui.Menu.prototype.renderMain = function()
 
 	var el = goog.dom.createDom('div', 'submenu main', [
 			goog.dom.createDom('div', 'button', 'Start'),
-			goog.dom.createDom('div', 'button', 'Howto play'),
+			goog.dom.createDom('div', 'button', 'How to play'),
 			goog.dom.createDom('div', 'button', 'Highscores'),
 			goog.dom.createDom('div', 'button', 'Credits')
 		]);
@@ -57,7 +57,7 @@ bp.ui.Menu.prototype.renderPause = function()
 
 	var el = goog.dom.createDom('div', 'submenu main', [
 			goog.dom.createDom('div', 'button', 'Continue'),
-			goog.dom.createDom('div', 'button', 'Howto play')
+			goog.dom.createDom('div', 'button', 'How to play')
 		]);
 
 	this.renderMenu_(el, this.handlePauseButtonClick_, 'Pause');
@@ -70,12 +70,12 @@ bp.ui.Menu.prototype.renderLost = function()
 	var el = goog.dom.createDom('div', 'submenu main', [
 			goog.dom.createDom('div', 'button', 'Play again'),
 			goog.dom.createDom('div', 'button', 'Highscores'),
-			goog.dom.createDom('div', 'button', 'Howto play'),
+			goog.dom.createDom('div', 'button', 'How to play'),
 			goog.dom.createDom('div', 'button', 'Credits')
 		]);
 
 	// Get userinfo
-	var pointController = bp.gameComponents.pointController;
+	var pointController = bp.gameComponents['pointController'];
 	var points = pointController.points.toString();
 	var level = pointController.level.toString();
 	var username = bp.username;
@@ -153,7 +153,7 @@ bp.ui.Menu.prototype.handleMainButtonClick_ = function(e)
 		case "Highscores":
 			this.handleLostButtonClick_(e);
 		break;
-		case "Howto play":
+		case "How to play":
 			this.layer_.setContent('howto');
 		break;
 		case "Credits":
@@ -176,12 +176,12 @@ bp.ui.Menu.prototype.handleMainLayerLoadComplete_ = function()
 };
 
 /**
- * @param  {bp.events.FormularEvent}
+ * @param  {bp.events.FormularEvent} e
  * @private
  */
 bp.ui.Menu.prototype.handleMainFormularLoadComplete_ = function(e)
 {
-	var username = e['values'][0]['el'].value;
+	var username = e.values['username']['value'];
 	bp.username = username;
 
 	// Send ready state
@@ -202,7 +202,7 @@ bp.ui.Menu.prototype.handlePauseButtonClick_ = function(e)
 		case "Continue":
 			this.dispatchEvent(bp.ui.Menu.EventType.PAUSECONTINUE);
 		break;
-		case "Howto play":
+		case "How to play":
 			this.handleMainButtonClick_(e);
 		break;
 	}
@@ -220,7 +220,7 @@ bp.ui.Menu.prototype.handleLostButtonClick_ = function(e)
 		case "Play again":
 			this.dispatchEvent(bp.ui.Menu.EventType.LOSTRESTART);
 		break;
-		case "Howto play":
+		case "How to play":
 			this.handleMainButtonClick_(e);
 		break;
 		case "Highscores":

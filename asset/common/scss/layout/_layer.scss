@@ -37,11 +37,30 @@
 	{
 		width: 100%;
 		height: 100%;
+		font-family: "Pixel-04b03";
+
+		th
+		{
+			color: gray;
+			font-weight: bold;
+			border-bottom: 1px dashed gray;
+		}
 
 		td
 		{
+			font-size: 20px;
+		}
+
+		td,
+		th
+		{
 			padding: 5px;
-			border: 1px solid gray;
+			//border: 1px solid gray;
+		}
+
+		tr:nth-child(2n)
+		{
+			background-color: #f7f7f7;
 		}
 	}
 
