@@ -42,6 +42,7 @@ bp.ui.Formular.prototype.decorateInternal = function(el)
 
 	// Get inputs
 	var inputsRaw = goog.dom.getElementsByTagNameAndClass('input', '', el);
+	inputsRaw[0].focus();
 	for(var i = 0; i < inputsRaw.length; i++)
 	{
 		this.inputs_[inputsRaw[i].id || inputsRaw[i].name || inputsRaw[i].type] = {

@@ -51,5 +51,5 @@ bp.controllers.SoundController.prototype.renderSounds_ = function(sounds)
 bp.controllers.SoundController.prototype.playSound = function(soundName)
 {
 	var sound = goog.dom.getElementByClass('audio-for-' + soundName, this.wrapper_);
-	sound.play();
+	//sound.play();
 };

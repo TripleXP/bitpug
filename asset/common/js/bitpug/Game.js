@@ -5,6 +5,7 @@ goog.require('goog.net.XhrIo');
 goog.require('bp.controllers.GameController');
 goog.require('bp.controllers.SoundController');
 goog.require('bp.ui.Menu');
+goog.require('bp.handlers.GameHandler');
 
 /**
  * @constructor
@@ -21,14 +22,21 @@ bp.Game = function()
      */
     bp.accessKey = "";
 
+    /**
+     * @type {bp.handlers.GameHandler}
+     * @private
+     */
+    this.gameHandler_ = bp.handlers.GameHandler.getInstance();
+
     // Load config to start the game with initial configuration
-    this.loadConfig_();
+    this.loadConfig_(true);
 };
 
 /**
+ * @param {boolean} isFirstStart
  * @private
  */
-bp.Game.prototype.loadConfig_ = function()
+bp.Game.prototype.loadConfig_ = function(isFirstStart)
 {
     var xhr = new goog.net.XhrIo();
     xhr.send('app/layout/jsonConfig.php');
@@ -36,8 +44,20 @@ bp.Game.prototype.loadConfig_ = function()
     goog.events.listenOnce(xhr, goog.net.EventType.SUCCESS,
         function(e){
             bp.settings = e.target.getResponseJson();
-            this.startInit();
+
+            if(isFirstStart) this.startInit();
         }, false, this);
+
+    goog.events.listenOnce(this.gameHandler_, bp.events.GameEvent.EventType.PLAYAGAIN,
+        this.reloadConfig_, false, this);
+};
+
+/**
+ * @private
+ */
+bp.Game.prototype.reloadConfig_ = function()
+{
+    this.loadConfig_(false);
 };
 
 bp.Game.prototype.startInit = function()

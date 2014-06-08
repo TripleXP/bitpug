@@ -54,7 +54,7 @@ bp.ui.PugPlayer = function()
 	this.moveDirection_ = '';
 
 	/**
-	 * @type {Number} pixels per tick
+	 * @type {number} pixels per tick
 	 * @private
 	 */
 	this.speed_ = bp.settings['pug']['moveSpeed'];
@@ -475,9 +475,22 @@ bp.ui.PugPlayer.prototype.handleGameStateChangeBoost_ = function(e)
 			this.boostLoader_.stop();
 		break;
 		case 'playagain':
+			this.resetDefault_();
 			this.loadBoost_();
 		break;
 	}
+};
+
+/**
+ * @private
+ */
+bp.ui.PugPlayer.prototype.resetDefault_ = function()
+{
+	this.speed_ = bp.settings['pug']['moveSpeed'];
+	this.boostLoader_.duration = bp.settings['module']['boost']['reloadingDelay'];
+	this.walkAnimTimer_.setInterval(bp.settings['pug']['walkAnimationMs']);
+	this.maxJumpHeight_ = bp.settings['pug']['maxJumpHeight'];
+	this.jumpSpeed_ = bp.settings['pug']['jumpSpeed'];
 };
 
 /**
@@ -539,6 +552,54 @@ bp.ui.PugPlayer.prototype.handleJumpAnimationEnd_ = function()
 	goog.dom.classes.enable(this.getElement(), 'jumping-down', false);
 	this.posY.bottom = this.jumpRange_['min'];
 	this.jumpActive_ = false;
+};
+
+/**
+ * @param  {number} pixels
+ * @param {boolean} increase
+ */
+bp.ui.PugPlayer.prototype.changeWalkSpeed = function(pixels, increase)
+{
+	if(increase)
+	{
+		this.speed_ += pixels;
+	}
+	else
+	{
+		this.speed_ = pixels;
+	}
+};
+
+/**
+ * @param {number} ms
+ */
+bp.ui.PugPlayer.prototype.changeBoostLoaderDelay = function(ms)
+{
+	this.boostLoader_.duration = ms;
+};
+
+/**
+ * @param {number} ms
+ */
+bp.ui.PugPlayer.prototype.changeAnimationTicks = function(ms)
+{
+	this.walkAnimTimer_.setInterval(ms);
+};
+
+/**
+ * @param {number} px
+ */
+bp.ui.PugPlayer.prototype.changeMaxJumpHeight = function(px)
+{
+	this.maxJumpHeight_ = px;
+};
+
+/**
+ * @param {number} ms
+ */
+bp.ui.PugPlayer.prototype.changeJumpSpeed = function(ms)
+{
+	this.jumpSpeed_ = ms;
 };
 
 /**

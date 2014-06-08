@@ -138,6 +138,9 @@ bp.controllers.RainController.prototype.restart = function()
 {
 	this.start();
 
+	// Reset spawn interval modified by the user level config
+	this.spawnTimer_.setInterval(bp.settings['rain']['spawnInterval']);
+
 	// Reset vars
 	this.missedDrops_ = 0;
 

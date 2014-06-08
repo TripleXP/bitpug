@@ -170,3 +170,61 @@ bp.controllers.PugController.prototype.handleBoostEnd_ = function()
         }
     }
 };
+
+/**
+ * *
+ * Functions called from the configuration of the user
+ * IMPORTANT: All functions need a expose
+ * *
+ */
+
+/**
+ * @expose
+ */
+bp.controllers.PugController.prototype.newMoveSpeed = function()
+{
+    var newPxTick = parseInt(arguments[0], 10);
+    var increase = false;
+    if(arguments[1] && arguments[1] == 'true')
+    {
+        increase = true;
+    }
+
+    this.pugPlayer_.changeWalkSpeed(newPxTick, increase);
+};
+
+/**
+ * @expose
+ */
+bp.controllers.PugController.prototype.newBoostLoaderDelay = function()
+{
+    var ms = parseInt(arguments[0], 10);
+    this.pugPlayer_.changeBoostLoaderDelay(ms);
+};
+
+/**
+ * @expose
+ */
+bp.controllers.PugController.prototype.newWalkAnimationMs = function()
+{
+    var ms = parseInt(arguments[0], 10);
+    this.pugPlayer_.changeAnimationTicks(ms);
+};
+
+/**
+ * @expose
+ */
+bp.controllers.PugController.prototype.newMaxJumpHeight = function()
+{
+    var px = parseInt(arguments[0], 10);
+    this.pugPlayer_.changeMaxJumpHeight(px);
+};
+
+/**
+ * @expose
+ */
+bp.controllers.PugController.prototype.newJumpSpeed = function()
+{
+    var ms = parseInt(arguments[0], 10);
+    this.pugPlayer_.changeJumpSpeed(ms);
+};

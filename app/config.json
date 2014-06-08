@@ -96,6 +96,13 @@
      *     "rainController" = {
      *         "newSpawnInterval(int ms)",
      *         "newDropFallspeed(int ms)"
+     *     },
+     *     pugController = {
+     *         "newMoveSpeed(int px, boolean opt_addToCurrent = false)",
+     *         "newBoostLoaderDelay(int ms)",
+     *         "newWalkAnimationMs(int ms)",
+     *         "newMaxJumpHeight(int px)",
+     *         "newJumpSpeed(int ms)"
      *     }
      * }
      *
@@ -104,19 +111,25 @@
      * SOME THINGS TO KNOW:
      * - The first value is the points a user needs...
      * - ...to reach the given level in the second value
-     * - The third value is the name of the component
-     * - The fourth value is for the functionname called from the component
-     * - With the third and the fourth values you can manipulate the behaviour of some components
+     * - The third value is the name of the component...
+     * - ...with the functionname in "[]" functionname
+     * - With the third value you can manipulate the behaviour of some components
      * - Strings as parameters in functions don't need quotation marks
      * - To see the current value of a function from this game look to the last given value or to
      *   the default value from above
+     * - Seperator for the functions = /
+     * - Seperator for the componets = ;
+     * - Example: rainController[newSpawnInterval(400)/newDropFallspeed(1000)];pointController[resetPoints()]
      *
      * IMPORTANT:
-     * - Do not use names that aren't in the library
-     * - Keep the array clear if it's get bigger
+     * - Do not use namespaces that aren't in the library
+     * - Keep the array clear if it get's bigger
+     * - You need a semicolon at the end of one component and at the end of each function...
+     *   ... even if you modify only one component or one function
+     * - Try to write all arguments in one line
      */
     "levels": [
-        [50, 2, "rainController", "newSpawnInterval(400)"],
+        [10, 2],
         [150, 4],
         [250, 6],
         [350, 8],

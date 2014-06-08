@@ -137,17 +137,36 @@ bp.controllers.PointController.prototype.checkLevel_ = function()
 
 			if(this.levelPoints_ >= this.levelPointsNeed_)
 			{
-				if(levelDesigner[i][2] && levelDesigner[i][3])
+				if(levelDesigner[i][2])
 				{
-					var componentName = levelDesigner[i][2];
-					var component = bp.gameComponents[componentName];
+					var componentNames = levelDesigner[i][2].split(';');
 
-					var fncName = levelDesigner[i][3].split('(')[0];
-					var args = levelDesigner[i][3].split('(')[1].replace(')', '').split(', ');
-
-					if(typeof component[fncName] == 'function')
+					for(var i = 0; i < componentNames.length; i++)
 					{
-						component[fncName].apply(component, args);
+						// Remove all spaces in string
+						componentNames[i] = componentNames[i].replace(/\s+/g, '');
+
+						if(componentNames[i] == '')
+							continue;
+
+						var currentComponentName = componentNames[i].split('[')[0];
+						var functionNames = componentNames[i].split('[')[1].replace(']', '').split('/');
+
+						for(var f = 0; f < functionNames.length; f++)
+						{
+							if(functionNames[f] == '')
+								continue;
+
+							var currentFunctionName = functionNames[f].split('(')[0];
+							var currentFunctionArgs = functionNames[f].split('(')[1].replace(')', '').split(',');
+
+							if(goog.typeOf(bp.gameComponents[currentComponentName][currentFunctionName]) == 'function')
+							{
+								bp.gameComponents[currentComponentName][currentFunctionName].apply(
+									bp.gameComponents[currentComponentName],
+									currentFunctionArgs);
+							}
+						}
 					}
 				}
 
