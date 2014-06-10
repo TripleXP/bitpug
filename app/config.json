@@ -95,7 +95,9 @@
      * {
      *     "rainController" = {
      *         "newSpawnInterval(int ms)",
-     *         "newDropFallspeed(int ms)"
+     *         "newDropFallspeed(int ms)",
+     *         "randomizeFallspeed(boolean active)",
+     *         "windSimulation(boolean active, string opt_direction, int opt_pixel)"
      *     },
      *     pugController = {
      *         "newMoveSpeed(int px, boolean opt_addToCurrent = false)",
@@ -120,6 +122,9 @@
      * - Seperator for the functions = /
      * - Seperator for the componets = ;
      * - Example: rainController[newSpawnInterval(400)/newDropFallspeed(1000)];pointController[resetPoints()]
+     * - Directios are defined as followed:
+     *   + left to right: 'ltr'
+     *   + right to left: 'rtl'
      *
      * IMPORTANT:
      * - Do not use namespaces that aren't in the library
@@ -129,10 +134,10 @@
      * - Try to write all arguments in one line
      */
     "levels": [
-        [10, 2],
-        [150, 4],
-        [250, 6],
-        [350, 8],
-        [450, 10]
+        [10,       2],
+        [150,      3],
+        [250,      4],
+        [350,      8],
+        [450,      10]
     ]
 }

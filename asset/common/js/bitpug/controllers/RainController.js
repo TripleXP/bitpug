@@ -74,6 +74,20 @@ bp.controllers.RainController = function()
 	 * @private
 	 */
 	this.sounds_ = bp.controllers.SoundController.getInstance();
+
+	/**
+	 * @type {boolean}
+	 * @private
+	 */
+	this.randomizeFallspeed_ = false;
+
+	/**
+	 * @type {Object}
+	 * @private
+	 */
+	this.windSimulationConfig_ = {
+		'active': false
+	};
 };
 goog.inherits(bp.controllers.RainController, goog.events.EventTarget);
 goog.addSingletonGetter(bp.controllers.RainController);
@@ -213,7 +227,7 @@ bp.controllers.RainController.prototype.spawnRainDrop_ = function()
 	var spawnCoordinates = new goog.math.Coordinate(cordX, cordY);
 
 	var raindrop = new bp.ui.RainDrop();
-	raindrop.renderDrop(spawnCoordinates);
+	raindrop.renderDrop(spawnCoordinates, this.randomizeFallspeed_, this.windSimulationConfig_);
 	this.lastDrop_ = raindrop;
 	this.rainDrops_.push(raindrop);
 
@@ -327,3 +341,41 @@ bp.controllers.RainController.prototype.newDropFallspeed = function()
 	var fallspeed = parseInt(arguments[0], 10);
 	bp.settings['rain']['initialFallSpeed'] = fallspeed;
 }
+
+/**
+ * @expose
+ */
+bp.controllers.RainController.prototype.randomizeFallspeed = function()
+{
+	this.randomizeFallspeed_ = true;
+	if(arguments[0] == 'false')
+	{
+		this.randomizeFallspeed_ = false;
+	}
+};
+
+/**
+ * @expose
+ */
+bp.controllers.RainController.prototype.windSimulation = function()
+{
+	var windSimulationConfig;
+
+	if(arguments[0] == 'true')
+	{
+		windSimulationConfig = {
+			'active': true,
+			'direction': arguments[1],
+			'pixel': parseInt(arguments[2], 10)
+		};
+	}
+	else
+	{
+		windSimulationConfig = {
+			'active': false
+		};
+	}
+
+	// Set wind simulation config
+	this.windSimulationConfig_ = windSimulationConfig;
+};

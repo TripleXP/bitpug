@@ -17,13 +17,11 @@ bp.ui.RainDrop = function()
 
 	/**
 	 * @type {number}
-	 * @private
 	 */
 	this.corX = 0;
 
 	/**
 	 * @type {number}
-	 * @private
 	 */
 	this.corY = 0;
 
@@ -40,15 +38,38 @@ bp.ui.RainDrop = function()
 
 	/**
 	 * @type {boolean}
+	 * @private
 	 */
 	this.isEaten_ = false;
+
+	/**
+	 * @type {Object}
+	 * @private
+	 */
+	this.windConfig_ = {}
+
+	/**
+	 * @type {boolean}
+	 * @private
+	 */
+	this.isOffset_ = false;
+
+	/**
+	 * @type {Object}
+	 * @private
+	 */
+	this.windConfig_ = {
+		'active': false
+	};
 };
 goog.inherits(bp.ui.RainDrop, goog.ui.Component);
 
 /**
- * @param  {goog.math.Coordinate} coordinates
+ * @param {goog.math.Coordinate} coordinates
+ * @param {boolean} isRandom
+ * @param {Object} windConfig
  */
-bp.ui.RainDrop.prototype.renderDrop = function(coordinates)
+bp.ui.RainDrop.prototype.renderDrop = function(coordinates, isRandom, windConfig)
 {
 	// Render RainDrop
 	var index = Math.floor(
@@ -63,10 +84,16 @@ bp.ui.RainDrop.prototype.renderDrop = function(coordinates)
 		'rain-wrapper')[0].appendChild(raindropEl);
 
 	this.dropEl = raindropEl;
+	this.windConfig_ = windConfig;
 
 	// Set animation
+	var initialFallspeed = bp.settings['rain']['initialFallSpeed'];
+	var randomSpeed = Math.round(goog.math.uniformRandom(bp.settings['rain']['initialFallSpeed']/2,
+		bp.settings['rain']['initialFallSpeed']));
+	var currentSpeed = isRandom ? randomSpeed : initialFallspeed;
+
 	this.animation_ = new goog.fx.Animation([coordinates.x,-50],
-		[0,coordinates.y], bp.settings['rain']['initialFallSpeed']);
+		[0,coordinates.y], currentSpeed);
 
 	// Listen for animation
 	this.getHandler().listen(this.animation_,
@@ -106,15 +133,37 @@ bp.ui.RainDrop.prototype.handleAnimation_ = function(e)
 	if(this.isInTouchWithHead_())
 	{
 		this.markAsEaten_();
+		return;
+	}
+
+	if(this.checkOffset_())
+	{
+		this.destroyDrop_();
+		return;
 	}
 
 	var y = (Number) ((e.y).toFixed(0));
-	goog.style.setStyle(this.dropEl, {top: y + 'px'});
+	this.corY = y;
+	goog.style.setStyle(this.dropEl, {'top': y + 'px'});
+
+	if(this.windConfig_['active'])
+	{
+		if(this.windConfig_['direction'] == 'ltr')
+		{
+			this.corX = this.dropEl.offsetLeft + this.windConfig_['pixel'];
+		}
+		else
+		{
+			this.corX = this.dropEl.offsetLeft - this.windConfig_['pixel'];
+		}
+
+		goog.style.setStyle(this.dropEl, {'left': this.corX + 'px'});
+	}
 };
 
 /**
  * @private
- * @return {boolean} [description]
+ * @return {boolean}
  */
 bp.ui.RainDrop.prototype.isInTouchWithHead_ = function()
 {
@@ -145,6 +194,28 @@ bp.ui.RainDrop.prototype.isInTouchWithHead_ = function()
 	return false;
 };
 
+/**
+ * @private
+ * @return {boolean}
+ */
+bp.ui.RainDrop.prototype.checkOffset_ = function()
+{
+	var playground = bp.gameComponents['registry'].getElement(
+		'game-section')[0];
+
+	if(this.dropEl.offsetLeft > playground.offsetWidth ||
+		(this.dropEl.offsetLeft + this.dropEl.offsetWidth) < 0)
+	{
+		this.isOffset_ = true;
+		return true;
+	}
+
+	return false;
+};
+
+/**
+ * @private
+ */
 bp.ui.RainDrop.prototype.markAsEaten_ = function()
 {
 	this.isEaten_ = true;
@@ -164,14 +235,22 @@ bp.ui.RainDrop.prototype.destroyDrop_ = function()
 	this.getHandler().unlisten(this.animation_,
 		goog.fx.Animation.EventType.END, this.destroyDrop_);
 
-	// Dispatch event
-	if(this.isEaten_)
+	if(this.isOffset_)
 	{
-		this.dispatchEvent(bp.ui.RainDrop.EventType.EATEN);
+		var wrapper = goog.dom.getElementByClass('rain-wrapper');
+		wrapper.removeChild(this.dropEl);
 	}
 	else
 	{
-		this.dispatchEvent(bp.ui.RainDrop.EventType.MISSED);
+		// Dispatch event
+		if(this.isEaten_)
+		{
+			this.dispatchEvent(bp.ui.RainDrop.EventType.EATEN);
+		}
+		else
+		{
+			this.dispatchEvent(bp.ui.RainDrop.EventType.MISSED);
+		}
 	}
 };
 

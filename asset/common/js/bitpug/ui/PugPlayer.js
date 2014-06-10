@@ -175,13 +175,13 @@ bp.ui.PugPlayer.prototype.decorateInternal = function(el)
 	this.moveRange_ = {
 		'min': 0,
 		'max': gameSection.offsetWidth - el.offsetWidth
-	}
+	};
 
 	// Set jump range Y
 	this.jumpRange_ = {
 		'min': this.posY.bottom,
 		'max': gameSection.offsetHeight - el.offsetHeight
-	}
+	};
 
 	// Init walk animation frames
 	this.walkAnimPos_ = [0, -62, -124, -185];
