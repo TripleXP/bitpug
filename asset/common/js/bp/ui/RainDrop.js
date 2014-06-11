@@ -43,12 +43,6 @@ bp.ui.RainDrop = function()
 	this.isEaten_ = false;
 
 	/**
-	 * @type {Object}
-	 * @private
-	 */
-	this.windConfig_ = {}
-
-	/**
 	 * @type {boolean}
 	 * @private
 	 */

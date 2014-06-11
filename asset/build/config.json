@@ -11,6 +11,6 @@
 	"output-wrapper": "// Copyright 2014 (Davide)\n(function(){%output%})();",
 
 	"closure-library": "../closure-library/closure/goog/",
-	"inputs": "../common/js/bitpug/Game.js",
+	"inputs": "../common/js/bp/Game.js",
 	"output-file": "../common/js-min/app.js"
 }
