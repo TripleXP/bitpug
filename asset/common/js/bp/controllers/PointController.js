@@ -133,7 +133,10 @@ bp.controllers.PointController.prototype.checkLevel_ = function()
 		{
 			levelExist = true;
 
-			this.levelPointsNeed_ = levelDesigner[i][0];
+			if(levelDesigner[i][0] != '^')
+			{
+				this.levelPointsNeed_ = levelDesigner[i][0];
+			}
 
 			if(this.levelPoints_ >= this.levelPointsNeed_)
 			{

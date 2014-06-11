@@ -568,6 +568,8 @@ bp.ui.PugPlayer.prototype.changeWalkSpeed = function(pixels, increase)
 	{
 		this.speed_ = pixels;
 	}
+
+	console.log(pixels, this.speed_, increase);
 };
 
 /**

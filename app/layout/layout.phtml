@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-        <?php if(APPLICATION_ENV != 'development'): ?>
+        <?php if(APPLICATION_ENV == 'development'): ?>
             <script src="asset/closure-library/closure/goog/base.js"></script>
             <script src="asset/common/js/deps.js"></script>
             <script>goog.require('bp.Game');</script>

@@ -183,7 +183,7 @@ bp.controllers.PugController.prototype.handleBoostEnd_ = function()
  */
 bp.controllers.PugController.prototype.newMoveSpeed = function()
 {
-    var newPxTick = parseInt(arguments[0], 10);
+    var newPxTick = (Number) (arguments[0]);
     var increase = false;
     if(arguments[1] && arguments[1] == 'true')
     {
@@ -198,7 +198,7 @@ bp.controllers.PugController.prototype.newMoveSpeed = function()
  */
 bp.controllers.PugController.prototype.newBoostLoaderDelay = function()
 {
-    var ms = parseInt(arguments[0], 10);
+    var ms = (Number) (arguments[0]);
     this.pugPlayer_.changeBoostLoaderDelay(ms);
 };
 
@@ -207,7 +207,7 @@ bp.controllers.PugController.prototype.newBoostLoaderDelay = function()
  */
 bp.controllers.PugController.prototype.newWalkAnimationMs = function()
 {
-    var ms = parseInt(arguments[0], 10);
+    var ms = (Number) (arguments[0]);
     this.pugPlayer_.changeAnimationTicks(ms);
 };
 
@@ -216,7 +216,7 @@ bp.controllers.PugController.prototype.newWalkAnimationMs = function()
  */
 bp.controllers.PugController.prototype.newMaxJumpHeight = function()
 {
-    var px = parseInt(arguments[0], 10);
+    var px = (Number) (arguments[0]);
     this.pugPlayer_.changeMaxJumpHeight(px);
 };
 
@@ -225,6 +225,6 @@ bp.controllers.PugController.prototype.newMaxJumpHeight = function()
  */
 bp.controllers.PugController.prototype.newJumpSpeed = function()
 {
-    var ms = parseInt(arguments[0], 10);
+    var ms = (Number) (arguments[0]);
     this.pugPlayer_.changeJumpSpeed(ms);
 };

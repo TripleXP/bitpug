@@ -54,9 +54,9 @@
      */
     "rain": {
         /* Fall speed on loading (ms) */
-        "initialFallSpeed": 5000/*5000*/,
+        "initialFallSpeed": 5000,
         /* Spawn interval of each drop (ms) */
-        "spawnInterval": 1000/*2000*/,
+        "spawnInterval": 2000,
         /* HIGHEST size of one drop for calculating all ranges (px) */
         "defaultSize": 40,
         /* Classes and values for default drop (chosen randomly) */
@@ -97,7 +97,7 @@
      *         "newSpawnInterval(int ms)",
      *         "newDropFallspeed(int ms)",
      *         "randomizeFallspeed(boolean active = true)",
-     *         "windSimulation(boolean active, string opt_direction, int opt_pixel)"
+     *         "windSimulation(boolean active, opt:[string direction, int pixel])"
      *     },
      *     pugController = {
      *         "newMoveSpeed(int px, boolean opt_addToCurrent = false)",
@@ -111,7 +111,7 @@
      * ------------------------------------------
      *
      * SOME THINGS TO KNOW:
-     * - The first value is the points a user needs...
+     * - The first value is the points a user needs (^ = leave as is)...
      * - ...to reach the given level in the second value
      * - The third value is the name of the component...
      * - ...with the functionname in "[]" functionname
@@ -120,7 +120,7 @@
      * - To see the current value of a function from this game look to the last given value or to
      *   the default value from above
      * - Seperator for the functions = /
-     * - Seperator for the componets = ;
+     * - Seperator for the components = ;
      * - Example: rainController[newSpawnInterval(400)/newDropFallspeed(1000)];pointController[resetPoints()]
      * - Directios are defined as followed:
      *   + left to right: ltr
@@ -134,11 +134,28 @@
      * - Try to write all arguments in one line
      */
     "levels": [
-        [10,       2, "rainController[newDropFallspeed(4300)];pugController[newMoveSpeed(3.2)]"],
-        [150,      3, "rainController[windSimulation(true, ltr, 1)]"],
-        [250,      4, "rainController[newDropFallspeed(3700)/windSimulation(true, rtl, 1)];pugController[newMoveSpeed(3.9)]"],
-        [300,      5, "rainController[newDropFallspeed(3200)/windSimulation(false)/randomizeFallspeed()];pugController[newMoveSpeed(4.5)]"],
-        [350,      8],
-        [450,      10]
+        [100,       2],
+
+        ["^",       3,  "rainController[newSpawnInterval(1000)]; pugController[newMoveSpeed(0.5, true)]"],
+
+        [200,       4],
+
+        ["^",       6,  "rainController[newDropFallspeed(4200)]; pugController[newMoveSpeed(0.5, true) / newBoostLoaderDelay(1300) / newWalkAnimationMs(60)]"],
+
+        [350,       7],
+
+        ["^",       8,  "rainController[windSimulation(true, ltr, 1) / newDropFallspeed(4500)]; pugController[newMaxJumpHeight(190) / newJumpSpeed(9) / newMoveSpeed(2.8)]"],
+
+        ["^",       10, "rainController[windSimulation(true, rtl, 1)]; pugController[newMoveSpeed(0.7, true) / newWalkAnimationMs(55) / newBoostLoaderDelay(1000)]"],
+
+        [500,       11],
+
+        ["^",       15, "rainController[windSimulation(false) / randomizeFallspeed() / newDropFallspeed(3700)]; pugController[newMoveSpeed(0.7, true) / newWalkAnimationMs(50) / newMaxJumpHeight(150) / newJumpSpeed(6) / newBoostLoaderDelay(700) / newSpawnInterval(1400)]"],
+
+        [800,       23],
+
+        [1000,      30],
+
+        [2000,      50]
     ]
 }
