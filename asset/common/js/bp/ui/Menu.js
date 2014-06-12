@@ -239,7 +239,7 @@ bp.ui.Menu.prototype.handleHighscoreLayerReady_ = function(e)
 	var highscoreEl = goog.dom.getElement('highscore-list');
 	var gaXhr = new goog.net.XhrIo();
 
-	gaXhr.send('/?hsload=true');
+	gaXhr.send(bp.baseUrl + '?hsload=true');
 	this.getHandler().listen(gaXhr, goog.net.EventType.COMPLETE,
 		function(e){
 			var list = e.target.getResponse();

@@ -55,7 +55,7 @@ bp.ui.Layer.prototype.setContent = function(filename, opt_className)
 	}
 
 	var gaXhr = new goog.net.XhrIo();
-	gaXhr.send('/app/views/' + filename + '.php');
+	gaXhr.send(bp.baseUrl + 'app/views/' + filename + '.php');
 
 	this.setLayerState(true);
 

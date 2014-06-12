@@ -25,12 +25,20 @@ define('GLOBAL_PASSWORD', '73j&)1!ßß34');
 define('HS_DELAY', 1);
 
 // Databse connection
-define("DB_HOST", 'localhost');
-define("DB_USERNAME", 'root');
-define("DB_PASSWORD", '');
-
-// Database (should not be changed)
-define("DB_NAME", 'bitpug');
+if(APPLICATION_ENV == 'development')
+{
+	define("DB_HOST", 'localhost');
+	define("DB_USERNAME", 'root');
+	define("DB_PASSWORD", '');
+	define("DB_NAME", 'bitpug');
+}
+else
+{
+	define("DB_HOST", 'rdbms.strato.de');
+	define("DB_USERNAME", 'U1493781');
+	define("DB_PASSWORD", 'bitpugonline42');
+	define("DB_NAME", 'DB1493781');
+}
 
 // SQL Dump
 define("SQL_DUMP_FILE", 'asset/common/sql/defaultTables.sql');

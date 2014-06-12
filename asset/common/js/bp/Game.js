@@ -20,6 +20,11 @@ bp.Game = function()
     /**
      * @type {string}
      */
+    bp.baseUrl = window.location.pathname;
+
+    /**
+     * @type {string}
+     */
     bp.accessKey = "";
 
     /**
@@ -39,7 +44,7 @@ bp.Game = function()
 bp.Game.prototype.loadConfig_ = function(isFirstStart)
 {
     var xhr = new goog.net.XhrIo();
-    xhr.send('app/layout/jsonConfig.php');
+    xhr.send(bp.baseUrl + 'app/layout/jsonConfig.php');
 
     goog.events.listenOnce(xhr, goog.net.EventType.SUCCESS,
         function(e){

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class DbConnect {
 	private $host, $username, $password;
@@ -11,7 +11,7 @@ class DbConnect {
 		 $this->password = DB_PASSWORD;
 
 		// Connects to host
-		$this->_connectHost();	
+		$this->_connectHost();
 
 		// Check db
 		if(!@file_exists('INSTALL.ED')) $this->_checkDb();
@@ -29,7 +29,7 @@ class DbConnect {
 	}
 
 	private function _checkDb()
-	{	
+	{
 		$this->db->query("CREATE DATABASE IF NOT EXISTS " . DB_NAME . ";");
 		$this->db->select_db(DB_NAME);
 
@@ -51,7 +51,7 @@ class DbConnect {
 	}
 
 	private function _setInstallFlag()
-	{	
+	{
 		@fopen("INSTALL.ED", "w");
 	}
 }
