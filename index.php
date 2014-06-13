@@ -36,7 +36,7 @@ else
 {
 	define("DB_HOST", 'rdbms.strato.de');
 	define("DB_USERNAME", 'U1493781');
-	define("DB_PASSWORD", 'bitpugonline42');
+	define("DB_PASSWORD", '');
 	define("DB_NAME", 'DB1493781');
 }
 
