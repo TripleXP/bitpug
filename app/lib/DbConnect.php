@@ -20,7 +20,7 @@ class DbConnect {
 
 	private function _connectHost()
 	{
-		$this->db = new mysqli($this->host, $this->username, $this->password);
+		$this->db = new mysqli($this->host, $this->username, $this->password, "", defined("DB_PORT") ? DB_PORT : 80);
 		if($this->db->connect_errno)
 		{
 			echo "Failed to connect to Database: " . $this->db->connect_error;

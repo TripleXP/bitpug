@@ -34,10 +34,11 @@ if(APPLICATION_ENV == 'development')
 }
 else
 {
-	define("DB_HOST", 'rdbms.strato.de');
-	define("DB_USERNAME", 'U1493781');
-	define("DB_PASSWORD", '');
-	define("DB_NAME", 'DB1493781');
+	define("DB_HOST", '10.35.249.22');
+	define("DB_USERNAME", 'k36315_bitpug');
+	define("DB_PASSWORD", 'i4rlad93jqad');
+	define("DB_NAME", 'k36315_bitpug');
+	define("DB_PORT", 3306);
 }
 
 // SQL Dump
