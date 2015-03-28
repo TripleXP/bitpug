@@ -18,7 +18,40 @@ goog.addSingletonGetter(bp.controllers.SoundController);
 bp.controllers.SoundController.prototype.init = function()
 {
 	// Set all sounds
-	var sounds = ["boost", "jump", "lost-drop", "lvlup"];
+	var sounds = [
+		{
+			"name": "boost",
+			"types": [
+				"wav"
+			]
+		},
+		{
+			"name": "jump",
+			"types": [
+				"wav"
+			]
+		},
+		{
+			"name": "lost-drop",
+			"types": [
+				"wav"
+			]
+		},
+		{
+			"name": "lvlup",
+			"types": [
+				"wav"
+			]
+		},
+		{
+			"name": "background",
+			"types": [
+				"mp3",
+				"ogg"
+			],
+			'volume': 0.2
+		}
+	]
 
 	// Render sound elements to play
 	this.renderSounds_(sounds);
@@ -34,13 +67,23 @@ bp.controllers.SoundController.prototype.renderSounds_ = function(sounds)
 
 	this.wrapper_ = goog.dom.createDom('div', 'sound-wrapper');
 
-	for(var i = 0; i < sounds.length; i++)
+	for(var i = 0, len = sounds.length; i < len; i++)
 	{
-		var audioEl = goog.dom.createDom('audio', 'audio-for-' + sounds[i]);
-		var sourceEl = goog.dom.createDom('source');
-		sourceEl.src = soundDir + sounds[i] + '.wav';
-		sourceEl.type = "audio/wav";
-		audioEl.appendChild(sourceEl);
+		var audioEl = goog.dom.createDom('audio', 'audio-for-' + sounds[i]['name']);
+
+		for(var x = 0, lenX = sounds[i]['types'].length; x < lenX; x++)
+		{
+			var sourceEl = goog.dom.createDom('source');
+			sourceEl.src = soundDir + sounds[i]['name'] + '.' + sounds[i]['types'][x];
+			sourceEl.type = 'audio/' + sounds[i]['types'][x];
+			audioEl.appendChild(sourceEl);
+		}
+
+		if(sounds[i]['volume'])
+		{
+			audioEl['volume'] = sounds[i]['volume'];
+		}
+
 		this.wrapper_.appendChild(audioEl);
 		this.sounds_.push(audioEl);
 	}
@@ -48,8 +91,11 @@ bp.controllers.SoundController.prototype.renderSounds_ = function(sounds)
 	goog.dom.getElement('game').appendChild(this.wrapper_);
 };
 
+/**
+ * @param  {string} soundName
+ */
 bp.controllers.SoundController.prototype.playSound = function(soundName)
 {
 	var sound = goog.dom.getElementByClass('audio-for-' + soundName, this.wrapper_);
-	//sound.play();
+	if(sound) sound.play();
 };

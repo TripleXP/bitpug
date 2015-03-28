@@ -68,7 +68,9 @@ bp.Game.prototype.reloadConfig_ = function()
 bp.Game.prototype.startInit = function()
 {
     // Init sound controller
-    bp.controllers.SoundController.getInstance().init();
+    var soundController = bp.controllers.SoundController.getInstance();
+        soundController.init();
+        soundController.playSound("background");
 
     // Start game controller
     var menu = new bp.ui.Menu();
