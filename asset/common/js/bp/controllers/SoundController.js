@@ -49,7 +49,8 @@ bp.controllers.SoundController.prototype.init = function()
 				"mp3",
 				"ogg"
 			],
-			'volume': 0.2
+			'volume': 0.2,
+			'loop': true
 		}
 	]
 
@@ -82,6 +83,11 @@ bp.controllers.SoundController.prototype.renderSounds_ = function(sounds)
 		if(sounds[i]['volume'])
 		{
 			audioEl['volume'] = sounds[i]['volume'];
+		}
+
+		if(sounds[i]['loop'] && sounds[i]['loop'] == true)
+		{
+			audioEl.setAttribute('loop', '');
 		}
 
 		this.wrapper_.appendChild(audioEl);
