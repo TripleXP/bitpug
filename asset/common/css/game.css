@@ -1,4 +1,4 @@
-/* line 17, c:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 5, c:/Ruby21-x64/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -20,46 +20,46 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, c:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 22, c:/Ruby21-x64/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, c:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 24, c:/Ruby21-x64/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, c:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 26, c:/Ruby21-x64/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, c:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 28, c:/Ruby21-x64/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, c:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 30, c:/Ruby21-x64/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, c:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 103, c:/Ruby21-x64/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, c:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 32, c:/Ruby21-x64/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, c:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+/* line 116, c:/Ruby21-x64/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block;
 }
 
@@ -70,7 +70,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-weight: normal;
   font-style: normal;
 }
-
 @font-face {
   font-family: 'Pixel-04b03';
   src: url("../fonts/04b03/regular/04b03.eot");
@@ -78,7 +77,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-weight: normal;
   font-style: normal;
 }
-
 @font-face {
   font-family: 'Pixel-Arcade';
   src: url("../fonts/arcade/regular/arcade-webfont.eot");
@@ -86,27 +84,24 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-weight: normal;
   font-style: normal;
 }
-
-/* line 2, ../scss/_layout.scss */
+/* line 1, ../scss/_layout.scss */
 body {
   background: url(../img/layout/environment/bg.png);
   overflow: hidden;
 }
 
-/* line 2, ../scss/layout/_menu.scss */
+/* line 1, ../scss/layout/_menu.scss */
 #menu {
   position: absolute;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 6;
-  -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
+  -webkit-border-radius: 10px;
   border-radius: 10px;
 }
-/* line 11, ../scss/layout/_menu.scss */
+/* line 10, ../scss/layout/_menu.scss */
 #menu h2 {
   font-size: 40px;
   font-family: "Pixel", Arial, sans-serif;
@@ -115,11 +110,11 @@ body {
   color: white;
   margin: 10px 0 0 10px;
 }
-/* line 21, ../scss/layout/_menu.scss */
+/* line 20, ../scss/layout/_menu.scss */
 #menu.inactive {
   display: none;
 }
-/* line 26, ../scss/layout/_menu.scss */
+/* line 25, ../scss/layout/_menu.scss */
 #menu .submenu {
   position: absolute;
   width: 400px;
@@ -127,7 +122,7 @@ body {
   left: 50%;
   margin-left: -200px;
 }
-/* line 35, ../scss/layout/_menu.scss */
+/* line 34, ../scss/layout/_menu.scss */
 #menu .button {
   width: 100%;
   padding: 10px 0;
@@ -138,21 +133,21 @@ body {
   font-size: 30px;
   margin-bottom: 20px;
   cursor: pointer;
-  -webkit-box-shadow: 0px 0px 2px black;
   -moz-box-shadow: 0px 0px 2px black;
+  -webkit-box-shadow: 0px 0px 2px black;
   box-shadow: 0px 0px 2px black;
-  -webkit-transition: box-shadow 0.5s;
   -moz-transition: box-shadow 0.5s;
   -o-transition: box-shadow 0.5s;
+  -webkit-transition: box-shadow 0.5s;
   transition: box-shadow 0.5s;
 }
-/* line 49, ../scss/layout/_menu.scss */
+/* line 48, ../scss/layout/_menu.scss */
 #menu .button:hover {
-  -webkit-box-shadow: 0px 0px 5px black;
   -moz-box-shadow: 0px 0px 5px black;
+  -webkit-box-shadow: 0px 0px 5px black;
   box-shadow: 0px 0px 5px black;
 }
-/* line 55, ../scss/layout/_menu.scss */
+/* line 54, ../scss/layout/_menu.scss */
 #menu .user-info {
   position: absolute;
   font-family: "Pixel";
@@ -162,23 +157,23 @@ body {
   bottom: 10px;
   width: 100%;
 }
-/* line 65, ../scss/layout/_menu.scss */
+/* line 64, ../scss/layout/_menu.scss */
 #menu .user-info div.username {
   float: left;
   margin-right: 10px;
 }
-/* line 72, ../scss/layout/_menu.scss */
+/* line 70, ../scss/layout/_menu.scss */
 #menu .user-info div.level,
 #menu .user-info div.points {
   float: right;
   padding-right: 7px;
 }
-/* line 78, ../scss/layout/_menu.scss */
+/* line 77, ../scss/layout/_menu.scss */
 #menu .user-info div.points {
   padding-right: 17px;
 }
 
-/* line 2, ../scss/layout/_layer.scss */
+/* line 1, ../scss/layout/_layer.scss */
 #layer {
   top: 0;
   left: 0;
@@ -190,23 +185,21 @@ body {
   visibility: hidden;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
-  -webkit-transition: opacity 0.5s;
   -moz-transition: opacity 0.5s;
   -o-transition: opacity 0.5s;
+  -webkit-transition: opacity 0.5s;
   transition: opacity 0.5s;
-  -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
+  -webkit-border-radius: 10px;
   border-radius: 10px;
 }
-/* line 16, ../scss/layout/_layer.scss */
+/* line 15, ../scss/layout/_layer.scss */
 #layer.active {
   visibility: visible;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;
 }
-/* line 22, ../scss/layout/_layer.scss */
+/* line 21, ../scss/layout/_layer.scss */
 #layer .content {
   position: absolute;
   width: 380px;
@@ -218,36 +211,36 @@ body {
   overflow: auto;
   background: white;
   font-family: Arial, sans-serif;
-  -webkit-box-shadow: 0px 0px 5px black;
   -moz-box-shadow: 0px 0px 5px black;
+  -webkit-box-shadow: 0px 0px 5px black;
   box-shadow: 0px 0px 5px black;
 }
-/* line 37, ../scss/layout/_layer.scss */
+/* line 36, ../scss/layout/_layer.scss */
 #layer .content table {
   width: 100%;
   height: 100%;
   font-family: "Pixel-04b03";
 }
-/* line 43, ../scss/layout/_layer.scss */
+/* line 42, ../scss/layout/_layer.scss */
 #layer .content table th {
   color: gray;
   font-weight: bold;
   border-bottom: 1px dashed gray;
 }
-/* line 50, ../scss/layout/_layer.scss */
+/* line 49, ../scss/layout/_layer.scss */
 #layer .content table td {
   font-size: 20px;
 }
-/* line 56, ../scss/layout/_layer.scss */
+/* line 54, ../scss/layout/_layer.scss */
 #layer .content table td,
 #layer .content table th {
   padding: 5px;
 }
-/* line 62, ../scss/layout/_layer.scss */
+/* line 61, ../scss/layout/_layer.scss */
 #layer .content table tr:nth-child(2n) {
   background-color: #f7f7f7;
 }
-/* line 68, ../scss/layout/_layer.scss */
+/* line 67, ../scss/layout/_layer.scss */
 #layer .close {
   cursor: pointer;
   position: absolute;
@@ -259,34 +252,32 @@ body {
   top: 0px;
   right: 0px;
   font-family: "Arial", sans-serif;
-  -webkit-border-radius: 3px 10px 3px 3px;
   -moz-border-radius: 3px 10px 3px 3px;
-  -ms-border-radius: 3px 10px 3px 3px;
-  -o-border-radius: 3px 10px 3px 3px;
+  -webkit-border-radius: 3px;
   border-radius: 3px 10px 3px 3px;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
   opacity: 0.5;
-  -webkit-box-shadow: -1px 1px 3px black;
   -moz-box-shadow: -1px 1px 3px black;
+  -webkit-box-shadow: -1px 1px 3px black;
   box-shadow: -1px 1px 3px black;
 }
-/* line 84, ../scss/layout/_layer.scss */
+/* line 83, ../scss/layout/_layer.scss */
 #layer .close:hover {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;
 }
-/* line 91, ../scss/layout/_layer.scss */
+/* line 90, ../scss/layout/_layer.scss */
 #layer.small .content {
   top: 30%;
   height: 30%;
 }
-/* line 97, ../scss/layout/_layer.scss */
+/* line 96, ../scss/layout/_layer.scss */
 #layer.dynamic .content {
   height: auto;
   top: 30%;
 }
 
-/* line 2, ../scss/layout/_off-game.scss */
+/* line 1, ../scss/layout/_off-game.scss */
 h1.heading {
   position: relative;
   font-family: "Pixel", sans-serif;
@@ -298,7 +289,7 @@ h1.heading {
   text-align: center;
   margin-top: 2%;
 }
-/* line 15, ../scss/layout/_off-game.scss */
+/* line 13, ../scss/layout/_off-game.scss */
 h1.heading:after, h1.heading:before {
   content: "";
   position: absolute;
@@ -308,16 +299,16 @@ h1.heading:after, h1.heading:before {
   width: 200px;
   background-color: #152525;
 }
-/* line 26, ../scss/layout/_off-game.scss */
+/* line 25, ../scss/layout/_off-game.scss */
 h1.heading:after {
   left: -210px;
 }
-/* line 31, ../scss/layout/_off-game.scss */
+/* line 30, ../scss/layout/_off-game.scss */
 h1.heading:before {
   right: -210px;
 }
 
-/* line 2, ../scss/layout/_playground.scss */
+/* line 1, ../scss/layout/_playground.scss */
 .playground {
   position: absolute;
   left: 50%;
@@ -327,13 +318,11 @@ h1.heading:before {
   margin-left: -400px;
   margin-top: -300px;
   background: white;
-  -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
+  -webkit-border-radius: 10px;
   border-radius: 10px;
 }
-/* line 14, ../scss/layout/_playground.scss */
+/* line 13, ../scss/layout/_playground.scss */
 .playground #game {
   position: relative;
   z-index: 1;
@@ -341,7 +330,7 @@ h1.heading:before {
   height: 100%;
 }
 
-/* line 2, ../scss/layout/_stat-display.scss */
+/* line 1, ../scss/layout/_stat-display.scss */
 .stat-display {
   position: absolute;
   width: 100px;
@@ -351,23 +340,21 @@ h1.heading:before {
   z-index: -1;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
-  -webkit-border-radius: 10px 0 0 10px;
   -moz-border-radius: 10px 0 0 10px;
-  -ms-border-radius: 10px 0 0 10px;
-  -o-border-radius: 10px 0 0 10px;
+  -webkit-border-radius: 10px;
   border-radius: 10px 0 0 10px;
-  -webkit-transition: opacity 1s, left 0.5s;
   -moz-transition: opacity 1s, left 0.5s;
   -o-transition: opacity 1s, left 0.5s;
+  -webkit-transition: opacity 1s, left 0.5s;
   transition: opacity 1s, left 0.5s;
 }
-/* line 14, ../scss/layout/_stat-display.scss */
+/* line 13, ../scss/layout/_stat-display.scss */
 .stat-display.visible {
   left: -100px;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;
 }
-/* line 20, ../scss/layout/_stat-display.scss */
+/* line 19, ../scss/layout/_stat-display.scss */
 .stat-display .deko-pug {
   position: absolute;
   width: 64px;
@@ -377,7 +364,7 @@ h1.heading:before {
   top: -53px;
   margin-left: -60px;
 }
-/* line 31, ../scss/layout/_stat-display.scss */
+/* line 30, ../scss/layout/_stat-display.scss */
 .stat-display .module {
   position: relative;
   text-align: center;
@@ -387,11 +374,11 @@ h1.heading:before {
   color: #808080;
   font-family: "Pixel", sans-serif;
 }
-/* line 41, ../scss/layout/_stat-display.scss */
+/* line 40, ../scss/layout/_stat-display.scss */
 .stat-display .module:not(:last-child) {
   border-bottom: 1px solid #DDDDDD;
 }
-/* line 46, ../scss/layout/_stat-display.scss */
+/* line 45, ../scss/layout/_stat-display.scss */
 .stat-display .module:after {
   content: "Default";
   display: block;
@@ -402,12 +389,12 @@ h1.heading:before {
   line-height: 0;
   text-transform: uppercase;
 }
-/* line 60, ../scss/layout/_stat-display.scss */
+/* line 59, ../scss/layout/_stat-display.scss */
 .stat-display .life {
   position: relative;
   height: 55px;
 }
-/* line 65, ../scss/layout/_stat-display.scss */
+/* line 64, ../scss/layout/_stat-display.scss */
 .stat-display .life .hearts {
   top: 20px;
   position: absolute;
@@ -415,27 +402,27 @@ h1.heading:before {
   height: 22px;
   width: 100%;
 }
-/* line 74, ../scss/layout/_stat-display.scss */
+/* line 73, ../scss/layout/_stat-display.scss */
 .stat-display .life.x3 .hearts {
   background-position: center 0;
 }
-/* line 79, ../scss/layout/_stat-display.scss */
+/* line 78, ../scss/layout/_stat-display.scss */
 .stat-display .life.x2 .hearts {
   background-position: center -22px;
 }
-/* line 84, ../scss/layout/_stat-display.scss */
+/* line 83, ../scss/layout/_stat-display.scss */
 .stat-display .life.x1 .hearts {
   background-position: center -44px;
 }
-/* line 89, ../scss/layout/_stat-display.scss */
+/* line 88, ../scss/layout/_stat-display.scss */
 .stat-display .life.x0 .hearts {
   background-position: center -66px;
 }
-/* line 96, ../scss/layout/_stat-display.scss */
+/* line 95, ../scss/layout/_stat-display.scss */
 .stat-display .boost {
   height: 60px;
 }
-/* line 100, ../scss/layout/_stat-display.scss */
+/* line 99, ../scss/layout/_stat-display.scss */
 .stat-display .boost .bar-wrapper {
   position: absolute;
   top: 20px;
@@ -443,54 +430,54 @@ h1.heading:before {
   width: 80px;
   padding: 10px;
 }
-/* line 109, ../scss/layout/_stat-display.scss */
+/* line 108, ../scss/layout/_stat-display.scss */
 .stat-display .boost .bar-wrapper .bar {
   height: inherit;
-  -webkit-transition: background-color 1s;
   -moz-transition: background-color 1s;
   -o-transition: background-color 1s;
+  -webkit-transition: background-color 1s;
   transition: background-color 1s;
 }
-/* line 114, ../scss/layout/_stat-display.scss */
+/* line 113, ../scss/layout/_stat-display.scss */
 .stat-display .boost .bar-wrapper .bar.loaded {
   background-color: #82FE82;
 }
-/* line 119, ../scss/layout/_stat-display.scss */
+/* line 118, ../scss/layout/_stat-display.scss */
 .stat-display .boost .bar-wrapper .bar.loading {
   background-color: orange;
 }
-/* line 124, ../scss/layout/_stat-display.scss */
+/* line 123, ../scss/layout/_stat-display.scss */
 .stat-display .boost .bar-wrapper .bar.empty {
   width: 1%;
   background-color: red;
 }
-/* line 133, ../scss/layout/_stat-display.scss */
+/* line 132, ../scss/layout/_stat-display.scss */
 .stat-display .game-handlers {
   height: 30px;
 }
-/* line 137, ../scss/layout/_stat-display.scss */
+/* line 136, ../scss/layout/_stat-display.scss */
 .stat-display .game-handlers .game-state {
   margin: 10px 5px;
   width: 20px;
   height: 20px;
   cursor: pointer;
 }
-/* line 147, ../scss/layout/_stat-display.scss */
+/* line 145, ../scss/layout/_stat-display.scss */
 .stat-display .game-handlers .game-state.pause:after, .stat-display .game-handlers .game-state.pause:before {
   content: "";
   width: 9px;
   height: 20px;
   background: #808080;
 }
-/* line 155, ../scss/layout/_stat-display.scss */
+/* line 154, ../scss/layout/_stat-display.scss */
 .stat-display .game-handlers .game-state.pause:after {
   float: left;
 }
-/* line 160, ../scss/layout/_stat-display.scss */
+/* line 159, ../scss/layout/_stat-display.scss */
 .stat-display .game-handlers .game-state.pause:before {
   float: right;
 }
-/* line 166, ../scss/layout/_stat-display.scss */
+/* line 165, ../scss/layout/_stat-display.scss */
 .stat-display .game-handlers .game-state.continue {
   width: 0;
   height: 0;
@@ -498,7 +485,7 @@ h1.heading:before {
   border-bottom: 10px solid transparent;
   border-left: 15px solid #808080;
 }
-/* line 178, ../scss/layout/_stat-display.scss */
+/* line 177, ../scss/layout/_stat-display.scss */
 .stat-display .action-msg {
   height: 30px;
   line-height: 100%;
@@ -506,85 +493,81 @@ h1.heading:before {
   text-align: left;
   padding: 22px 5px 0 5px;
 }
-/* line 186, ../scss/layout/_stat-display.scss */
+/* line 185, ../scss/layout/_stat-display.scss */
 .stat-display .action-msg.warning {
   color: red;
 }
-/* line 190, ../scss/layout/_stat-display.scss */
+/* line 189, ../scss/layout/_stat-display.scss */
 .stat-display .action-msg.warning:after {
   color: #808080;
 }
-/* line 196, ../scss/layout/_stat-display.scss */
+/* line 195, ../scss/layout/_stat-display.scss */
 .stat-display .action-msg span {
   display: block;
 }
-/* line 203, ../scss/layout/_stat-display.scss */
+/* line 202, ../scss/layout/_stat-display.scss */
 .stat-display .game-handlers:after {
   content: "";
 }
-/* line 208, ../scss/layout/_stat-display.scss */
+/* line 207, ../scss/layout/_stat-display.scss */
 .stat-display .life:after {
   content: "Life";
 }
-/* line 213, ../scss/layout/_stat-display.scss */
+/* line 212, ../scss/layout/_stat-display.scss */
 .stat-display .points:after {
   content: "Points";
 }
-/* line 218, ../scss/layout/_stat-display.scss */
+/* line 217, ../scss/layout/_stat-display.scss */
 .stat-display .level:after {
   content: "Level";
 }
-/* line 223, ../scss/layout/_stat-display.scss */
+/* line 222, ../scss/layout/_stat-display.scss */
 .stat-display .boost:after {
   content: "Boost";
 }
-/* line 228, ../scss/layout/_stat-display.scss */
+/* line 227, ../scss/layout/_stat-display.scss */
 .stat-display .action-msg:after {
   content: "Last message";
 }
 
-/* line 2, ../scss/layout/_environment.scss */
+/* line 1, ../scss/layout/_environment.scss */
 .environment {
   position: absolute;
   top: 0;
   width: 100%;
   height: 100%;
   background: #8fffff;
-  -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
+  -webkit-border-radius: 10px;
   border-radius: 10px;
 }
-/* line 11, ../scss/layout/_environment.scss */
+/* line 10, ../scss/layout/_environment.scss */
 .environment .ground {
   position: absolute;
   width: 100%;
   height: 85px;
-  -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
+  -webkit-border-radius: 10px;
   border-radius: 10px;
   bottom: 0;
   background: url(../img/layout/environment/ground.jpg) repeat-x;
 }
-/* line 21, ../scss/layout/_environment.scss */
+/* line 20, ../scss/layout/_environment.scss */
 .environment .hut {
   position: absolute;
-  width: 120px;
-  height: 126px;
+  width: 129px;
+  height: 135px;
   background: url("../img/layout/environment/hut.png") no-repeat;
   left: 10%;
   bottom: 40px;
   z-index: 1;
 }
-/* line 32, ../scss/layout/_environment.scss */
+/* line 31, ../scss/layout/_environment.scss */
 .environment .cloud-wrapper {
   width: 100%;
   overflow: hidden;
 }
-/* line 37, ../scss/layout/_environment.scss */
+/* line 36, ../scss/layout/_environment.scss */
 .environment .cloud-wrapper .cloud {
   top: 50px;
   position: absolute;
@@ -592,11 +575,11 @@ h1.heading:before {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
   opacity: 0.8;
 }
-/* line 44, ../scss/layout/_environment.scss */
+/* line 43, ../scss/layout/_environment.scss */
 .environment .cloud-wrapper .cloud.inactive {
   display: none;
 }
-/* line 49, ../scss/layout/_environment.scss */
+/* line 48, ../scss/layout/_environment.scss */
 .environment .cloud-wrapper .cloud.c1 {
   width: 200px;
   height: 55px;
@@ -604,7 +587,7 @@ h1.heading:before {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
   opacity: 0.7;
 }
-/* line 57, ../scss/layout/_environment.scss */
+/* line 56, ../scss/layout/_environment.scss */
 .environment .cloud-wrapper .cloud.c2 {
   width: 150px;
   height: 41px;
@@ -612,41 +595,38 @@ h1.heading:before {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
   opacity: 0.7;
 }
-/* line 65, ../scss/layout/_environment.scss */
+/* line 64, ../scss/layout/_environment.scss */
 .environment .cloud-wrapper .cloud.c3 {
   width: 200px;
   height: 55px;
   background-image: url("../img/layout/environment/clouds/cloud1.png");
-  -webkit-transform: scale(0.7);
   -moz-transform: scale(0.7);
   -ms-transform: scale(0.7);
-  -o-transform: scale(0.7);
+  -webkit-transform: scale(0.7);
   transform: scale(0.7);
 }
-/* line 73, ../scss/layout/_environment.scss */
+/* line 72, ../scss/layout/_environment.scss */
 .environment .cloud-wrapper .cloud.c4 {
   width: 150px;
   height: 41px;
   background-image: url("../img/layout/environment/clouds/cloud2.png");
-  -webkit-transform: scale(0.5);
   -moz-transform: scale(0.5);
   -ms-transform: scale(0.5);
-  -o-transform: scale(0.5);
+  -webkit-transform: scale(0.5);
   transform: scale(0.5);
 }
-/* line 81, ../scss/layout/_environment.scss */
+/* line 80, ../scss/layout/_environment.scss */
 .environment .cloud-wrapper .cloud.c5 {
   width: 150px;
   height: 41px;
   background-image: url("../img/layout/environment/clouds/cloud2.png");
-  -webkit-transform: scale(0.8);
   -moz-transform: scale(0.8);
   -ms-transform: scale(0.8);
-  -o-transform: scale(0.8);
+  -webkit-transform: scale(0.8);
   transform: scale(0.8);
 }
 
-/* line 2, ../scss/layout/_pug-player.scss */
+/* line 1, ../scss/layout/_pug-player.scss */
 .pug-player {
   width: 64px;
   height: 58px;
@@ -656,48 +636,46 @@ h1.heading:before {
   left: 100px;
   z-index: 5;
 }
-/* line 12, ../scss/layout/_pug-player.scss */
+/* line 11, ../scss/layout/_pug-player.scss */
 .pug-player.inactive {
   display: none;
 }
-/* line 17, ../scss/layout/_pug-player.scss */
+/* line 16, ../scss/layout/_pug-player.scss */
 .pug-player .mouth {
   position: absolute;
   left: 0;
   width: 100%;
   height: 35px;
 }
-/* line 26, ../scss/layout/_pug-player.scss */
+/* line 25, ../scss/layout/_pug-player.scss */
 .pug-player.right .mouth {
   left: auto;
   right: 0;
 }
-/* line 32, ../scss/layout/_pug-player.scss */
+/* line 31, ../scss/layout/_pug-player.scss */
 .pug-player.right {
   background-image: url(../img/layout/pugs/pug-player/pug-right-sprite.png);
 }
-/* line 42, ../scss/layout/_pug-player.scss */
+/* line 41, ../scss/layout/_pug-player.scss */
 .pug-player.jumping {
-  -webkit-transition: -webkit-transform 0.5s;
   -moz-transition: -moz-transform 0.5s;
   -o-transition: -o-transform 0.5s;
+  -webkit-transition: -webkit-transform 0.5s;
   transition: transform 0.5s;
-  -webkit-transform: rotate(360deg);
   -moz-transform: rotate(360deg);
   -ms-transform: rotate(360deg);
-  -o-transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
   transform: rotate(360deg);
 }
-/* line 47, ../scss/layout/_pug-player.scss */
+/* line 46, ../scss/layout/_pug-player.scss */
 .pug-player.jumping.right {
-  -webkit-transform: rotate(-360deg);
   -moz-transform: rotate(-360deg);
   -ms-transform: rotate(-360deg);
-  -o-transform: rotate(-360deg);
+  -webkit-transform: rotate(-360deg);
   transform: rotate(-360deg);
 }
 
-/* line 2, ../scss/layout/_rain.scss */
+/* line 1, ../scss/layout/_rain.scss */
 .rain-wrapper {
   position: absolute;
   left: 0;
@@ -707,7 +685,7 @@ h1.heading:before {
   overflow: hidden;
 }
 
-/* line 12, ../scss/layout/_rain.scss */
+/* line 11, ../scss/layout/_rain.scss */
 .rain-wrapper .drop {
   position: absolute;
   z-index: 2;
@@ -715,40 +693,39 @@ h1.heading:before {
   height: 20px;
   background: rgba(0, 0, 0, 0.5);
 }
-/* line 20, ../scss/layout/_rain.scss */
+/* line 19, ../scss/layout/_rain.scss */
 .rain-wrapper .drop.eaten {
   visibility: hidden;
 }
-/* line 25, ../scss/layout/_rain.scss */
+/* line 24, ../scss/layout/_rain.scss */
 .rain-wrapper .drop.candy {
   background: url(../img/layout/rain/candy.png) no-repeat;
 }
-/* line 30, ../scss/layout/_rain.scss */
+/* line 29, ../scss/layout/_rain.scss */
 .rain-wrapper .drop.bone {
   width: 32px;
   height: 32px;
   background: url(../img/layout/rain/bone.png) no-repeat;
 }
-/* line 37, ../scss/layout/_rain.scss */
+/* line 36, ../scss/layout/_rain.scss */
 .rain-wrapper .drop.hotdog {
   width: 32px;
   height: 14px;
   background: url(../img/layout/rain/hotdog.png) no-repeat;
 }
 
-/* line 4, ../scss/layout/_formular.scss */
+/* line 3, ../scss/layout/_formular.scss */
 form .input-wrapper {
   width: 100%;
 }
-/* line 10, ../scss/layout/_formular.scss */
+/* line 8, ../scss/layout/_formular.scss */
 form input,
 form select {
-  -webkit-appearance: none;
   -moz-appearance: none;
-  appearance: none;
+  -webkit-appearance: none;
   outline-width: 0;
 }
-/* line 16, ../scss/layout/_formular.scss */
+/* line 15, ../scss/layout/_formular.scss */
 form .input-wrapper input {
   display: block;
   padding: 0;
@@ -759,12 +736,12 @@ form .input-wrapper input {
   border: none;
   border-bottom: 2px solid black;
 }
-/* line 28, ../scss/layout/_formular.scss */
+/* line 27, ../scss/layout/_formular.scss */
 form .input-wrapper.submit input {
   float: left;
   width: 80%;
 }
-/* line 34, ../scss/layout/_formular.scss */
+/* line 33, ../scss/layout/_formular.scss */
 form .input-wrapper.submit input[type="submit"] {
   float: right;
   width: 20%;
@@ -773,7 +750,7 @@ form .input-wrapper.submit input[type="submit"] {
   color: white;
   cursor: pointer;
 }
-/* line 45, ../scss/layout/_formular.scss */
+/* line 44, ../scss/layout/_formular.scss */
 form .input-wrapper label {
   width: 100%;
   display: block;
@@ -783,7 +760,7 @@ form .input-wrapper label {
   padding: 5px 0;
   font-family: "Pixel", sans-serif;
 }
-/* line 56, ../scss/layout/_formular.scss */
+/* line 55, ../scss/layout/_formular.scss */
 form .error {
   font-family: "Pixel", Arial, sans-serif;
   font-weight: bold;
@@ -801,7 +778,7 @@ form .error {
   height: 11px;
   background: url(../img/layout/ui/flags.png) no-repeat;
 }
-/* line 8, ../scss/layout/_flags.scss */
+/* line 7, ../scss/layout/_flags.scss */
 .flag.center {
   position: relative;
   left: 50%;
