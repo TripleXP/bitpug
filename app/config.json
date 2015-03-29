@@ -150,7 +150,7 @@
 
         [500,       11],
 
-        ["^",       15, "rainController[windSimulation(false) / randomizeFallspeed() / newDropFallspeed(3700)]; pugController[newMoveSpeed(0.7, true) / newWalkAnimationMs(50) / newMaxJumpHeight(150) / newJumpSpeed(6) / newBoostLoaderDelay(700) / newSpawnInterval(1400)]"],
+        ["^",       18, "rainController[windSimulation(false) / randomizeFallspeed() / newDropFallspeed(3700)]; pugController[newMoveSpeed(0.7, true) / newWalkAnimationMs(50) / newMaxJumpHeight(150) / newJumpSpeed(6) / newBoostLoaderDelay(700) / newSpawnInterval(1400)]"],
 
         [800,       23],
 

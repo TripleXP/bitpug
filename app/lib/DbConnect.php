@@ -20,7 +20,7 @@ class DbConnect {
 
 	private function _connectHost()
 	{
-		$this->db = new mysqli($this->host, $this->username, $this->password, DB_NAME, @defined(DB_PORT) ? DB_PORT : null);
+		$this->db = new mysqli($this->host, $this->username, $this->password, null, @defined(DB_PORT) ? DB_PORT : null);
 
 		if($this->db->connect_errno)
 		{

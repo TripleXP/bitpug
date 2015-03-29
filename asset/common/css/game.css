@@ -572,8 +572,6 @@ h1.heading:before {
   top: 50px;
   position: absolute;
   background: transparent no-repeat;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
-  opacity: 0.8;
 }
 /* line 43, ../scss/layout/_environment.scss */
 .environment .cloud-wrapper .cloud.inactive {
@@ -581,49 +579,33 @@ h1.heading:before {
 }
 /* line 48, ../scss/layout/_environment.scss */
 .environment .cloud-wrapper .cloud.c1 {
-  width: 200px;
-  height: 55px;
+  width: 128px;
+  height: 64px;
   background-image: url("../img/layout/environment/clouds/cloud1.png");
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
-  opacity: 0.7;
 }
 /* line 56, ../scss/layout/_environment.scss */
 .environment .cloud-wrapper .cloud.c2 {
-  width: 150px;
-  height: 41px;
+  width: 192px;
+  height: 96px;
   background-image: url("../img/layout/environment/clouds/cloud2.png");
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
-  opacity: 0.7;
 }
 /* line 64, ../scss/layout/_environment.scss */
 .environment .cloud-wrapper .cloud.c3 {
-  width: 200px;
-  height: 55px;
+  width: 128px;
+  height: 64px;
   background-image: url("../img/layout/environment/clouds/cloud1.png");
-  -moz-transform: scale(0.7);
-  -ms-transform: scale(0.7);
-  -webkit-transform: scale(0.7);
-  transform: scale(0.7);
 }
 /* line 72, ../scss/layout/_environment.scss */
 .environment .cloud-wrapper .cloud.c4 {
-  width: 150px;
-  height: 41px;
+  width: 192px;
+  height: 96px;
   background-image: url("../img/layout/environment/clouds/cloud2.png");
-  -moz-transform: scale(0.5);
-  -ms-transform: scale(0.5);
-  -webkit-transform: scale(0.5);
-  transform: scale(0.5);
 }
 /* line 80, ../scss/layout/_environment.scss */
 .environment .cloud-wrapper .cloud.c5 {
-  width: 150px;
-  height: 41px;
+  width: 192px;
+  height: 96px;
   background-image: url("../img/layout/environment/clouds/cloud2.png");
-  -moz-transform: scale(0.8);
-  -ms-transform: scale(0.8);
-  -webkit-transform: scale(0.8);
-  transform: scale(0.8);
 }
 
 /* line 1, ../scss/layout/_pug-player.scss */

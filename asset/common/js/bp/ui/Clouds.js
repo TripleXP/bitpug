@@ -124,7 +124,7 @@ bp.ui.Clouds.prototype.renderClouds_ = function()
 				"-ms-transition": transition,
 				"transition:": transition,
 				"left": this.lastCloudLeft_ + 'px',
-				"top": (cloud.offsetTop + goog.math.uniformRandom(-cloud.offsetHeight, cloud.offsetHeight)) + 'px'
+				"top": goog.math.clamp((cloud.offsetTop + goog.math.uniformRandom(-cloud.offsetHeight, cloud.offsetHeight)), 0, 50) + 'px'
 			});
 
 			this.lastCloudLeft_ = this.lastCloudLeft_ + cloud.offsetWidth - Math.round(goog.math.uniformRandom(50, cloud.offsetWidth/2));
